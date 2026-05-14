@@ -1,0 +1,267 @@
+# Non-Primitive (Reference) Types
+
+Non-primitive types ကို **Reference Types** လို့လည်းခေါ်ပါတယ်။
+
+သူတို့က value ကို တိုက်ရိုက်မသိမ်းဘဲ  
+**memory reference (လိပ်စာ)** ကိုသိမ်းထားပါတယ်။
+
+---
+
+## Non-Primitive Types အဓိကများ
+
+JavaScript မှာ non-primitive types တွေက object-based types တွေဖြစ်ပါတယ်။
+
+- Object
+- Array
+- Function
+- Date
+- RegExp
+
+---
+
+## 1. Object
+
+Key–value ပုံစံနဲ့ data သိမ်းဖို့သုံးပါတယ်။
+
+```js
+const user = {
+  name: "Mg Mg",
+  age: 25
+};
+```
+
+---
+
+## 2. Array
+
+Data များစွာကို အစီအစဉ်လိုက်သိမ်းဖို့သုံးပါတယ်။
+
+```js
+const numbers = [1, 2, 3, 4];
+```
+
+👉 Array ကလည်း object တစ်မျိုးပါပဲ
+
+---
+
+## 3. Function
+
+JavaScript မှာ function တွေလည်း object ဖြစ်ပါတယ်။
+
+```js
+function greet() {
+  return "Hello";
+}
+```
+
+---
+
+## 4. Date
+
+Date / Time ကို handle လုပ်ဖို့သုံးပါတယ်။
+
+```js
+const now = new Date();
+```
+
+---
+
+## 5. RegExp
+
+Pattern matching (ရှာဖွေခြင်း) အတွက်သုံးပါတယ်။
+
+```js
+const regex = /hello/i;
+```
+
+---
+
+## ⚡ Important Concept: Reference Behavior
+
+Non-primitive types က reference (memory address) ကိုသုံးတာကြောင့်
+copy လုပ်တဲ့အခါ behavior မတူပါဘူး။
+
+---
+
+## ❗ Same Reference Example
+
+```js
+const a = { name: "A" };
+const b = a;
+
+b.name = "B";
+
+console.log(a.name);
+```
+
+### Output
+
+```txt
+B
+```
+
+👉 `a` နဲ့ `b` နှစ်ခုလုံးက same memory ကိုညွှန်းထားပါတယ်။
+
+---
+
+## ❗ Assignment ပြဿနာ (Mutation Issue)
+
+```js
+const user1 = {
+  name: "John",
+  age: 20
+};
+
+const user2 = user1;
+
+user2.age = 30;
+
+console.log(user1.age);
+```
+
+### Output
+
+```txt
+30
+```
+
+👉 `user2` ပြောင်းလိုက်တာနဲ့ `user1` ပါပြောင်းသွားတယ်
+
+---
+
+## ✅ Solution 1: Destructuring Copy
+
+```js
+const user1 = {
+  name: "John",
+  age: 20
+};
+
+const { ...user2 } = user1;
+
+user2.age = 30;
+
+console.log(user1.age);
+console.log(user2.age);
+```
+
+### Output
+
+```txt
+20
+30
+```
+
+---
+
+## ✅ Solution 2: Spread Operator (Shallow Copy)
+
+```js
+const user1 = {
+  name: "John",
+  age: 20
+};
+
+const user2 = { ...user1 };
+
+user2.age = 30;
+
+console.log(user1.age);
+console.log(user2.age);
+```
+
+### Output
+
+```txt
+20
+30
+```
+
+👉 Now object နှစ်ခုက independent ဖြစ်သွားပါပြီ
+
+---
+## ⚠️ Important: Shallow Copy Limitation
+
+Spread operator က shallow copy ပဲလုပ်ပေးတာဖြစ်ပါတယ်။
+Nested object တွေရှိလာရင် reference ကို shared လုပ်နေတုန်းပါပဲ။
+
+```js
+const user1 = {
+  name: "John",
+  address: {
+    city: "Yangon"
+  }
+};
+
+const user2 = { ...user1 };
+
+user2.address.city = "Mandalay";
+
+console.log(user1.address.city);
+```
+
+### Output
+
+```txt
+Mandalay
+```
+
+👉 Nested object တွေက still shared reference ဖြစ်နေတုန်းပါ။ 
+
+address object က shared reference ဖြစ်နေသေးလို့
+user2 ကိုပြောင်းတာနဲ့ user1 ပါပြောင်းသွားပါတယ်။
+
+
+---
+
+## ✅ Solution 3: StructuredClone (Deep Copy)
+
+`structuredClone()` က JavaScript built-in method တစ်ခုဖြစ်ပါတယ်။
+
+ဒီ method ကိုသုံးရင် nested object တွေအပါအဝင် deep copy ပြုလုပ်နိုင်ပါတယ်။
+```js
+const user1 = {
+  name: "John",
+  address: {
+    city: "Yangon"
+  }
+};
+
+const user2 = structuredClone(user1);
+
+user2.address.city = "Mandalay";
+
+console.log(user1.address.city);
+console.log(user2.address.city);
+```
+
+### Output
+
+```txt
+Yangon
+Mandalay
+```
+
+👉 Nested object တွေပါ independent copy ဖြစ်သွားပါတယ်။
+
+---
+
+## 🔥 Summary Table
+
+| Method | Result |
+|--------|--------|
+| `const b = a` | same reference |
+| `{ ...a }` | shallow copy |
+| destructure `{ ...a }` | shallow copy |
+| nested object | still shared |
+| structuredClone() | deep copy |
+
+---
+
+## 🧠 Key Points
+
+- Primitive types → value copy
+- Non-primitive types → reference copy
+- Assignment → same memory ကို share လုပ်တယ်
+- Spread / destructuring → shallow copy
+- Nested object တွေရှိရင် deep copy လိုအပ်တယ်

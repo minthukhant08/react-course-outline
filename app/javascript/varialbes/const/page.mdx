@@ -1,0 +1,138 @@
+# const
+
+`const` ကို JavaScript မှာ constant variable (မပြောင်းလဲနိုင်တဲ့ variable) ကြေညာဖို့ အသုံးပြုပါတယ်။
+
+`const` ရဲ့ အဓိကအချက်တွေကတော့
+
+- Block Scope ဖြစ်တယ်
+- Value ကို ပြန်မပြောင်းနိုင်ဘူး
+- Scope တူတဲ့နေရာမှာ ထပ်ကြေညာလို့မရဘူး
+
+---
+
+## Basic Example
+
+```js
+const a = 1;
+
+console.log(a);
+```
+
+### Output
+
+```txt
+1
+```
+
+---
+
+## Reassign မလုပ်နိုင်ခြင်း
+
+```js
+const a = 1;
+
+a = 2; // ❌ Error
+```
+
+`const` ကို declare ပြီးရင် value ကို ပြန်ပြောင်းလို့မရပါဘူး။
+
+---
+
+## Block Scope
+
+```js
+const a = 2;
+
+{
+  const a = 3;
+  console.log('inside =>', a);
+}
+
+console.log('outside =>', a);
+```
+
+### Output
+
+```txt
+inside => 3
+outside => 2
+```
+
+`let` လိုပဲ `const` လည်း block scope ဖြစ်ပါတယ်။
+
+---
+
+## Important Note (Object & Array)
+
+`const` ဆိုတာ value ကို မပြောင်းလဲနိုင်တာမဟုတ်ပဲ **reference မပြောင်းလဲနိုင်တာ** ဖြစ်ပါတယ်။
+
+### Object Example
+
+```js
+const user = {
+  name: 'John'
+};
+
+user.name = 'Jane'; // ✅ Allowed
+
+console.log(user.name);
+```
+
+### Output
+
+```txt
+Jane
+```
+
+Object ထဲက property တွေကို ပြောင်းလဲလို့ရပါတယ်။
+
+---
+
+### But Reassign မရ
+
+```js
+const user = {
+  name: 'John'
+};
+
+user = {}; // ❌ Error
+```
+
+---
+
+## Array Example
+
+```js
+const arr = [1, 2, 3];
+
+arr.push(4);
+
+console.log(arr);
+```
+
+### Output
+
+```txt
+[1, 2, 3, 4]
+```
+
+Array ထဲက data ကို modify လုပ်လို့ရပါတယ်။
+
+---
+
+## Summary
+
+| Feature | `const` |
+|---|---|
+| Block Scoped | ✅ |
+| Reassignable | ❌ |
+| Redeclare | ❌ |
+| Object/Array mutation | ✅ |
+
+---
+
+## Recommendation
+
+- Default အနေနဲ့ `const` ကိုအရင်သုံးပါ
+- ပြောင်းဖို့လိုမှ `let` သုံးပါ
+- `var` ကိုတော့ avoid လုပ်ပါ

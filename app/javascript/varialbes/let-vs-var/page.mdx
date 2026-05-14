@@ -1,0 +1,124 @@
+# let vs var
+
+`let` နဲ့ `var` နှစ်ခုလုံးကို JavaScript မှာ variable ကြေညာဖို့ အသုံးပြုပါတယ်။
+
+ဒါပေမယ့် behavior မတူပါဘူး။
+
+---
+
+## Scope Difference
+
+### `var`
+
+```js
+{
+  var a = 1;
+}
+
+console.log(a);
+```
+
+### Output
+
+```txt
+1
+```
+
+`var` က Block Scope မရှိပါဘူး။
+
+---
+
+### `let`
+
+```js
+{
+  let a = 1;
+}
+
+console.log(a);
+```
+
+### Output
+
+```txt
+ReferenceError
+```
+
+`let` က block အတွင်းမှာပဲ အသုံးပြုနိုင်ပါတယ်။
+
+---
+
+## Redeclare Difference
+
+### `var`
+
+```js
+var name = 'John';
+var name = 'Jane';
+```
+
+✅ Allowed
+
+---
+
+### `let`
+
+```js
+let name = 'John';
+let name = 'Jane';
+```
+
+❌ Error
+
+---
+
+## Loop Example
+
+### `var`
+
+```js
+for (var i = 0; i < 3; i++) {}
+
+console.log(i);
+```
+
+### Output
+
+```txt
+3
+```
+
+---
+
+### `let`
+
+```js
+for (let i = 0; i < 3; i++) {}
+
+console.log(i);
+```
+
+### Output
+
+```txt
+ReferenceError
+```
+
+---
+
+## Comparison Table
+
+| Feature | `var` | `let` |
+|---|---|---|
+| Block Scoped | ❌ | ✅ |
+| Function Scoped | ✅ | ❌ |
+| Value ပြန်ပြောင်းနိုင် | ✅ | ✅ |
+| Redeclare လုပ်နိုင် | ✅ | ❌ |
+
+---
+
+## Recommendation
+
+Modern JavaScript project တွေမှာ `let` ကို အသုံးပြုတာ ပိုကောင်းပါတယ်။
+
+`var` ကိုတော့ old codebase တွေမှာ ပိုတွေ့ရတတ်ပါတယ်။

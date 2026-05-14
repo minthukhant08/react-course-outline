@@ -1,0 +1,87 @@
+# let
+
+`let` ကို JavaScript မှာ variable ကြေညာဖို့ အသုံးပြုပါတယ်။
+
+`let` ရဲ့ အဓိကအချက်တွေကတော့
+
+- Block Scope ရှိတယ်
+- Value ပြန်ပြောင်းနိုင်တယ်
+- Scope တူတဲ့နေရာမှာ ထပ်ကြေညာလို့မရဘူး
+
+---
+
+## Basic Example
+
+```js
+let a = 1;
+
+console.log(a);
+
+a = 2;
+
+console.log(a);
+```
+
+### Output
+
+```txt
+1
+2
+```
+
+---
+
+## Block Scope
+
+```js
+let a = 2;
+
+{
+  let a = 3;
+  console.log('inside =>', a);
+}
+
+console.log('outside =>', a);
+```
+
+### Output
+
+```txt
+inside => 3
+outside => 2
+```
+
+အပေါ်က example မှာ
+
+```js
+{
+  let a = 3;
+}
+```
+
+ထဲက `a` နဲ့ အပြင်က `a` က variable မတူပါဘူး။
+
+ဒါကို Block Scope လို့ခေါ်ပါတယ်။
+
+---
+
+## Redeclare လုပ်လို့မရခြင်း
+
+```js
+let name = 'John';
+
+// ❌ Error
+let name = 'Jane';
+```
+
+Scope တူတဲ့နေရာမှာ `let` variable ကို ထပ်ကြေညာလို့မရပါဘူး။
+
+---
+
+## Summary
+
+| Feature | `let` |
+|---|---|
+| Block Scoped | ✅ |
+| Value ပြန်ပြောင်းနိုင် | ✅ |
+| Scope တူတဲ့နေရာမှာ Redeclare | ❌ |

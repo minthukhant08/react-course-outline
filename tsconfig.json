@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "app/_meta.jsx"  ],
+, "app/_meta.jsx", "app/javascript/objects/page.mdx", "app/javascript/objects/updting-properties/page.mdx"  ],
   "exclude": ["node_modules"]
 }

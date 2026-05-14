@@ -1,0 +1,117 @@
+# Basic Syntax
+
+Object ဆိုတာ JavaScript မှာ data တွေကို key–value ပုံစံနဲ့ သိမ်းဖို့သုံးတဲ့ non-primitive data type တစ်ခုဖြစ်ပါတယ်။
+
+- Object က JavaScript ရဲ့ အရေးကြီးဆုံး data structure တစ်ခုဖြစ်တယ်
+- Data များစွာကို group ဖွဲ့ပြီး သိမ်းနိုင်တယ်
+- Function တွေပါ object ထဲမှာထည့်နိုင်တယ်
+- Object တွေက reference type ဖြစ်တယ်
+- Spread operator က shallow copy ပဲလုပ်ပေးတယ်
+
+---
+
+## Key–Value Pair
+
+Object ထဲမှာ data တွေကို `key: value` ပုံစံနဲ့ရေးပါတယ်။
+
+```js
+const user = {
+  name: "Mg Mg",
+  age: 25,
+  city: "Yangon"
+};
+```
+
+| Key | Value |
+|------|------|
+| `name` | `"Mg Mg"` |
+| `age` | `25` |
+| `city` | `"Yangon"` |
+
+---
+
+## Object with Different Data Types
+
+Object ထဲမှာ data type မတူတာတွေကို ရောပြီးသိမ်းနိုင်ပါတယ်။
+
+```js
+const user = {
+  name: "Mg Mg",
+  age: 25,
+  isAdmin: true,
+  skills: ["JS", "PHP"]
+};
+```
+
+---
+
+## Nested Objects
+
+Object ထဲမှာ object ထပ်ထည့်လို့ရပါတယ်။
+
+```js
+const user = {
+  name: "Mg Mg",
+  address: {
+    city: "Yangon",
+    township: "Hlaing"
+  }
+};
+
+console.log(user.address.city);
+```
+
+### Output
+
+```txt
+Yangon
+```
+
+---
+
+## Object Methods
+
+Function ကို object ထဲမှာ ထည့်ထားရင် method လို့ခေါ်ပါတယ်။
+
+```js
+const user = {
+  name: "Mg Mg",
+
+  greet: function () {
+    return "Hello";
+  }
+};
+
+console.log(user.greet());
+```
+
+### Output
+
+```txt
+Hello
+```
+
+---
+
+## `this` Keyword
+
+`this` က current object ကိုညွှန်းပါတယ်။
+
+```js
+const user = {
+  name: "Mg Mg",
+
+  greet() {
+    return "Hello " + this.name;
+  }
+};
+
+console.log(user.greet());
+```
+
+### Output
+
+```txt
+Hello Mg Mg
+```
+

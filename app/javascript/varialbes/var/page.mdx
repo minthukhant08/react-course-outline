@@ -1,0 +1,99 @@
+# var
+
+`var` က JavaScript အဟောင်းတွေမှာ variable ကြေညာဖို့ အသုံးများခဲ့တဲ့ keyword ဖြစ်ပါတယ်။
+
+`var` ရဲ့ အဓိကအချက်တွေကတော့
+
+- Function Scope ဖြစ်တယ်
+- Value ပြန်ပြောင်းနိုင်တယ်
+- Variable ကို ထပ်ကြေညာနိုင်တယ်
+
+---
+
+## Basic Example
+
+```js
+var a = 1;
+
+console.log(a);
+
+a = 2;
+
+console.log(a);
+```
+
+### Output
+
+```txt
+1
+2
+```
+
+---
+
+## Scope Example
+
+```js
+{
+  var a = 3;
+}
+
+console.log(a);
+```
+
+### Output
+
+```txt
+3
+```
+
+`var` က Block Scope မရှိတဲ့အတွက် block အပြင်ကနေပါ access လုပ်နိုင်ပါတယ်။
+
+---
+
+## Redeclare Example
+
+```js
+var name = 'John';
+
+var name = 'Jane';
+
+console.log(name);
+```
+
+### Output
+
+```txt
+Jane
+```
+
+`var` က variable ကို ထပ်ကြေညာနိုင်ပါတယ်။
+
+---
+
+## Problem with `var`
+
+```js
+for (var i = 0; i < 3; i++) {}
+
+console.log(i);
+```
+
+### Output
+
+```txt
+3
+```
+
+loop ပြီးသွားရင်တောင် `i` variable က အပြင်မှာကျန်နေပါတယ်။
+
+---
+
+## Summary
+
+| Feature | `var` |
+|---|---|
+| Block Scoped | ❌ |
+| Function Scoped | ✅ |
+| Value ပြန်ပြောင်းနိုင် | ✅ |
+| Redeclare လုပ်နိုင် | ✅ |

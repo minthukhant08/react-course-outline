@@ -1,0 +1,26 @@
+# Reference Behavior
+
+Object တွေက reference type ဖြစ်တဲ့အတွက် assignment လုပ်ရင် memory ကို share လုပ်ပါတယ်။
+
+```js
+const a = {
+  name: "A"
+};
+
+const b = a;
+
+b.name = "B";
+
+console.log(a.name);
+```
+
+## Output
+
+```txt
+B
+```
+
+👉 `a` နဲ့ `b` က same object ကို reference လုပ်ထားတာဖြစ်ပါတယ်။
+See [See reference for important notes](/javascript/varialbes/non-primitive-data-types#-important-concept-reference-behavior)
+
+---

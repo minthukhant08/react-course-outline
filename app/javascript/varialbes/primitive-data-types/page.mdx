@@ -1,0 +1,146 @@
+# Primitive Data Types
+
+JavaScript မှာ **Primitive Data Types** ဆိုတာ value တစ်ခုတည်းကိုသာ သိမ်းထားနိုင်တဲ့ simple data types တွေကို ဆိုလိုပါတယ်။
+
+Primitive types တွေက immutable (ပြောင်းလဲမရ) ဖြစ်ပါတယ်။
+
+---
+
+## Primitive Types List
+
+JavaScript မှာ primitive types အဓိက 7 မျိုးရှိပါတယ်
+
+- String
+- Number
+- Boolean
+- Undefined
+- Null
+- BigInt
+- Symbol
+
+---
+
+## 1. String
+
+စာသားတွေကို သိမ်းဖို့သုံးပါတယ်။
+
+```js
+const name = "Min Thu";
+const message = 'Hello';
+```
+
+---
+
+## 2. Number
+
+ကိန်းဂဏန်းတွေကို သိမ်းဖို့သုံးပါတယ်။
+
+```js
+const age = 25;
+const price = 99.5;
+```
+
+JavaScript မှာ integer / float မခွဲပါဘူး။
+
+---
+
+## 3. Boolean
+
+true / false value တွေကိုသိမ်းပါတယ်။
+
+```js
+const isActive = true;
+const isLoggedIn = false;
+```
+
+---
+
+## 4. Undefined
+
+Variable ကြေညာထားပေမယ့် value မပေးသေးတဲ့အခြေအနေ။
+
+```js
+let a;
+console.log(a);
+```
+
+### Output
+
+```txt
+undefined
+```
+
+---
+
+## 5. Null
+
+Intentional empty value ဖြစ်ပါတယ်။
+
+```js
+const data = null;
+```
+
+👉 `null` က "no value" ကို intentionally ပြထားတာပါ
+
+---
+
+## 6. BigInt
+
+အလွန်ကြီးမားတဲ့ number တွေအတွက်သုံးပါတယ်။
+
+```js
+const big = 123456789012345678901234567890n;
+```
+
+---
+
+## 7. Symbol
+
+Unique identifier တစ်ခုဖန်တီးဖို့သုံးပါတယ်။
+
+```js
+const id = Symbol('id');
+const id2 = Symbol('id');
+
+console.log(id === id2); // false
+```
+
+---
+
+## Primitive
+
+```js
+let a = 10;
+let b = a;
+
+b = 20;
+
+console.log(a); // 10
+console.log(b); // 20
+```
+
+👉 Copy လုပ်ရင် value သီးသန့်ဖြစ်သွားတယ် (reference မဟုတ်)
+
+---
+
+## Summary Table
+
+| Type | Example |
+|---|---|
+| String | `"hello"` |
+| Number | `123` |
+| Boolean | `true / false` |
+| Undefined | `undefined` |
+| Null | `null` |
+| BigInt | `123n` |
+| Symbol | `Symbol()` |
+
+---
+
+## Key Point
+
+Primitive types တွေက:
+
+- Immutable (ပြောင်းလဲမရ)
+- Value-based
+- Copy လုပ်ရင် independent ဖြစ်သွားတယ်
