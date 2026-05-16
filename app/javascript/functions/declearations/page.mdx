@@ -1,0 +1,56 @@
+# Declearations
+JavaScript မှာ function declaration နည်းလမ်းအမျိုးမျိုးရှိပါတယ်။ 
+
+အခြေအနေပေါ်မူတည်ပြီး သင့်တော်တဲ့ နည်းလမ်းကို ရွေးချယ်အသုံးပြုနိုင်ဖို့ overview သိထားဖို့ လိုအပ်ပါတယ်။
+
+### 1. Function Declaration (အသုံးအများဆုံး)
+
+```js 
+function sayHello() {
+  console.log("Hello!");
+}
+```
+`function` keyword ကိုအသုံးပြုပြီး တိုက်ရိုက်ကြေညာတဲ့နည်းဖြစ်ပါတယ်။ **Hoisting** ဖြစ်တဲ့အတွက် function မတိုင်ခင် အပေါ်ကနေ လှမ်းခေါ်လို့ရပါတယ်။
+
+### 2. Function Expression
+
+```js 
+const sayHello = function() {
+  console.log("Hello!");
+};
+```
+Function ကို variable တစ်ခုထဲမှာ သိမ်းပြီး ရေးသားတဲ့နည်းဖြစ်ပါတယ်။ Hoist မဖြစ်တဲ့အတွက် ကြေညာပြီးမှသာ ခေါ်သုံးလို့ ရပါတယ်။
+
+### 3. Arrow Function (ES6)
+
+```js 
+const sayHello = () => {
+  console.log("Hello!");
+};
+```
+Modern JavaScript မှာ အသုံးအများဆုံး နည်းလမ်းဖြစ်ပါတယ်။ Syntax ပိုတိုပါတယ်။
+
+### 4. Arrow Function (Implicit Return)
+
+```js 
+const add = (a, b) => a + b;
+```
+Code တစ်ကြောင်းတည်းရှိရင် `{}` နဲ့ `return` ကို ဖြုတ်ပြီး အတိုချုံ့ ရေးနိုင်ပါတယ်။
+
+### 5. Anonymous Function
+
+```js 
+setTimeout(function() {
+  console.log("Run after 1s");
+}, 1000);
+```
+နာမည်မပါတဲ့ function မျိုးဖြစ်ပြီး callback တွေမှာ အသုံးများပါတယ်။
+
+---
+
+### Comparison: Hoisting
+
+| Feature | Function Declaration | Function Expression / Arrow |
+|---------|----------------------|-----------------------------|
+| **Hoisted** | ✅ Yes | ❌ No |
+| **Usage** | Global/General logic | Callbacks / Specific logic |

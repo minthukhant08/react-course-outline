@@ -1,0 +1,57 @@
+# Basic Syntax
+
+Array ဆိုတာ JavaScript မှာ data value အများကြီးကို list တစ်ခုအနေနဲ့ စနစ်တကျသိမ်းဆည်းဖို့သုံးတဲ့ non-primitive data type တစ်ခုဖြစ်ပါတယ်။
+
+- Array က JavaScript မှာ data တွေကို အစဉ်လိုက် (orderly) သိမ်းဆည်းဖို့ အသုံးအများဆုံး structure တစ်ခုဖြစ်တယ်
+- Data အမျိုးအစားမတူတာတွေကို list တစ်ခုတည်းမှာ စုသိမ်းနိုင်တယ်
+- Array ထဲက data တစ်ခုချင်းစီကို index နံပါတ်နဲ့ လှမ်းယူနိုင်တယ်
+- Array တွေကလည်း reference type ဖြစ်တယ်
+- Zero-based indexing (0 ကစပြီး ရေတွက်တယ်) ကိုသုံးတယ်
+
+---
+
+## Index–Value Pair
+
+Array ထဲမှာ data တွေကို square brackets `[]` ထဲမှာ index နံပါတ်တွေနဲ့ စဉ်ပြီးသိမ်းပါတယ်။
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+```
+
+| Index | Value |
+|-------|-------|
+| `0`   | `"Apple"` |
+| `1`   | `"Banana"` |
+| `2`   | `"Orange"` |
+
+---
+
+## Array with Different Data Types
+
+Array ထဲမှာ data type မတူတာတွေကို ရောပြီးသိမ်းနိုင်ပါတယ်။
+
+```js
+const mixedArray = ["Mg Mg", 25, true, { city: "Yangon" }];
+```
+
+---
+
+## Nested Arrays
+
+Array ထဲမှာ array ထပ်ထည့်လို့ရပါတယ်။
+
+```js
+const matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+
+console.log(matrix[0][1]);
+```
+
+### Output
+
+```txt
+2
+```

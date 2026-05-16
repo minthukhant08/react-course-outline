@@ -1,0 +1,58 @@
+# Adding Elements
+
+Array ထဲကို element အသစ်ထည့်ဖို့ နည်းလမ်းအမျိုးမျိုးရှိပါတယ်။
+
+---
+
+## 1. `.push()`
+
+Array ရဲ့ နောက်ဆုံး (end) မှာ element အသစ်တိုးချင်ရင် သုံးပါတယ်။
+
+```js
+const fruits = ["Apple", "Banana"];
+fruits.push("Orange");
+
+console.log(fruits);
+```
+
+### Output
+```txt
+["Apple", "Banana", "Orange"]
+```
+
+---
+
+## 2. `.unshift()`
+
+Array ရဲ့ အရှေ့ဆုံး (start) မှာ element အသစ်တိုးချင်ရင် သုံးပါတယ်။
+
+```js
+const fruits = ["Apple", "Banana"];
+fruits.unshift("Mango");
+
+console.log(fruits);
+```
+
+### Output
+```txt
+["Mango", "Apple", "Banana"]
+```
+
+---
+
+## 3. `.splice()`
+
+Array ရဲ့ ကြိုက်တဲ့နေရာ (specific index) မှာ element အသစ်ထည့်ချင်ရင် သုံးပါတယ်။
+
+```js
+const fruits = ["Apple", "Orange"];
+// index 1 မှာ ဘာမှမဖျက်ဘဲ "Banana" ထည့်မယ်
+fruits.splice(1, 0, "Banana");
+
+console.log(fruits);
+```
+
+### Output
+```txt
+["Apple", "Banana", "Orange"]
+```

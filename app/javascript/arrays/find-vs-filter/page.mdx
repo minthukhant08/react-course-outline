@@ -1,0 +1,44 @@
+# Filter vs Find
+
+`.filter()` နဲ့ `.find()` သည် array ထဲက data တွေကို ရှာဖွေစစ်ထုတ်တဲ့နေရာမှာ ဆင်တူသယောင် ရှိပေမယ့် အဓိက ကွာခြားချက်တွေ ရှိပါတယ်။
+
+---
+
+## Comparison Table
+
+| Feature | `.filter()` | `.find()` |
+|---------|-------------|-----------|
+| **Result** | ကိုက်ညီတဲ့ element **အားလုံး** | **ပထမဆုံး** ကိုက်ညီတဲ့ element တစ်ခုတည်း |
+| **Return Type** | **Array** အမြဲတမ်း ပြန်ပေးတယ် | **Value** (သို့မဟုတ် object) တစ်ခုတည်း ပြန်ပေးတယ် |
+| **Not Found** | **Empty Array `[]`** ပြန်ပေးတယ် | **`undefined`** ပြန်ပေးတယ် |
+| **Performance** | Array တစ်ခုလုံးကို အဆုံးထိ စစ်တယ် | ကိုက်ညီတာတွေ့တာနဲ့ ရပ်တယ် |
+
+---
+
+## Example Comparison
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+// filter - ၃ ထက်ကြီးတဲ့ ကိန်းအားလုံးကို array နဲ့ ပြန်ပေးမယ်
+const filterRes = numbers.filter(n => n > 3); 
+
+// find - ၃ ထက်ကြီးတဲ့ ပထမဆုံးကိန်းကိုပဲ value နဲ့ ပြန်ပေးမယ်
+const findRes = numbers.find(n => n > 3);
+
+console.log("Filter Result:", filterRes);
+console.log("Find Result:", findRes);
+```
+
+### Output
+```txt
+Filter Result: [4, 5]
+Find Result: 4
+```
+
+---
+
+## ဘယ်အချိန်မှာ ဘာကို သုံးရမလဲ?
+
+- **`.filter()` ကို သုံးပါ:** အကယ်၍ data တွေ အများကြီးကို စစ်ထုတ်ချင်တာမျိုး (ဥပမာ - category တူတဲ့ product အားလုံးကို ပြချင်တာ) ဆိုရင် သုံးပါ။
+- **`.find()` ကို သုံးပါ:** အကယ်၍ unique ဖြစ်တဲ့ data တစ်ခုတည်းကိုပဲ ရှာချင်တာမျိုး (ဥပမာ - user ID နဲ့ user တစ်ယောက်တည်းကို ရှာတာ) ဆိုရင် သုံးပါ။

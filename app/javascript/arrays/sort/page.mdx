@@ -1,0 +1,127 @@
+# Array.sort()
+
+`.sort()` method သည် array ထဲမှာရှိတဲ့ element တွေကို အစဉ်လိုက် စီပေးတဲ့နေရာမှာ သုံးပါတယ်။ သတိထားရမှာက `.sort()` သည် မူရင်း (original) array ကို တိုက်ရိုက် ပြောင်းလဲသွားစေတာ (mutating) ဖြစ်ပါတယ်။
+
+---
+
+## 1. Sorting Strings (Default)
+
+Parameter မပါဘဲ သုံးရင် element တွေကို string အနေနဲ့ သတ်မှတ်ပြီး alphabetical (အက္ခရာစဉ်) အတိုင်း စီပေးပါတယ်။
+
+```js
+const fruits = ["Banana", "Apple", "Orange"];
+fruits.sort();
+
+console.log(fruits);
+```
+
+### Output
+```txt
+["Apple", "Banana", "Orange"]
+```
+
+---
+
+## 2. Sorting Numbers
+
+ကိန်းဂဏန်းတွေကို စီတဲ့အခါမှာတော့ `.sort()` က string အဖြစ် ပြောင်းပြီး ပထမဆုံး ဂဏန်းကိုပဲ ကြည့်စီတဲ့အတွက် မှားယွင်းနိုင်ပါတယ်။ ဒါကြောင့် **Compare Function** ကို သုံးရပါမယ်။
+
+```js
+const numbers = [40, 100, 1, 5, 25];
+
+// Ascending Order (အငယ်မှ အကြီး)
+numbers.sort((a, b) => a - b);
+
+console.log(numbers);
+```
+
+### Output
+```txt
+[1, 5, 25, 40, 100]
+```
+*(မှတ်ချက် - `a - b` သည် အနှုတ်ထွက်ရင် `a` ကို အရှေ့မှာ ထားပါတယ်။)*
+
+---
+
+## 3. Sorting Objects
+
+Object property တွေပေါ် မူတည်ပြီးတော့လည်း စီနိုင်ပါတယ်။
+
+```js
+const students = [
+  { name: "Mg Mg", score: 80 },
+  { name: "Su Su", score: 95 },
+  { name: "Kyaw Kyaw", score: 70 }
+];
+
+// ရမှတ် (score) အများဆုံးမှ အနည်းသို့ စီခြင်း (Descending)
+students.sort((a, b) => b.score - a.score);
+
+console.log(students);
+```
+
+### Output
+```txt
+[
+  { name: "Su Su", score: 95 },
+  { name: "Mg Mg", score: 80 },
+  { name: "Kyaw Kyaw", score: 70 }
+]
+```
+
+---
+
+## 4. Immutable Sorting (Best Practice)
+
+မူရင်း array ကို မပျက်စေချင်ရင် Spread Operator နဲ့ copy အရင်ကူးပြီးမှ sort လုပ်သင့်ပါတယ်။
+
+```js
+const original = [3, 1, 2];
+const sorted = [...original].sort((a, b) => a - b);
+
+console.log("Original:", original);
+console.log("Sorted:", sorted);
+```
+
+### Output
+```txt
+Original: [3, 1, 2]
+Sorted: [1, 2, 3]
+```
+
+---
+
+## 5. Custom Order Sorting (Advanced)
+
+တစ်ခါတလေမှာ alphabetical (A-Z) မဟုတ်ဘဲ ကိုယ်သတ်မှတ်ထားတဲ့ order တစ်ခုအတိုင်း စီချင်တဲ့အခါမျိုး ရှိနိုင်ပါတယ်။
+
+```js
+const items = [
+  { name: "Item 1", type: "C" },
+  { name: "Item 2", type: "A" },
+  { name: "Item 3", type: "B" }
+];
+
+// စီချင်တဲ့ အစီအစဉ် (Order)
+const customOrder = ["B", "A", "C"];
+
+items.sort((a, b) => {
+  return customOrder.indexOf(a.type) - customOrder.indexOf(b.type);
+});
+
+console.log(items);
+```
+
+### Output
+```txt
+[
+  { name: "Item 3", type: "B" },
+  { name: "Item 2", type: "A" },
+  { name: "Item 1", type: "C" }
+]
+```
+*(မှတ်ချက် - `indexOf()` ကိုသုံးပြီး `customOrder` array ထဲက index နံပါတ်တွေကို နှိုင်းယှဉ်ပြီး စီသွားတာဖြစ်ပါတယ်။)*
+
+---
+
+👉 `.sort()` သည် data တွေကို string အဖြစ် ပြောင်းစီတတ်တာကြောင့် ကိန်းဂဏန်းတွေအတွက် compare function ကို မဖြစ်မနေ သုံးပေးဖို့ လိုအပ်ပါတယ်။

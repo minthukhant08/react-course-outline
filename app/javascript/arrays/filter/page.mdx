@@ -1,0 +1,68 @@
+# Array.filter()
+
+`.filter()` method သည် original array ထဲက element တွေကို condition တစ်ခုခုနဲ့ စစ်ထုတ်ပြီး ကိုက်ညီတဲ့ element တွေနဲ့ array အသစ်တစ်ခု (new array) ကို return ပြန်ပေးပါတယ်။
+
+---
+
+## 1. Basic Usage
+
+Condition မှန်ကန်တဲ့ (true ဖြစ်တဲ့) element တွေကိုပဲ စုပြီး array အသစ်တစ်ခု ထုတ်ပေးပါတယ်။
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6];
+
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+
+console.log(evenNumbers);
+```
+
+### Output
+```txt
+[2, 4, 6]
+```
+
+---
+
+## 2. Callback Function Parameters
+
+`.filter()` သည်လည်း `.map()` ကဲ့သို့ပင် callback function ထဲမှာ parameter (၃) ခုအထိ လက်ခံနိုင်ပါတယ်။
+
+```js
+array.filter((element, index, array) => { ... });
+```
+
+1. **element**: စစ်ဆေးနေတဲ့ လက်ရှိ element။
+2. **index**: လက်ရှိ element ရဲ့ index နံပါတ်။ (optional)
+3. **array**: မူရင်း array တစ်ခုလုံး။ (optional)
+
+---
+
+## 3. Filtering Array of Objects
+
+Data list တစ်ခုထဲကနေ လိုချင်တဲ့ category ဒါမှမဟုတ် condition နဲ့ ကိုက်ညီတဲ့ object တွေကို စစ်ထုတ်တဲ့အခါ အသုံးများပါတယ်။
+
+```js
+const users = [
+  { name: "Mg Mg", age: 15 },
+  { name: "Su Su", age: 25 },
+  { name: "Kyaw Kyaw", age: 18 },
+  { name: "Zaw Zaw", age: 30 }
+];
+
+const adults = users.filter(user => user.age >= 18);
+
+console.log(adults);
+```
+
+### Output
+```txt
+[
+  { name: "Kyaw Kyaw", age: 18 },
+  { name: "Su Su", age: 25 },
+  { name: "Zaw Zaw", age: 30 }
+]
+```
+
+---
+
+👉 `.filter()` သည် condition နဲ့ ကိုက်ညီတာ တစ်ခုမှ မရှိပါက **empty array `[]`** ကို return ပြန်ပေးပါတယ်။

@@ -1,0 +1,44 @@
+# For Of Loop
+
+`for...of` loop ကို **Array** သို့မဟုတ် Iterable objects (String, Map, Set) ထဲက value တွေကို တစ်ခုချင်းစီ တိုက်ရိုက် ထုတ်ယူချင်တဲ့အခါ သုံးပါတယ်။
+
+---
+
+## Example with Array
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+
+for (let fruit of fruits) {
+  console.log(fruit);
+}
+```
+
+### Output
+```txt
+Apple
+Banana
+Orange
+```
+
+---
+
+## Example with String
+
+```js
+const text = "JS";
+
+for (let char of text) {
+  console.log(char);
+}
+```
+
+### Output
+```txt
+J
+S
+```
+
+---
+
+👉 `for...of` သည် array values တွေကို ဖတ်ရုံသက်သက် (read-only style) အတွက် အလွန် သန့်ရှင်းတဲ့ syntax ဖြစ်ပါတယ်။

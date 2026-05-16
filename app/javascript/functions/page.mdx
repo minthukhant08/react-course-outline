@@ -1,0 +1,69 @@
+# Basic Syntax
+
+Function ဆိုတာ code block တစ်ခုကို လိုအပ်တဲ့အချိန်မှာ ပြန်သုံးလို့ရအောင် စုစည်းထားတာဖြစ်ပါတယ်။
+
+- Function က JavaScript မှာ logic တွေကို ပြန်သုံးနိုင်ဖို့ (reusability) အတွက် အရေးကြီးဆုံး tool တစ်ခုဖြစ်တယ်
+- Code တွေကို စနစ်တကျ group ဖွဲ့နိုင်တယ်
+- Parameter တွေကတစ်ဆင့် data တွေ လက်ခံနိုင်တယ်
+- `return` ကိုသုံးပြီး ရလဒ်တွေကို ပြန်ထုတ်ပေးနိုင်တယ်
+- JavaScript မှာ function တွေက first-class citizens တွေဖြစ်တယ် (variable ထဲမှာ သိမ်းလို့ရတယ်)
+
+---
+
+## Function Declaration
+
+အရိုးရှင်းဆုံး function တည်ဆောက်ပုံဖြစ်ပါတယ်။ `function` keyword ကို သုံးပါတယ်။
+
+```js
+function greet() {
+  console.log("Hello, World!");
+}
+
+// Function ကို ခေါ်သုံးခြင်း (Calling)
+greet();
+```
+
+### Output
+```txt
+Hello, World!
+```
+
+---
+
+## Parameters & Arguments
+
+Function ဆီကို data တွေ ပေးပို့ချင်တဲ့အခါ parameter တွေကို သုံးနိုင်ပါတယ်။
+
+```js
+function sayHello(name) {
+  console.log("Hello " + name);
+}
+
+// "Mg Mg" သည် argument ဖြစ်ပါတယ်။
+sayHello("Mg Mg");
+```
+
+### Output
+```txt
+Hello Mg Mg
+```
+
+---
+
+## Calling a Function
+
+Function ကို သူ့ရဲ့ နာမည်နဲ့ ကွင်းစကွင်းပိတ် `()` သုံးပြီး ခေါ်ယူအသုံးပြုရပါတယ်။
+
+```js
+function welcome() {
+  return "Welcome to JS!";
+}
+
+const message = welcome();
+console.log(message);
+```
+
+### Output
+```txt
+Welcome to JS!
+```

@@ -1,0 +1,47 @@
+# Switch Statement
+
+Variable တစ်ခုတည်းက ထွက်လာမယ့် တန်ဖိုး (value) အမျိုးမျိုးကို နှိုင်းယှဉ်စစ်ဆေးချင်တဲ့အခါ `if-else` အစား `switch` ကို သုံးနိုင်ပါတယ်။
+
+---
+
+## Basic Syntax
+
+`case` တွေကို စစ်ဆေးပြီး ကိုက်ညီတဲ့နေရာမှာ အလုပ်လုပ်ပါတယ်။ `break` မပါရင် နောက်က case တွေကိုပါ ဆက်ပြီး အလုပ်လုပ်သွားမှာ ဖြစ်ပါတယ်။
+
+```js
+let day = 2;
+let dayName;
+
+switch (day) {
+  case 1:
+    dayName = "Monday";
+    break;
+  case 2:
+    dayName = "Tuesday";
+    break;
+  case 3:
+    dayName = "Wednesday";
+    break;
+  default:
+    dayName = "Other Day";
+}
+
+console.log(dayName);
+```
+
+### Output
+```txt
+Tuesday
+```
+
+---
+
+## Key Points
+
+- **break**: Case တစ်ခု ပြီးသွားရင် switch ထဲကနေ ထွက်ဖို့ သုံးပါတယ်။
+- **default**: ဘယ် case နဲ့မှ မကိုက်ညီတဲ့အခါ အလုပ်လုပ်ပါမယ်။
+- **Strict Comparison**: Switch သည် `===` (strict equality) ကို သုံးပြီး နှိုင်းယှဉ်ပါတယ်။
+
+---
+
+👉 `switch` သည် တန်ဖိုး တစ်ခုတည်းကို value မျိုးစုံနဲ့ နှိုင်းယှဉ်ရတဲ့ နေရာတွေမှာ `if-else` ထက် ပိုပြီး ဖတ်ရလွယ်ကူ စနစ်ကျပါတယ်။

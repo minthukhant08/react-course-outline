@@ -1,0 +1,64 @@
+# Array.find()
+
+`.find()` method သည် original array ထဲက element တွေကို condition တစ်ခုခုနဲ့ စစ်ဆေးပြီး **ပထမဆုံး** ကိုက်ညီတဲ့ element တစ်ခုတည်းကိုပဲ return ပြန်ပေးပါတယ်။
+
+---
+
+## 1. Basic Usage
+
+Condition နဲ့ ကိုက်ညီတာ တွေ့တာနဲ့ ရှာဖွေတာကို ရပ်တန့်ပြီး အဲ့ဒီ element ကို return ပြန်ပေးပါတယ်။
+
+```js
+const numbers = [5, 12, 8, 130, 44];
+
+const found = numbers.find(num => num > 10);
+
+console.log(found);
+```
+
+### Output
+```txt
+12
+```
+*(မှတ်ချက် - ၁၀ ထက်ကြီးတဲ့ ကိန်းတွေ အများကြီးရှိပေမယ့် ပထမဆုံးတွေ့တဲ့ 12 ကိုပဲ return ပြန်ပေးတာဖြစ်ပါတယ်။)*
+
+---
+
+## 2. Callback Function Parameters
+
+Callback function ထဲမှာ parameter (၃) ခု လက်ခံနိုင်ပါတယ်။
+
+```js
+array.find((element, index, array) => { ... });
+```
+
+1. **element**: ရှာဖွေနေတဲ့ လက်ရှိ element။
+2. **index**: လက်ရှိ element ရဲ့ index နံပါတ်။
+3. **array**: မူရင်း array တစ်ခုလုံး။
+
+---
+
+## 3. Finding Specific Object
+
+ID ဒါမှမဟုတ် unique ဖြစ်တဲ့ value တစ်ခုခုနဲ့ object တစ်ခုတည်းကို ရှာချင်တဲ့အခါ အသုံးများပါတယ်။
+
+```js
+const users = [
+  { id: 1, name: "Mg Mg" },
+  { id: 2, name: "Su Su" },
+  { id: 3, name: "Kyaw Kyaw" }
+];
+
+const user = users.find(u => u.id === 2);
+
+console.log(user);
+```
+
+### Output
+```txt
+{ id: 2, name: "Su Su" }
+```
+
+---
+
+👉 `.find()` သည် condition နဲ့ ကိုက်ညီတာ တစ်ခုမှ မရှိပါက **`undefined`** ကို return ပြန်ပေးပါတယ်။

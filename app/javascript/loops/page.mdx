@@ -1,0 +1,37 @@
+# Loops
+
+Loop ဆိုတာ code block တစ်ခုကို အကြိမ်ကြိမ် (repeatedly) အလုပ်လုပ်စေချင်တဲ့အခါ သုံးပါတယ်။
+
+JavaScript မှာ loop ပုံစံအမျိုးမျိုး ရှိပါတယ်။
+
+- **Traditional Loops** (for, while, do while)
+- **Object/Array Iteration** (for...in, for...of)
+- **Array Methods** (forEach, map)
+
+---
+
+## 1. Why we need Loops?
+
+ဥပမာ - နာမည် ၁၀ ခုကို output ထုတ်ချင်တယ်ဆိုရင် `console.log` ၁၀ ကြိမ် ရေးမယ့်အစား loop တစ်ခုတည်းနဲ့ ဖြေရှင်းနိုင်ပါတယ်။
+
+```js
+// Loop မသုံးဘဲ ရေးခြင်း
+console.log(1);
+console.log(2);
+console.log(3);
+
+// Loop သုံးပြီး ရေးခြင်း
+for (let i = 1; i <= 3; i++) {
+  console.log(i);
+}
+```
+
+---
+
+## 2. Loop Control
+
+Loop တွေမှာ အရေးကြီးဆုံးက loop ဘယ်အချိန်မှာ ရပ်မလဲဆိုတာ သတ်မှတ်ပေးဖို့ဖြစ်ပါတယ်။ မဟုတ်ရင် **Infinite Loop** ဖြစ်ပြီး computer/browser ကို hang သွားစေနိုင်ပါတယ်။
+
+---
+
+👉 Loop တွေကို အသုံးပြုပြီး data list တွေ၊ arrays တွေနဲ့ အလုပ်လုပ်တဲ့အခါ code တွေကို ပိုပြီး သန့်ရှင်းစေပါတယ်။

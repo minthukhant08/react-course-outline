@@ -1,0 +1,70 @@
+# Array.concat() & Spread Operator
+
+Array တွေကို တစ်ခုနဲ့တစ်ခု ပေါင်းစပ် (merge) ချင်တဲ့အခါ `.concat()` method သို့မဟုတ် modern **Spread Operator (`...`)** ကို အသုံးပြုနိုင်ပါတယ်။
+
+---
+
+## 1. Array.concat()
+
+`.concat()` သည် array အဟောင်းတွေကို မပြောင်းလဲစေဘဲ (immutable) ၎င်းတို့ကို ပေါင်းစပ်ထားတဲ့ array အသစ်တစ်ခုကို return ပြန်ပေးပါတယ်။
+
+```js
+const array1 = ["a", "b"];
+const array2 = ["c", "d"];
+
+const combined = array1.concat(array2);
+
+console.log(combined);
+console.log(array1); // မူရင်း array သည် မပြောင်းလဲပါ
+```
+
+### Output
+```txt
+["a", "b", "c", "d"]
+["a", "b"]
+```
+
+---
+
+## 2. Spread Operator (...)
+
+Spread operator သည် ES6 မှာ ပါဝင်လာတဲ့ modern နည်းလမ်းဖြစ်ပြီး array တွေကို ပေါင်းစပ်တဲ့နေရာမှာ `.concat()` ထက် ပိုပြီး ပျော့ပြောင်း (flexible) ပါတယ်၊ ပိုပြီးလည်း ဖတ်ရလွယ်ကူပါတယ်။
+
+```js
+const fruits = ["Apple", "Banana"];
+const vegetables = ["Carrot", "Potato"];
+
+const food = [...fruits, ...vegetables];
+
+console.log(food);
+```
+
+### Output
+```txt
+["Apple", "Banana", "Carrot", "Potato"]
+```
+
+---
+
+## 3. Why Spread Operator is better?
+
+Spread operator ကို သုံးခြင်းအားဖြင့် array တွေကို merge လုပ်ရုံတင်မကဘဲ ကြားထဲမှာ တခြား element တွေကိုပါ အလွယ်တကူ ထည့်သွင်းနိုင်ပါတယ်။
+
+```js
+const numbers = [1, 2];
+const moreNumbers = [4, 5];
+
+// ကြားထဲမှာ 3 ကို ထည့်ချင်တဲ့အခါ
+const allNumbers = [...numbers, 3, ...moreNumbers];
+
+console.log(allNumbers);
+```
+
+### Output
+```txt
+[1, 2, 3, 4, 5]
+```
+
+---
+
+👉 `.concat()` ရော Spread Operator ရောသည် array အသစ်ကိုပဲ ဖန်တီးပေးတာဖြစ်လို့ React လို state management လုပ်တဲ့နေရာတွေမှာ variable တွေကို မပြောင်းလဲစေဘဲ (Immutability) အသုံးပြုဖို့ အကောင်းဆုံးဖြစ်ပါတယ်။

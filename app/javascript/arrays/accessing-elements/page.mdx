@@ -1,0 +1,47 @@
+# Accessing Array Elements
+
+Array ထဲက element တွေကို access လုပ်ဖို့ index နံပါတ်ကို အသုံးပြုရပါတယ်။
+
+---
+
+## 1. Bracket Notation (Index Access)
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+
+console.log(fruits[0]);
+console.log(fruits[1]);
+console.log(fruits[2]);
+```
+
+#### Output
+
+```txt
+Apple
+Banana
+Orange
+```
+
+👉 Index သည် 0 ကနေစတင်ပါတယ်။ အသုံးအများဆုံးနည်းလမ်းဖြစ်ပါတယ်။
+
+---
+
+## 2. `.at()` Method
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+
+console.log(fruits.at(0));
+console.log(fruits.at(-1));
+```
+
+### Output
+
+```txt
+Apple
+Orange
+```
+
+👉 `.at()` သည် modern JavaScript (ES2022) မှာပါဝင်လာပြီး negative index (နောက်ဆုံးကနေ ပြန်ရေတွက်ခြင်း) အတွက် အသုံးဝင်ပါတယ်။
+
+---

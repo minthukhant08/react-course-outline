@@ -1,5 +1,6 @@
 export default {
     index: "Basic Syntax",
+    'declearations': 'Declearations',
     'accessing-object': 'Accessing Object Values',
     'adding-properties': "Adding new properties",
     'updating-properties': "Updating properties",

@@ -1,0 +1,70 @@
+# If, Else If, Else
+
+Condition တစ်ခု သို့မဟုတ် တစ်ခုထက်ပိုတာတွေကို စစ်ဆေးပြီး အလုပ်လုပ်စေချင်တဲ့အခါ သုံးပါတယ်။
+
+---
+
+## 1. if statement
+
+Condition မှန်မှသာ code block ထဲက အလုပ်လုပ်ပါမယ်။
+
+```js
+let age = 20;
+
+if (age >= 18) {
+  console.log("You can vote!");
+}
+```
+
+### Output
+```txt
+You can vote!
+```
+
+---
+
+## 2. if...else statement
+
+Condition မမှန်တဲ့အခါ (false ဖြစ်တဲ့အခါ) `else` ထဲက code တွေ အလုပ်လုပ်ပါမယ်။
+
+```js
+let age = 15;
+
+if (age >= 18) {
+  console.log("Adult");
+} else {
+  console.log("Minor");
+}
+```
+
+### Output
+```txt
+Minor
+```
+
+---
+
+## 3. else if statement
+
+အခြေအနေ အမျိုးမျိုးကို အဆင့်ဆင့် စစ်ဆေးချင်တဲ့အခါ သုံးပါတယ်။
+
+```js
+let score = 75;
+
+if (score >= 80) {
+  console.log("Grade A");
+} else if (score >= 60) {
+  console.log("Grade B");
+} else {
+  console.log("Grade C");
+}
+```
+
+### Output
+```txt
+Grade B
+```
+
+---
+
+👉 `if` statement သည် အမြဲတမ်း ပထမဆုံး ကိုက်ညီတဲ့ block တစ်ခုတည်းကိုပဲ အလုပ်လုပ်စေတာ ဖြစ်ပါတယ်။

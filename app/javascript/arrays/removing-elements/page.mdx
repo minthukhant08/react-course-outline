@@ -1,0 +1,58 @@
+# Removing Elements
+
+Array ထဲက element တွေကို ဖယ်ထုတ်ဖို့ နည်းလမ်းအမျိုးမျိုးရှိပါတယ်။
+
+---
+
+## 1. `.pop()`
+
+Array ရဲ့ နောက်ဆုံး (last) element ကို ဖယ်ထုတ်ချင်ရင် သုံးပါတယ်။
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+fruits.pop();
+
+console.log(fruits);
+```
+
+### Output
+```txt
+["Apple", "Banana"]
+```
+
+---
+
+## 2. `.shift()`
+
+Array ရဲ့ အရှေ့ဆုံး (first) element ကို ဖယ်ထုတ်ချင်ရင် သုံးပါတယ်။
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+fruits.shift();
+
+console.log(fruits);
+```
+
+### Output
+```txt
+["Banana", "Orange"]
+```
+
+---
+
+## 3. `.splice()`
+
+Array ရဲ့ ကြိုက်တဲ့နေရာ (specific index) က element ကို ဖယ်ထုတ်ချင်ရင် သုံးပါတယ်။
+
+```js
+const fruits = ["Apple", "Banana", "Orange"];
+// index 1 ကစပြီး element 1 ခု ဖျက်မယ်
+fruits.splice(1, 1);
+
+console.log(fruits);
+```
+
+### Output
+```txt
+["Apple", "Orange"]
+```

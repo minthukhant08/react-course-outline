@@ -1,0 +1,83 @@
+# Declearations
+JavaScript မှာ object declaration နည်းလမ်းအမျိုးမျိုးရှိပေမယ့်
+တကယ်အသုံးများတာက Object Literal (`{}`) ပဲဖြစ်ပါတယ်။
+
+အစပိုင်းမှာ declaration type အားလုံးကို memorize လုပ်ထားဖို့မလိုပါဘူး။
+
+အသုံးအများဆုံး pattern တွေကိုနားလည်ထားရင် လုံလောက်ပါတယ်။
+
+ဒါပေမယ့် တခြား developer တွေရဲ့ code ဖတ်တဲ့အခါ
+`class`, `Object.create()`, `constructor function` စတဲ့ pattern တွေကိုတွေ့နိုင်တဲ့အတွက်
+အခုလို overview သိထားတာက အကူအညီဖြစ်ပါတယ်။
+
+### 1. Object Literal (အသုံးအများဆုံး)
+
+```js 
+const user = {
+  name: "John",
+  age: 25
+};
+```
+`{}` ကိုအသုံးပြုပြီး object တည်ဆောက်တဲ့နည်းဖြစ်ပါတယ်။
+
+JavaScript မှာ အသုံးအများဆုံး declaration type ဖြစ်ပါတယ်။
+
+### 2. new Object()
+
+```js 
+const user = new Object();
+
+user.name = "John";
+user.age = 25;
+```
+
+`Object` constructor ကိုအသုံးပြုပြီး object ဖန်တီးတာဖြစ်ပါတယ်။
+
+### 3. Constructor Function
+```js 
+function User(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+const user = new User("John", 25);
+```
+တူညီတဲ့ object မျိုးစုံကို create လုပ်ချင်တဲ့အခါ အသုံးပြုပါတယ်။
+
+### 4. ES6 Class
+``` js 
+class User {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+const user = new User("John", 25);
+```
+Modern JavaScript မှာ object blueprint အနေနဲ့ အသုံးပြုတဲ့နည်းဖြစ်ပါတယ်။
+
+### 5. Factory Function
+```js 
+function createUser(name, age) {
+  return {
+    name,
+    age
+  };
+}
+
+const user = createUser("John", 25);
+```
+Function ကနေ object return ပြန်ပေးတဲ့ pattern ဖြစ်ပါတယ်။
+
+### 6. Object.create()
+```js 
+const person = {
+  greet() {
+    console.log("Hello");
+  }
+};
+
+const user = Object.create(person);
+```
+Prototype ကိုအခြေခံပြီး object အသစ်တည်ဆောက်တဲ့နည်းဖြစ်ပါတယ်။

@@ -1,0 +1,82 @@
+# Array.map()
+
+`.map()` method သည် original array ထဲက element တစ်ခုချင်းစီကို function တစ်ခုခုနဲ့ တွက်ချက်ပြီး array အသစ်တစ်ခု (new array) ကို return ပြန်ပေးပါတယ်။
+
+---
+
+## 1. Basic Usage
+
+Original array ကို မပြောင်းလဲစေဘဲ calculation တစ်ခုခုလုပ်ပြီး array အသစ်တစ်ခုပဲ ထွက်လာမှာဖြစ်ပါတယ်။
+
+```js
+const numbers = [1, 2, 3, 4];
+
+const doubled = numbers.map(num => num * 2);
+
+console.log(doubled);
+console.log(numbers); // original array သည် မပြောင်းလဲပါ
+```
+
+### Output
+```txt
+[2, 4, 6, 8]
+[1, 2, 3, 4]
+```
+
+---
+
+## 2. Callback Function Parameters
+
+`.map()` ရဲ့ parameter ထဲမှာ anonymous function (အမည်မပါတဲ့ function) ကို အသုံးပြုပါတယ်။ ဒီ function ထဲမှာ parameter (၃) ခုအထိ လက်ခံနိုင်ပါတယ်။
+
+```js
+array.map((element, index, array) => { ... });
+```
+
+1. **element**: လက်ရှိ ရောက်နေတဲ့ array element။ (မဖြစ်မနေပါရမယ်)
+2. **index**: လက်ရှိ element ရဲ့ index နံပါတ်။ (optional)
+3. **array**: မူရင်း array တစ်ခုလုံး။ (optional)
+
+### Example with Index
+
+```js
+const fruits = ["Apple", "Banana"];
+
+const list = fruits.map((fruit, index) => {
+  return `${index + 1}. ${fruit}`;
+});
+
+console.log(list);
+```
+
+### Output
+```txt
+["1. Apple", "2. Banana"]
+```
+
+---
+
+## 3. Working with Objects
+
+Array of objects ထဲကနေ လိုချင်တဲ့ property တစ်ခုတည်းကိုပဲ map လုပ်ပြီး ထုတ်ယူနိုင်ပါတယ်။
+
+```js
+const users = [
+  { name: "Mg Mg", age: 20 },
+  { name: "Su Su", age: 25 },
+  { name: "Kyaw Kyaw", age: 30 }
+];
+
+const names = users.map(user => user.name);
+
+console.log(names);
+```
+
+### Output
+```txt
+["Mg Mg", "Su Su", "Kyaw Kyaw"]
+```
+
+---
+
+👉 `.map()` ကို React လို library တွေမှာ list တွေ display လုပ်တဲ့အခါ အလွန်အသုံးများပါတယ်။

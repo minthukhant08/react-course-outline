@@ -1,0 +1,70 @@
+# Return Statement
+
+Function တစ်ခုကနေ တွက်ချက်လိုက်တဲ့ ရလဒ်ကို အပြင်ကို ပြန်ထုတ်ပေးချင်တဲ့အခါ `return` keyword ကို သုံးပါတယ်။
+
+---
+
+## 1. Returning a Value
+
+`return` ကို သုံးလိုက်ရင် function သည် အလုပ်လုပ်တာ ရပ်သွားပြီး သတ်မှတ်ထားတဲ့ value ကို ပြန်ပေးပါတယ်။
+
+```js
+function add(a, b) {
+  return a + b;
+}
+
+const result = add(5, 3);
+console.log(result);
+```
+
+### Output
+```txt
+8
+```
+
+---
+
+## 2. Returning Objects/Arrays
+
+Function တစ်ခုကနေ data type မျိုးစုံကို return ပြန်ပေးနိုင်ပါတယ်။
+
+```js
+function getUser() {
+  return {
+    name: "Mg Mg",
+    age: 20
+  };
+}
+
+const user = getUser();
+console.log(user.name);
+```
+
+### Output
+```txt
+Mg Mg
+```
+
+---
+
+## 3. Important Note about `return`
+
+`return` ရဲ့ အောက်မှာရှိတဲ့ code တွေသည် အလုပ်လုပ်မှာ မဟုတ်ပါဘူး။
+
+```js
+function test() {
+  return "Done";
+  console.log("This will never run"); // ❌ အလုပ်မလုပ်ပါ
+}
+
+console.log(test());
+```
+
+### Output
+```txt
+Done
+```
+
+---
+
+👉 Function တစ်ခုမှာ `return` မပါရင် default အနေနဲ့ `undefined` ကို return ပြန်ပေးပါတယ်။

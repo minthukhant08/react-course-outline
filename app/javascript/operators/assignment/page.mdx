@@ -1,0 +1,35 @@
+# Assignment Operators
+
+Variable တွေထဲကို value တွေ ထည့်သွင်း (assign) တဲ့နေရာမှာ သုံးပါတယ်။
+
+---
+
+## Basic Assignment
+
+| Operator | Example | Equivalent to |
+|----------|---------|---------------|
+| `=` | `x = y` | `x = y` |
+| `+=` | `x += y` | `x = x + y` |
+| `-=` | `x -= y` | `x = x - y` |
+| `*=` | `x *= y` | `x = x * y` |
+| `/=` | `x /= y` | `x = x / y` |
+| `%=` | `x %= y` | `x = x % y` |
+| `**=` | `x **= y` | `x = x ** y` |
+
+---
+
+## Example Usage
+
+```js
+let x = 10;
+
+x += 5; // x = 10 + 5
+console.log(x); // 15
+
+x *= 2; // x = 15 * 2
+console.log(x); // 30
+```
+
+---
+
+👉 `=` သည် assign လုပ်ခြင်းဖြစ်ပြီး `==` သည် နှိုင်းယှဉ်ခြင်းဖြစ်ကြောင်း သတိပြုပါ။

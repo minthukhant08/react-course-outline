@@ -1,0 +1,40 @@
+# Logical Operators
+
+Condition တစ်ခုထက်ပိုတာတွေကို ပေါင်းစပ်ပြီး စစ်ဆေးချင်တဲ့အခါ သုံးပါတယ်။
+
+---
+
+## Logical AND (&&)
+
+Condition အားလုံး မှန်မှသာ `true` ရပါမယ်။
+
+| A | B | A && B |
+|---|---|--------|
+| true | true | true |
+| true | false | false |
+
+---
+
+## Logical OR (||)
+
+Condition တစ်ခုခု မှန်ရင်ပဲ `true` ရပါမယ်။
+
+| A | B | A \|\| B |
+|---|---|---------|
+| true | false | true |
+| false | false | false |
+
+---
+
+## Logical NOT (!)
+
+ရလဒ်ကို ပြောင်းပြန် (true ကို false၊ false ကို true) လုပ်ပေးပါတယ်။
+
+```js
+let isAdmin = true;
+console.log(!isAdmin); // false
+```
+
+---
+
+👉 Logical operator တွေကို `if...else` statement တွေမှာ logic တွေ တည်ဆောက်ဖို့ အဓိက အသုံးပြုပါတယ်။

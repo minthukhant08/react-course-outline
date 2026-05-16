@@ -1,0 +1,48 @@
+# Declearations
+JavaScript မှာ array declaration နည်းလမ်းအမျိုးမျိုးရှိပေမယ့်
+တကယ်အသုံးများတာက Array Literal (`[]`) ပဲဖြစ်ပါတယ်။
+
+အစပိုင်းမှာ declaration type အားလုံးကို memorize လုပ်ထားဖို့မလိုပါဘူး။
+
+အသုံးအများဆုံး pattern တွေကိုနားလည်ထားရင် လုံလောက်ပါတယ်။
+
+ဒါပေမယ့် တခြား developer တွေရဲ့ code ဖတ်တဲ့အခါ
+`new Array()`, `Array.of()`, `Array.from()` စတဲ့ pattern တွေကိုတွေ့နိုင်တဲ့အတွက်
+အခုလို overview သိထားတာက အကူအညီဖြစ်ပါတယ်။
+
+### 1. Array Literal (အသုံးအများဆုံး)
+
+```js 
+const fruits = ["Apple", "Banana", "Orange"];
+```
+`[]` ကိုအသုံးပြုပြီး array တည်ဆောက်တဲ့နည်းဖြစ်ပါတယ်။
+
+
+### 2. new Array()
+
+```js 
+const fruits = new Array("Apple", "Banana", "Orange");
+```
+
+`Array` constructor ကိုအသုံးပြုပြီး array ဖန်တီးတာဖြစ်ပါတယ်။ 
+သတိထားရမှာက `new Array(5)` လို့ရေးရင် length 5 ရှိတဲ့ empty array တစ်ခု ထွက်လာမှာဖြစ်ပါတယ်။
+
+### 3. Array.of()
+```js 
+const numbers = Array.of(1, 2, 3);
+```
+Argument အနေနဲ့ပေးလိုက်တဲ့ value တွေကို array အနေနဲ့ တည်ဆောက်ပေးပါတယ်။
+
+### 4. Array.from()
+```js 
+const str = "Hello";
+const chars = Array.from(str); // ["H", "e", "l", "l", "o"]
+```
+Iterable objects (string, set, map) တွေကနေ array အဖြစ်ပြောင်းလဲချင်တဲ့အခါ အသုံးပြုပါတယ်။
+
+### 5. Spread Operator (...)
+```js 
+const arr1 = [1, 2];
+const arr2 = [...arr1, 3, 4]; // [1, 2, 3, 4]
+```
+Existing array ကိုသုံးပြီး array အသစ်တစ်ခု တည်ဆောက်တဲ့အခါ အသုံးပြုပါတယ်။

@@ -1,0 +1,134 @@
+# Array.reduce()
+
+`.reduce()` method သည် array တစ်ခုလုံးမှာရှိတဲ့ element တွေကို ပေါင်းစပ်ပြီး **single value** (တန်ဖိုးတစ်ခုတည်း) အဖြစ်သို့ ပြောင်းလဲပေးတဲ့နေရာမှာ သုံးပါတယ်။
+
+---
+
+## 1. Basic Usage (Summing Numbers)
+
+Array ထဲက ကိန်းဂဏန်းအားလုံးကို ပေါင်းပြီး ရလဒ်တစ်ခုတည်း ထွက်လာအောင် လုပ်ဆောင်နိုင်ပါတယ်။
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+
+const sum = numbers.reduce((accumulator, currentValue) => {
+  return accumulator + currentValue;
+}, 0); // 0 သည် initial value (စတင်မယ့် တန်ဖိုး) ဖြစ်ပါတယ်။
+
+console.log(sum);
+```
+
+### Output
+```txt
+15
+```
+
+---
+
+## 2. Callback Function Parameters
+
+`.reduce()` ၏ callback function တွင် parameter (၄) ခုအထိ လက်ခံနိုင်ပြီး ဒုတိယ parameter အနေဖြင့် `initialValue` ကို ထည့်သွင်းနိုင်ပါတယ်။
+
+```js
+array.reduce((accumulator, currentValue, currentIndex, array) => { ... }, initialValue);
+```
+
+1. **accumulator**: အဆင့်ဆင့် တွက်ချက်ထားတဲ့ ရလဒ်တွေကို သိမ်းဆည်းထားမယ့် variable (စုဆောင်းသူ)။
+2. **currentValue**: လက်ရှိ ရောက်ရှိနေတဲ့ element။
+3. **currentIndex**: လက်ရှိ element ၏ index။ (optional)
+4. **array**: မူရင်း array တစ်ခုလုံး။ (optional)
+5. **initialValue**: ပထမဦးဆုံး အကြိမ်မှာ accumulator ထဲကို ထည့်ပေးလိုက်မယ့် တန်ဖိုး။ (မဖြစ်မနေ မဟုတ်သော်လည်း ထည့်ပေးရန် အကြံပြုပါသည်)
+
+---
+
+## 3. Working with Objects (Total Price)
+
+Shopping cart တစ်ခုထဲက ပစ္စည်းတွေရဲ့ စုစုပေါင်း ဈေးနှုန်းကို တွက်ချက်တဲ့အခါ အသုံးများပါတယ်။
+
+```js
+const cart = [
+  { item: "Laptop", price: 1000 },
+  { item: "Mouse", price: 20 },
+  { item: "Keyboard", price: 50 }
+];
+
+const totalPrice = cart.reduce((total, product) => {
+  return total + product.price;
+}, 0);
+
+console.log("Total Price:", totalPrice);
+```
+
+### Output
+```txt
+Total Price: 1070
+```
+
+---
+
+## 4. Grouping Data (Advanced)
+
+`.reduce()` ကိုသုံးပြီး data တွေကို အုပ်စုခွဲ (grouping) တာတွေလည်း လုပ်နိုင်ပါတယ်။
+
+```js
+const dogs = [
+  { name: "Max", age: 2 },
+  { name: "Buddy", age: 5 },
+  { name: "Rocky", age: 1 },
+  { name: "Bella", age: 4 }
+];
+
+const groupedDogs = dogs.reduce((groups, dog) => {
+  if (dog.age > 3) {
+    groups.overThree.push(dog);
+  } else {
+    groups.underThree.push(dog);
+  }
+  return groups;
+}, { overThree: [], underThree: [] }); // Initial value သည် empty lists ပါတဲ့ object ဖြစ်ပါတယ်။
+
+console.log(groupedDogs);
+```
+
+### Output
+```txt
+{
+  overThree: [
+    { name: "Buddy", age: 5 },
+    { name: "Bella", age: 4 }
+  ],
+  underThree: [
+    { name: "Max", age: 2 },
+    { name: "Rocky", age: 1 }
+  ]
+}
+```
+
+---
+
+## 5. Reduce vs Map
+
+တစ်ခါတလေမှာ `.map()` ကိုသုံးပြီး `.reduce()` ရဲ့ ရလဒ်မျိုး ရအောင် လုပ်လို့ရပေမယ့် `.reduce()` က ပိုပြီး သင့်တော်ပါတယ်။
+
+### ပေါင်းလဒ်တွက်ချက်ခြင်း (Example)
+
+```js
+const prices = [100, 200, 300];
+
+// ❌ Map ကိုသုံးပြီး တွက်ခြင်း (Anti-pattern)
+let totalMap = 0;
+prices.map(p => totalMap += p); 
+
+// ✅ Reduce ကိုသုံးပြီး တွက်ခြင်း (Best Practice)
+const totalReduce = prices.reduce((acc, p) => acc + p, 0);
+```
+
+#### ဘာကြောင့် Reduce က ပိုကောင်းတာလဲ?
+
+1.  **Intent (ရည်ရွယ်ချက်):** `.map()` ရဲ့ အဓိက အလုပ်က array အသစ်တစ်ခု ထုတ်ပေးဖို့ဖြစ်ပါတယ်။ အခုလို value တစ်ခုတည်း ထွက်လာအောင် လုပ်ဖို့ မဟုတ်ပါဘူး။
+2.  **Side Effects:** `.map()` ကို သုံးရင် အပြင်က `totalMap` ဆိုတဲ့ variable ကို သွားပြင်နေရပါတယ်။ ဒါကို side effect လို့ ခေါ်ပါတယ်။ `.reduce()` ကတော့ သူ့ဘာသာသူ အပြီးသတ် တွက်ချက်သွားတာဖြစ်လို့ ပိုပြီး သန့်ရှင်း (clean) ပါတယ် (Pure Function)။
+3.  **Immutability:** `.reduce()` သည် original data တွေကို မထိခိုက်စေဘဲ ရလဒ်အသစ်ကို တိုက်ရိုက် return ပြန်ပေးပါတယ်။
+
+---
+
+👉 `.reduce()` သည် array တစ်ခုကို value တစ်ခုတည်း (Number, String, Object သို့မဟုတ် Array အသစ်) ဖြစ်အောင် "reduce" (လျှော့ချ/ပေါင်းစည်း) ပေးတာဖြစ်လို့ အလွန် powerful ဖြစ်တဲ့ method တစ်ခုဖြစ်ပါတယ်။

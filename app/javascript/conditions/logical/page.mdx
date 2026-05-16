@@ -1,0 +1,44 @@
+# Logical Short-circuiting
+
+Logical operators (`&&`, `||`) တွေကို သုံးပြီး condition စစ်ဆေးတာအပြင် code တွေကို အတိုကောက် အလုပ်လုပ်စေနိုင်ပါတယ်။
+
+---
+
+## 1. Logical AND (&&) - The "Guard" Operator
+
+ပထမ condition မှန်မှသာ ဒုတိယ အစိတ်အပိုင်းကို အလုပ်လုပ်စေချင်တဲ့အခါ သုံးပါတယ်။
+
+```js
+const isLoggedIn = true;
+
+// isLoggedIn မှန်မှသာ Welcome လို့ ပြပါမယ်
+isLoggedIn && console.log("Welcome!");
+```
+
+### Output
+```txt
+Welcome!
+```
+
+---
+
+## 2. Logical OR (||) - The "Default" Operator
+
+ပထမ value သည် `falsy` ဖြစ်နေခဲ့ရင် default value တစ်ခု သတ်မှတ်ပေးချင်တဲ့အခါ သုံးပါတယ်။
+
+```js
+let userName = ""; // empty string is falsy
+
+let displayName = userName || "Guest";
+
+console.log(displayName);
+```
+
+### Output
+```txt
+Guest
+```
+
+---
+
+👉 Logical short-circuiting ကို React လို နေရာမျိုးမှာ conditional rendering လုပ်တဲ့အခါ အလွန်အသုံးများပါတယ်။

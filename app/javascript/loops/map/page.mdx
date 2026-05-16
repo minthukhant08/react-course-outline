@@ -1,0 +1,35 @@
+# Array.map() (as a Loop)
+
+`.map()` method သည် array တစ်ခုလုံးကို ပတ်ပြီး (iterate လုပ်ပြီး) element တစ်ခုချင်းစီကို calculation လုပ်ကာ **Array အသစ်တစ်ခု** အဖြစ် return ပြန်ပေးပါတယ်။
+
+---
+
+## Example
+
+```js
+const numbers = [1, 2, 3];
+
+const squares = numbers.map(num => num * num);
+
+console.log(squares);
+```
+
+### Output
+```txt
+[1, 4, 9]
+```
+
+---
+
+## forEach vs map
+
+| Feature | `.forEach()` | `.map()` |
+|---------|--------------|----------|
+| **Return** | `undefined` | **New Array** |
+| **Usage** | Side effects (log, save) | Data transformation |
+
+---
+
+👉 Loop တစ်ပတ်ပတ်ပြီးတိုင်း ရလာတဲ့ result တွေကို array အသစ်ထဲ ပြန်ထည့်ချင်တယ်ဆိုရင် `.map()` က အကောင်းဆုံး ဖြစ်ပါတယ်။
+
+*(မှတ်ချက် - အသေးစိတ်ကို Arrays section ထဲရှိ [Map](/javascript/arrays/map) မှာ ဖတ်ရှုနိုင်ပါတယ်။)*

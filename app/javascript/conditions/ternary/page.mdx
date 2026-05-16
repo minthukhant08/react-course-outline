@@ -1,0 +1,48 @@
+# Ternary Operator
+
+`if-else` ရေးသားပုံကို code တစ်ကြောင်းတည်းနဲ့ ရိုးရှင်းအောင် ရေးနိုင်တဲ့ အတိုကောက် နည်းလမ်းဖြစ်ပါတယ်။
+
+---
+
+## Syntax
+
+```js
+condition ? value_if_true : value_if_false
+```
+
+---
+
+## Example
+
+```js
+let age = 20;
+let status = age >= 18 ? "Adult" : "Minor";
+
+console.log(status);
+```
+
+### Output
+```txt
+Adult
+```
+
+---
+
+## Comparison with if-else
+
+```js
+// if-else နဲ့ ရေးရင်
+let message;
+if (isLoggedIn) {
+  message = "Welcome back!";
+} else {
+  message = "Please login.";
+}
+
+// Ternary နဲ့ ရေးရင်
+const message = isLoggedIn ? "Welcome back!" : "Please login.";
+```
+
+---
+
+👉 Ternary operator ကို ရိုးရှင်းတဲ့ condition တွေမှာပဲ သုံးသင့်ပါတယ်။ အဆင့်ဆင့် ထပ်နေတဲ့ complex logic တွေအတွက်တော့ `if-else` က ပိုကောင်းပါတယ်။

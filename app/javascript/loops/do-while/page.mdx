@@ -1,0 +1,36 @@
+# Do While Loop
+
+`do while` loop သည် code block ကို အနည်းဆုံး တစ်ကြိမ် (first time) အလုပ်လုပ်ပြီးမှ condition ကို စစ်ဆေးပါတယ်။
+
+---
+
+## Syntax
+
+```js
+do {
+  // code block
+} while (condition);
+```
+
+---
+
+## Example
+
+```js
+let i = 10;
+
+do {
+  console.log("Value is: " + i);
+  i++;
+} while (i < 5);
+```
+
+### Output
+```txt
+Value is: 10
+```
+*(မှတ်ချက် - `i < 5` သည် false ဖြစ်သော်လည်း `do` block ကြောင့် တစ်ကြိမ်တော့ အလုပ်လုပ်သွားပါတယ်။)*
+
+---
+
+👉 `do while` သည် condition မမှန်ရင်တောင် အနည်းဆုံး တစ်ကြိမ်တော့ အလုပ်လုပ်စေချင်တဲ့ နေရာတွေမှာ သုံးပါတယ်။

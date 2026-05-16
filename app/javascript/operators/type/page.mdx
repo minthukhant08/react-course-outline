@@ -1,0 +1,31 @@
+# Type Operators
+
+Data တွေရဲ့ အမျိုးအစား (Data Type) ကို စစ်ဆေးချင်တဲ့အခါ သုံးပါတယ်။
+
+---
+
+## typeof Operator
+
+Variable တစ်ခု ဒါမှမဟုတ် value တစ်ခုရဲ့ type ကို string အနေနဲ့ ပြန်ပေးပါတယ်။
+
+```js
+console.log(typeof "Hello"); // "string"
+console.log(typeof 42);      // "number"
+console.log(typeof true);    // "boolean"
+console.log(typeof {});      // "object"
+```
+
+---
+
+## instanceof Operator
+
+Object တစ်ခုသည် သတ်မှတ်ထားတဲ့ class သို့မဟုတ် constructor ကနေ ဆင်းသက်လာတာ ဟုတ်မဟုတ် စစ်ဆေးပါတယ်။
+
+```js
+let date = new Date();
+console.log(date instanceof Date); // true
+```
+
+---
+
+👉 `typeof` ကို variable တစ်ခုမှာ ဘာ data တွေ ရှိနေလဲဆိုတာ သိရှိဖို့ development လုပ်နေစဉ်မှာ အလွန်အသုံးများပါတယ်။

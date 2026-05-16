@@ -1,0 +1,29 @@
+# Nested Conditions
+
+Condition တစ်ခုထဲမှာ နောက်ထပ် condition တစ်ခုကို ထပ်ဆင့်စစ်ဆေးတာဖြစ်ပါတယ်။
+
+## Example
+
+```js
+let age = 20;
+let hasID = true;
+
+if (age >= 18) {
+  if (hasID) {
+    console.log("You can enter the club.");
+  } else {
+    console.log("You need an ID to enter.");
+  }
+} else {
+  console.log("You are too young.");
+}
+```
+
+### Output
+```txt
+You can enter the club.
+```
+
+---
+
+👉 Nested if တွေ အရမ်းများလာရင် code ဖတ်ရ ခက်ခဲစေတဲ့အတွက် လိုအပ်မှသာ သုံးသင့်ပါတယ်။ Logical operators (`&&`, `||`) တွေကို သုံးပြီး nested structure ကို လျှော့ချနိုင်ပါတယ်။
