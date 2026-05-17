@@ -1,0 +1,71 @@
+# Interfaces
+
+TypeScript မှာ Interface ဆိုတာ object တစ်ခုရဲ့ ပုံစံ (structure) ကို သတ်မှတ်ဖို့သုံးတဲ့ နည်းလမ်းတစ်ခု ဖြစ်ပါတယ်။ သူက object တစ်ခုမှာ ဘယ်လို property တွေ ပါရမယ်၊ ဘယ်လို data type တွေ ဖြစ်ရမယ်ဆိုတာကို blueprint (ပုံစံကြမ်း) အနေနဲ့ သတ်မှတ်ပေးပါတယ်။
+
+---
+
+## 1. Basic Interface
+
+`interface` keyword ကို သုံးပြီး object တစ်ခုရဲ့ ပုံစံကို အခုလို သတ်မှတ်နိုင်ပါတယ်။
+
+```ts
+interface Person {
+  firstName: string;
+  lastName: string;
+  age: number;
+}
+
+const student: Person = {
+  firstName: "Aung",
+  lastName: "Kaung",
+  age: 20
+};
+```
+
+## 2. Optional and Readonly Properties
+
+- **Optional (?)**: Property တစ်ခုက ရှိချင်မှရှိမယ်ဆိုရင် `?` ကို သုံးနိုင်ပါတယ်။
+- **Readonly**: တန်ဖိုးကို တစ်ခါပဲ သတ်မှတ်ခွင့်ရှိပြီး နောက်တစ်ကြိမ် ပြန်ပြင်လို့ မရစေချင်ရင် `readonly` ကို သုံးနိုင်ပါတယ်။
+
+```ts
+interface Car {
+  readonly brand: string;
+  model: string;
+  year?: number; // Optional
+}
+
+const myCar: Car = {
+  brand: "Toyota",
+  model: "Camry"
+};
+
+// myCar.brand = "Honda"; // ❌ Error: Cannot assign to 'brand' because it is a read-only property.
+```
+
+## 3. Extending Interfaces
+
+Interface တစ်ခုကို နောက်ထပ် interface တစ်ခုကနေ အမွေဆက်ခံ (Inherit) ပြီး ထပ်ဆင့် တိုးချဲ့နိုင်ပါတယ်။ ဒါကို `extends` keyword နဲ့ သုံးပါတယ်။
+
+```ts
+interface Animal {
+  name: string;
+}
+
+interface Dog extends Animal {
+  breed: string;
+}
+
+const myDog: Dog = {
+  name: "Buddy",
+  breed: "Golden Retriever"
+};
+```
+
+## 4. Interface vs Type Alias
+
+Interface နဲ့ Type Alias က ဆင်တူသော်လည်း အဓိက ကွာခြားချက်မှာ Interface က `extends` လုပ်ရလွယ်ကူပြီး "Declaration Merging" (နာမည်တူ interface နှစ်ခုကို ပေါင်းစည်းခြင်း) ကို ပြုလုပ်နိုင်ခြင်း ဖြစ်ပါတယ်။
+
+👉 Object structure တွေကို သတ်မှတ်တဲ့အခါ Interface ကို အဓိက သုံးဖို့ အကြံပြုလိုပါတယ်။
+
+---
+👉 Interfaces ကို သေချာနားလည်ထားခြင်းက React components တွေမှာ Props တွေကို စနစ်တကျ သတ်မှတ်တဲ့အခါ အများကြီး အထောက်အကူ ဖြစ်စေပါတယ်။

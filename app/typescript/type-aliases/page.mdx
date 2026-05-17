@@ -1,0 +1,73 @@
+# Type Aliases
+
+TypeScript မှာ Type Alias ဆိုတာ မိမိစိတ်ကြိုက် data type အသစ်တစ်ခုကို နာမည်ပေးပြီး သတ်မှတ်နိုင်တဲ့ နည်းလမ်းဖြစ်ပါတယ်။ ဒါကို `type` keyword နဲ့ သုံးပါတယ်။
+
+---
+
+## 1. Basic Type Alias
+
+ရိုးရိုး primitive types တွေကို နာမည်အသစ်ပေးပြီး သုံးနိုင်ပါတယ်။ ဒါက code ကို ပိုပြီး အဓိပ္ပာယ်ရှိစေပါတယ်။
+
+```ts
+type ID = number | string;
+
+let userId: ID = 123;
+userId = "abc-456"; // ✅ အဆင်ပြေပါတယ်
+```
+
+## 2. Object Type Aliases
+
+Object တွေရဲ့ structure ကို type အဖြစ် သတ်မှတ်ထားပြီး နေရာအနှံ့မှာ ပြန်သုံးနိုင်ပါတယ်။ ဒါဟာ React props တွေအတွက် အရမ်း အသုံးဝင်ပါတယ်။
+
+```ts
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  isAdmin?: boolean; // ? ကတော့ optional (ရှိချင်မှရှိမယ်) လို့ ပြောတာပါ
+};
+
+const myUser: User = {
+  id: 1,
+  name: "Mg Mg",
+  email: "mgmg@example.com"
+};
+```
+
+## 3. Union Types with Alias
+
+Type Alias ကို သုံးပြီး တန်ဖိုးတစ်ခုထက်မက လက်ခံနိုင်တဲ့ logic တွေကို ရေးသားနိုင်ပါတယ်။
+
+```ts
+type Status = "Pending" | "Approved" | "Rejected";
+
+let currentStatus: Status = "Pending";
+// currentStatus = "Done"; // ❌ Error: Type '"Done"' is not assignable to type 'Status'
+```
+
+### Output
+
+```txt
+(TypeScript compile error ပြပါလိမ့်မယ်)
+```
+
+## 4. Function Aliases
+
+Function တွေရဲ့ parameter နဲ့ return type ကိုလည်း alias အဖြစ် သတ်မှတ်နိုင်ပါတယ်။
+
+```ts
+type MathFunc = (x: number, y: number) => number;
+
+const add: MathFunc = (a, b) => a + b;
+const multiply: MathFunc = (a, b) => a * b;
+
+console.log(add(5, 5));
+```
+
+### Output
+
+```txt
+10
+```
+
+👉 Type Alias ကို သုံးခြင်းဖြင့် complex ဖြစ်တဲ့ type တွေကို ရှင်းလင်းစွာ စီမံနိုင်ပြီး code reusability ကို တိုးတက်စေပါတယ်။

@@ -1,0 +1,77 @@
+# Functions in TypeScript
+
+TypeScript မှာ function တွေကို အသုံးပြုတဲ့အခါ parameter (ပေးပို့တဲ့ data) နဲ့ return (ပြန်ပေးတဲ့ data) အမျိုးအစားတွေကို တိတိကျကျ သတ်မှတ်နိုင်ပါတယ်။
+
+---
+
+## 1. Parameter and Return Types
+
+Function တစ်ခုမှာ ဘယ်လို data type ကို လက်ခံမယ်ဆိုတာနဲ့ ဘယ်လို data type ကို ပြန်ပေးမယ်ဆိုတာကို အခုလို သတ်မှတ်နိုင်ပါတယ်။
+
+```ts
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+const result = add(5, 10);
+console.log(result);
+```
+
+### Output
+
+```txt
+15
+```
+
+## 2. Optional and Default Parameters
+
+- **Optional (?)**: Parameter တစ်ခုက ထည့်ချင်မှ ထည့်မယ်ဆိုရင် `?` ကို သုံးနိုင်ပါတယ်။
+- **Default**: Parameter အတွက် default တန်ဖိုးတစ်ခုကို ကြိုတင်သတ်မှတ်ထားနိုင်ပါတယ်။
+
+```ts
+function greet(name: string, greeting: string = "Hello"): string {
+  return `${greeting}, ${name}!`;
+}
+
+console.log(greet("Mg Mg"));
+console.log(greet("Kyaw Kyaw", "Mingalaba"));
+```
+
+### Output
+
+```txt
+Hello, Mg Mg!
+Mingalaba, Kyaw Kyaw!
+```
+
+## 3. Void and Never Types
+
+- **void**: Function ကနေ ဘာတန်ဖိုးမှ ပြန်မပေးတဲ့အခါ (ဥပမာ- console ထုတ်ရုံပဲ လုပ်တဲ့အခါ) သုံးပါတယ်။
+- **never**: Function က ဘယ်တော့မှ ပြီးဆုံးမှာ မဟုတ်တဲ့အခါ (ဥပမာ- error တစ်ခု အမြဲ throw လုပ်တဲ့အခါ) သုံးပါတယ်။
+
+```ts
+function logMessage(message: string): void {
+  console.log(message);
+}
+
+logMessage("TypeScript is awesome!");
+```
+
+## 4. Function as a Type
+
+Function ကိုယ်တိုင်ကိုလည်း type တစ်ခုအနေနဲ့ သတ်မှတ်ပြီး variable တွေမှာ သုံးနိုင်ပါတယ်။
+
+```ts
+let myFunc: (a: number, b: number) => number;
+
+myFunc = (x, y) => x * y;
+console.log(myFunc(10, 2));
+```
+
+### Output
+
+```txt
+20
+```
+
+👉 Function တွေမှာ data type တွေကို သေချာသတ်မှတ်ခြင်းက logic အမှားတွေကို ကြိုတင်ကာကွယ်ပေးပါတယ်။

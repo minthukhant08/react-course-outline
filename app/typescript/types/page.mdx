@@ -1,0 +1,99 @@
+# TypeScript Data Types
+
+TypeScript မှာ variable တွေရဲ့ data type ကို တိတိကျကျ သတ်မှတ်နိုင်ပါတယ်။ ဒါကို "Type Annotation" လို့ ခေါ်ပါတယ်။
+
+---
+
+## 1. Primitive Types
+
+JavaScript မှာပါတဲ့ အခြေခံ data type တွေကို TypeScript မှာ အခုလို သတ်မှတ်နိုင်ပါတယ်။
+
+```ts
+let username: string = "Mg Mg";
+let age: number = 20;
+let isStudent: boolean = true;
+let empty: null = null;
+let notDefined: undefined = undefined;
+```
+
+## 2. Arrays & Tuples
+
+Array တွေမှာ ဘယ်လို data အမျိုးအစားပဲ ပါဝင်ရမယ်ဆိုတာကို သတ်မှတ်နိုင်ပါတယ်။
+
+### Array
+```ts
+let fruits: string[] = ["Apple", "Banana"];
+let scores: number[] = [90, 85, 100];
+```
+
+### Tuple
+Tuple ကတော့ array ထဲမှာ ပါဝင်မယ့် data အရေအတွက်နဲ့ အမျိုးအစား အစဉ်လိုက်ကိုပါ ကန့်သတ်ချင်တဲ့အခါ သုံးပါတယ်။
+
+```ts
+let user: [number, string] = [1, "Mg Mg"]; 
+// user = ["Mg Mg", 1]; // ❌ Error: Type string is not assignable to type number
+```
+
+## 3. Any & Unknown
+
+`any` နဲ့ `unknown` နှစ်ခုစလုံးက data type မသေချာတဲ့အခါ သုံးနိုင်ပေမယ့် သူတို့ရဲ့ အလုပ်လုပ်ပုံ ကွာခြားပါတယ်။
+
+### Why `any` is risky?
+`any` ကို သုံးရင် TypeScript က ဘာမှ စစ်ဆေးပေးတော့မှာ မဟုတ်ပါဘူး။ ဒါကြောင့် မရှိတဲ့ function တွေကို ခေါ်သုံးမိရင်တောင် error မပြတဲ့အတွက် runtime မှာ crash ဖြစ်နိုင်ပါတယ်။
+
+```ts
+let myData: any = 10;
+
+// random function တစ်ခုကို ခေါ်ကြည့်မယ်
+myData.sayHello(); // ✅ TypeScript က error မပြပါဘူး (ဒါပေမယ့် runtime မှာ crash ဖြစ်မယ်)
+```
+
+### Safety with `unknown`
+`unknown` ကတော့ `any` ထက် ပိုလုံခြုံပါတယ်။ သူကို အသုံးမပြုခင် ဒါက ဘာ type လဲဆိုတာကို အရင်စစ်ဆေးဖို့ (Type Guard) လိုအပ်ပါတယ်။
+
+```ts
+let value: unknown = "Hello";
+
+// value.toUpperCase(); // ❌ Error: 'value' is of type 'unknown'
+
+if (typeof value === "string") {
+  console.log(value.toUpperCase()); // ✅ အခုမှ အလုပ်လုပ်ပါမယ်
+}
+
+//OR 
+
+(value as string).toUpperCase(); // ✅ အလုပ်လုပ်ပါမယ်
+```
+
+## 4. Enums
+
+Enum ဆိုတာ ဆက်စပ်နေတဲ့ constant တန်ဖိုးတွေကို နာမည်ပေးပြီး စုစည်းထားတာ ဖြစ်ပါတယ်။ တန်ဖိုး (values) တွေကိုလည်း စိတ်ကြိုက် သတ်မှတ်နိုင်ပါတယ်။
+
+### Numeric Enum
+Default အားဖြင့် 0 ကနေ စပါတယ်။ ဒါပေမယ့် ကိုယ်တိုင် ပြောင်းလဲသတ်မှတ်နိုင်ပါတယ်။
+
+```ts
+enum Status {
+  Active = 1,
+  Inactive = 0,
+  Pending = 2
+}
+
+console.log(Status.Active); // 1
+```
+
+### String Enum
+စာသား (string) တွေကိုလည်း value အနေနဲ့ သတ်မှတ်နိုင်ပါတယ်။ ဒါက code ဖတ်ရတာ ပိုရှင်းစေပါတယ်။
+
+```ts
+enum Direction {
+  Up = "UP",
+  Down = "DOWN",
+  Left = "LEFT",
+  Right = "RIGHT"
+}
+
+console.log(Direction.Up); // "UP"
+```
+
+👉 မှန်ကန်တဲ့ data type တွေကို သတ်မှတ်ခြင်းက code ထဲမှာ bug တွေ ဖြစ်နိုင်ခြေကို အများကြီး လျှော့ချပေးပါတယ်။

@@ -1,0 +1,90 @@
+# Generics in TypeScript
+
+TypeScript မှာ Generic ဆိုတာ data type တစ်ခုတည်းအတွက် မဟုတ်ဘဲ အမျိုးမျိုးသော data type တွေမှာ ပြန်လည်အသုံးပြုနိုင်တဲ့ (Reusable) component တွေကို တည်ဆောက်တဲ့ နည်းလမ်းဖြစ်ပါတယ်။ သူက type-safety ကို မထိခိုက်စေဘဲ flexibility ကို ပေးစွမ်းပါတယ်။
+
+---
+
+## 1. Generic Functions
+
+Function တစ်ခုကို data type ပေါင်းစုံနဲ့ အလုပ်လုပ်စေချင်တဲ့အခါ `<T>` ဆိုတဲ့ placeholder ကို သုံးပါတယ်။ `T` တယ် "Type" ကို ကိုယ်စားပြုပါတယ်။
+
+```ts
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let output1 = identity<string>("Hello World");
+let output2 = identity<number>(100);
+
+console.log(output1);
+console.log(output2);
+```
+
+### Output
+
+```txt
+Hello World
+100
+```
+
+## 2. Generic Interfaces (API Response Example)
+
+Interface တွေကို generic အနေနဲ့ သတ်မှတ်ခြင်းက API response တွေလိုမျိုး "ပုံစံတူပြီး data ပဲကွာတဲ့" အခြေအနေတွေမှာ အရမ်းအသုံးဝင်ပါတယ်။
+
+```ts
+interface ApiResponse<T> {
+  status: number;
+  message: string;
+  data: T; // ဘယ်လို data အမျိုးအစားမဆို ဖြစ်နိုင်တယ်
+}
+
+interface User {
+  id: number;
+  name: string;
+}
+
+// User data အတွက် Response
+const userResponse: ApiResponse<User> = {
+  status: 200,
+  message: "Success",
+  data: { id: 1, name: "Mg Mg" }
+};
+
+// Post data အတွက် Response (ပြန်သုံးလို့ရတယ်)
+const postResponse: ApiResponse<{ title: string }> = {
+  status: 200,
+  message: "Success",
+  data: { title: "TypeScript Generics" }
+};
+```
+
+## 3. Generic Constraints (ကန့်သတ်ချက်များ)
+
+တစ်ခါတလေမှာ Generic ကို "ဘယ် type မဆို" လက်ခံခိုင်းမယ့်အစား "အနည်းဆုံးတော့ ဒီ property ပါရမယ်" ဆိုပြီး ကန့်သတ်ချင်တဲ့အခါ `extends` ကို သုံးရပါတယ်။
+
+ဥပမာ- ကျွန်ုပ်တို့က argument ရဲ့ `.length` ကို သုံးချင်တယ်ဆိုပါစို့။ `T` က ဘာမှန်းမသိရသေးတဲ့အတွက် `T` ထဲမှာ `.length` ပါမယ်လို့ TypeScript က အာမမခံနိုင်ပါဘူး။ ဒါကြောင့် အခုလို ကန့်သတ်ပေးရပါတယ်။
+
+```ts
+interface Lengthy {
+  length: number;
+}
+
+// T တယ် အနည်းဆုံးတော့ Lengthy interface ပါ အချက်အလက်တွေ ပါဝင်ရမယ်လို့ ကန့်သတ်လိုက်တာပါ
+function logLength<T extends Lengthy>(arg: T): void {
+  // အခုဆိုရင် .length ကို စိတ်ချလက်ချ သုံးလို့ရပါပြီ
+  console.log("Length is:", arg.length);
+}
+
+logLength("Hello"); // ✅ String မှာ length ပါတယ်
+logLength([1, 2, 3]); // ✅ Array မှာ length ပါတယ်
+// logLength(123); // ❌ Error: Number မှာ length မပါတဲ့အတွက် လက်မခံပါ
+```
+
+### Output
+
+```txt
+Length is: 5
+Length is: 3
+```
+
+👉 Generics ကို သုံးခြင်းဖြင့် code တွေကို ပိုမိုပြောင်းလွယ်ပြင်လွယ် ရှိစေပြီး logic တွေကို ထပ်ခါတလဲလဲ ရေးစရာမလိုတော့ပါဘူး။
