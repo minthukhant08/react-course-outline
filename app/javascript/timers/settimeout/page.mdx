@@ -1,0 +1,44 @@
+# setTimeout
+
+`setTimeout` ကို သတ်မှတ်ထားတဲ့ အချိန်တစ်ခု (millisecond) ကြာပြီးမှ code တစ်ခုကို တစ်ကြိမ်တည်း run ဖို့အတွက် သုံးပါတယ်။
+
+---
+
+## 1. Basic Syntax
+
+သူ့ရဲ့ syntax က function တစ်ခုနဲ့ စောင့်စေချင်တဲ့ အချိန် (ms) ကို parameter အနေနဲ့ ပေးရတာ ဖြစ်ပါတယ်။
+
+```js
+// 2 seconds (2000ms) ကြာရင် အလုပ်လုပ်မယ်
+setTimeout(() => {
+  console.log("၂ စက္ကန့် စောင့်ပြီးပါပြီ။");
+}, 2000);
+```
+
+### Output
+
+```txt
+၂ စက္ကန့် စောင့်ပြီးပါပြီ။
+```
+
+## 2. Stopping a timeout
+
+`clearTimeout` ကို သုံးပြီး run ဖို့ စောင့်နေတဲ့ timer ကို ပြန်ဖျက်လို့ ရပါတယ်။
+
+```js
+const timerId = setTimeout(() => {
+  console.log("ဒီ code က run မှာ မဟုတ်ဘူး");
+}, 3000);
+
+// timer ကို ချက်ချင်း ပြန်ဖျက်လိုက်မယ်
+clearTimeout(timerId);
+console.log("Timer ကို ဖျက်လိုက်ပါပြီ။");
+```
+
+### Output
+
+```txt
+Timer ကို ဖျက်လိုက်ပါပြီ။
+```
+
+👉 `setTimeout` ရဲ့ အချိန်ကို 0 လို့ ပေးထားရင်တောင် လက်ရှိ run နေတဲ့ code တွေ ပြီးမှသာ အလုပ်လုပ်မှာ ဖြစ်ပါတယ်။

@@ -1,0 +1,52 @@
+# Variables
+
+JavaScript မှာ variable ဆိုတာ data value တွေကို သိမ်းဆည်းဖို့သုံးတဲ့ container တွေ ဖြစ်ပါတယ်။
+
+- Variable တွေကို အမည်ပေးပြီး (name) သိမ်းဆည်းထားနိုင်တဲ့အတွက် လိုအပ်တဲ့အခါ ပြန်လည်ခေါ်ယူသုံးစွဲနိုင်တယ်
+- သိမ်းထားတဲ့ data တွေကို လိုအပ်သလို ပြောင်းလဲနိုင်တယ်
+- Variable name ပေးတဲ့အခါ letter, number, underscore (_) နဲ့ dollar sign ($) တွေကို သုံးနိုင်တယ် (ဒါပေမယ့် number နဲ့ စလို့မရပါ)
+
+---
+
+## 1. Declaring Variables
+
+JavaScript မှာ variable ကြေညာဖို့အတွက် `var`, `let`, နဲ့ `const` ဆိုတဲ့ keywords (၃) မျိုးကို အဓိက သုံးပါတယ်။
+
+```js
+var name = "Mg Mg";
+let age = 20;
+const city = "Yangon";
+
+console.log(name);
+console.log(age);
+console.log(city);
+```
+
+### Output
+
+```txt
+Mg Mg
+20
+Yangon
+```
+
+## 2. Dynamic Typing
+
+JavaScript ဟာ dynamic typing language ဖြစ်တဲ့အတွက် variable တစ်ခုထဲမှာ data type အမျိုးမျိုးကို ပြောင်းလဲသိမ်းဆည်းနိုင်ပါတယ်။
+
+```js
+let data = "Hello";
+console.log(data);
+
+data = 100;
+console.log(data);
+```
+
+### Output
+
+```txt
+Hello
+100
+```
+
+👉 Variable တွေကို နားလည်လွယ်တဲ့ အမည် (meaningful names) ပေးခြင်းက code ဖတ်ရတာ ပိုကောင်းစေပါတယ်။

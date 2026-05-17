@@ -1,0 +1,34 @@
+# Promise.allSettled()
+
+`Promise.allSettled()` ကတော့ ပေးထားတဲ့ Promise တွေ အားလုံး (အောင်မြင်သည်ဖြစ်စေ၊ ရှုံးနိမ့်သည်ဖြစ်စေ) ပြီးဆုံးသွားတဲ့အထိ စောင့်ပါတယ်။
+
+---
+
+## 1. Waiting for All Results
+
+သူက `Promise.all()` လိုမျိုး တစ်ခုခု error တက်တာနဲ့ ရပ်မသွားပါဘူး။ Promise တစ်ခုချင်းစီရဲ့ အခြေအနေ (status) နဲ့ ရလဒ် (value သို့မဟုတ် reason) ကို array တစ်ခုအနေနဲ့ ပြန်ပေးပါတယ်။
+
+```js
+const p1 = Promise.resolve("အောင်မြင်သည်");
+const p2 = Promise.reject("မှားယွင်းသည်");
+
+Promise.allSettled([p1, p2])
+  .then((results) => {
+    console.log(results);
+  });
+```
+
+### Output
+
+```txt
+[
+  { status: "fulfilled", value: "အောင်မြင်သည်" },
+  { status: "rejected", reason: "မှားယွင်းသည်" }
+]
+```
+
+## 2. When to use?
+
+တစ်ခုနှင့်တစ်ခု အမှီအခို မရှိတဲ့ အလုပ်တွေကို run ချင်တဲ့အခါနဲ့ ဘယ်နှစ်ခု အောင်မြင်ပြီး ဘယ်နှစ်ခု ရှုံးနိမ့်သွားလဲဆိုတာကို သိချင်တဲ့အခါ သုံးပါတယ်။
+
+👉 `Promise.allSettled()` သည် အလုပ်အားလုံးရဲ့ နောက်ဆုံးရလဒ်ကို မပျောက်ပျက်စေဘဲ အကုန်သိချင်တဲ့အခါ အကောင်းဆုံး ဖြစ်ပါတယ်။

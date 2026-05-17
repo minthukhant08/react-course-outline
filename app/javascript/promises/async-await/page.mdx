@@ -1,0 +1,72 @@
+# Async / Await
+
+`async` နဲ့ `await` က Promise တွေကို ပိုမိုလွယ်ကူပြီး ဖတ်ရရိုးရှင်းတဲ့ ပုံစံ (synchronous code ရေးသလိုမျိုး) နဲ့ ရေးသားနိုင်အောင် ကူညီပေးပါတယ်။
+
+---
+
+## 1. Using async/await
+
+Function တစ်ခုရှေ့မှာ `async` ကို ထည့်ရပြီး၊ Promise အလုပ်လုပ်တာကို စောင့်ချင်တဲ့နေရာမှာ `await` ကို သုံးရပါတယ်။
+
+```js
+const fetchData = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("Data ရပါပြီ!"), 1000);
+  });
+};
+
+async function showData() {
+  console.log("စောင့်နေပါတယ်...");
+  const result = await fetchData();
+  console.log(result);
+}
+
+showData();
+```
+
+### Output
+
+```txt
+စောင့်နေပါတယ်...
+Data ရပါပြီ!
+```
+
+## 2. Async/Await vs .then() Chaining
+
+`.then()` ကို သုံးပြီး chain လုပ်တာက code ကို ရှင်းလင်းစေပေမယ့် အဆင့်တွေ အများကြီး ရှိလာတဲ့အခါ `async/await` က ပိုပြီး ဖတ်ရလွယ်ကူတဲ့ synchronous style ကို ပေးနိုင်ပါတယ်။
+
+```js
+// ✅ .then() Chaining ပုံစံ
+getUser(1)
+  .then(user => getPosts(user.id))
+  .then(posts => getComments(posts[0].id))
+  .then(comments => console.log(comments));
+
+// ✅ Async/Await ပုံစံ (ပိုမိုရိုးရှင်းသွားသည်)
+async function displayComments() {
+  const user = await getUser(1);
+  const posts = await getPosts(user.id);
+  const comments = await getComments(posts[0].id);
+  console.log(comments);
+}
+```
+
+`async/await` ကို သုံးခြင်းဖြင့် "Promise Hell" (nested promises) ဖြစ်နိုင်ခြေကို လုံးဝ လျှော့ချနိုင်ပြီး variable တွေကိုလည်း အဆင့်ဆင့် လွယ်လွယ်ကူကူ access လုပ်နိုင်ပါတယ်။
+
+## 3. Error Handling with try...catch
+
+Async/Await မှာ error ကို ဖမ်းယူဖို့အတွက် `try...catch` block ကို သုံးပါတယ်။ ဒါဟာ `.catch()` သုံးတာထက် ပုံမှန် synchronous error handling နဲ့ ပိုတူပါတယ်။
+
+```js
+async function getData() {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.log("Error တက်သွားတယ်:", error.message);
+  }
+}
+```
+
+👉 `async/await` သည် လက်ရှိ modern JavaScript မှာ asynchronous code ရေးဖို့ အသုံးအများဆုံး နည်းလမ်းဖြစ်ပါတယ်။

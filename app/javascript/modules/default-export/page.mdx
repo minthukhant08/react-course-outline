@@ -1,0 +1,37 @@
+# Default Export
+
+Default Export ကို `file` တစ်ခုကနေ အဓိက အစိတ်အပိုင်းတစ်ခုတည်း (ဥပမာ- Class တစ်ခု သို့မဟုတ် Function တစ်ခု) ကိုပဲ ထုတ်ပေးချင်တဲ့အခါ သုံးပါတယ်။
+
+---
+
+## 1. Exporting Default
+
+`file` တစ်ခုမှာ `export default` တစ်ခုပဲ ရှိရပါမယ်။
+
+```js
+// message.js
+const welcome = () => {
+  return "Welcome to JavaScript Modules!";
+};
+
+export default welcome;
+```
+
+## 2. Importing Default
+
+Default export ကို import လုပ်တဲ့အခါ curly braces `{}` သုံးစရာ မလိုပါဘူး။ မိမိနှစ်သက်ရာ နာမည်ပေးပြီး ယူသုံးနိုင်ပါတယ်။
+
+```js
+// main.js
+import sayHi from './message.js';
+
+console.log(sayHi());
+```
+
+### Output
+
+```txt
+Welcome to JavaScript Modules!
+```
+
+👉 `file` တစ်ခုမှာ Named export တွေ အများကြီး ရှိနိုင်ပေမယ့် Default export ကတော့ တစ်ခုတည်းသာ ရှိနိုင်ပါတယ်။

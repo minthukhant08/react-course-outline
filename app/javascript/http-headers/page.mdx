@@ -1,0 +1,31 @@
+# HTTP Headers
+
+HTTP Headers ဆိုတာ request တစ်ခု ဒါမှမဟုတ် response တစ်ခုနဲ့အတူ ပါဝင်တဲ့ အပိုဆောင်းအချက်အလက် (Metadata) တွေ ဖြစ်ပါတယ်။
+
+---
+
+## 1. What are HTTP Headers?
+
+Headers တွေက client နဲ့ server တို့ကြားမှာ data တွေအပြင် တခြား လိုအပ်တဲ့ context တွေကို ပေးပို့ဖို့ သုံးပါတယ်။ ဥပမာ- ဘယ်လို data format မျိုး သုံးထားသလဲ၊ ဘယ်သူက ပို့တာလဲ ဆိုတာမျိုးတွေ ဖြစ်ပါတယ်။
+
+အဓိက (၂) မျိုး ရှိပါတယ် -
+- **Request Headers**: Browser ကနေ server ဆီကို ပို့တဲ့ အချက်အလက်များ။
+- **Response Headers**: Server ကနေ browser ဆီကို ပြန်ပို့တဲ့ အချက်အလက်များ။
+
+## 2. Common Headers
+
+အသုံးအများဆုံး header အချို့မှာ -
+- **Content-Type**: ပေးပို့တဲ့ data ရဲ့ အမျိုးအစားကို ဖော်ပြပါတယ်။ (ဥပမာ- `application/json`)
+- **Authorization**: User ရဲ့ login token သို့မဟုတ် identity ကို အတည်ပြုရန် သုံးပါတယ်။
+- **User-Agent**: ဘယ် browser သို့မဟုတ် ဘယ် device ကနေ request ပို့တာလဲဆိုတာကို ဖော်ပြတယ်။
+
+```js
+fetch('https://api.example.com/data', {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer my-token-123'
+  }
+});
+```
+
+👉 Headers တွေဟာ network requests တွေရဲ့ နောက်ကွယ်က အရေးကြီးတဲ့ ဆက်သွယ်ရေး လမ်းကြောင်းတွေ ဖြစ်ပါတယ်။

@@ -1,0 +1,51 @@
+# Error Handling
+
+JavaScript မှာ error handling ဆိုတာ code ရေးသားရာမှာ error တစ်ခုခုတက်လာရင် program တစ်ခုလုံး ရပ်တန့်မသွားဘဲ စနစ်တကျ ဆက်လက်အလုပ်လုပ်နိုင်အောင် ထိန်းသိမ်းပေးတဲ့ နည်းလမ်းဖြစ်ပါတယ်။
+
+---
+
+## 1. Program Failure (Without Error Handling)
+
+Error handling မလုပ်ထားရင် program ထဲမှာ error တစ်ခုတက်တာနဲ့ အဲ့ဒီနေရာမှာတင် program က ရပ်တန့်သွားမှာဖြစ်ပြီး နောက်က code တွေ ဆက်အလုပ်မလုပ်တော့ပါဘူး။
+
+```js
+console.log("Start");
+
+// မရှိတဲ့ variable ကို ခေါ်သုံးတဲ့အတွက် error တက်ပြီး program ရပ်သွားမယ်
+console.log(myVariable); 
+
+console.log("End"); // ဒီ line က အလုပ်လုပ်တော့မှာ မဟုတ်ပါဘူး
+```
+
+### Output
+
+```txt
+Start
+ReferenceError: myVariable is not defined
+```
+
+## 2. Handling Errors (With try...catch)
+
+`try...catch` ကို သုံးလိုက်ရင်တော့ error တက်ခဲ့ရင်တောင် program က ရပ်မသွားဘဲ ကျန်တဲ့ code တွေကို ဆက်လက် run စေနိုင်ပါတယ်။
+
+```js
+console.log("Start");
+
+try {
+    console.log(myVariable); 
+} catch (error) {
+    console.log("Error ကို ဖမ်းမိပြီး logic တွေ ဆက် run ပါမယ်။");
+}
+
+console.log("End"); // ဒီတစ်ခါမှာတော့ ဒီ line အလုပ်လုပ်ပါမယ်
+```
+
+### Output
+
+```txt
+Start
+Error ကို ဖမ်းမိပြီး logic တွေ ဆက် run ပါမယ်။
+End
+```
+
+👉 Error handling ကို သေချာသုံးခြင်းက code ကို ပိုမိုခိုင်မာ (robust) စေပါတယ်။

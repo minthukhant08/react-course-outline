@@ -1,0 +1,32 @@
+# Promise.all()
+
+`Promise.all()` ကို Promise အများကြီးကို တစ်ပြိုင်တည်း run စေချင်တဲ့အခါနဲ့ အားလုံးပြီးမှ ရလဒ်ကို တစ်ခါတည်း ယူချင်တဲ့အခါ သုံးပါတယ်။
+
+---
+
+## 1. Running multiple promises
+
+Promises အားလုံး အောင်မြင်မှသာ `.then()` အလုပ်လုပ်မှာ ဖြစ်ပါတယ်။ တစ်ခုခု error တက်တာနဲ့ Promise အားလုံး ကျရှုံး (reject) သွားမှာ ဖြစ်ပါတယ်။
+
+```js
+const p1 = Promise.resolve("Data 1");
+const p2 = new Promise((resolve) => setTimeout(() => resolve("Data 2"), 1000));
+const p3 = "Data 3"; // normal value
+
+Promise.all([p1, p2, p3])
+  .then((results) => {
+    console.log(results);
+  });
+```
+
+### Output
+
+```txt
+["Data 1", "Data 2", "Data 3"]
+```
+
+## 2. Fast Execution
+
+တစ်ခုပြီးမှ တစ်ခု စောင့်စရာမလိုဘဲ အားလုံးကို ပြိုင်တည်း run တဲ့အတွက် အချိန်ကုန် ပိုသက်သာစေပါတယ်။
+
+👉 `Promise.all()` သည် တစ်ခုနှင့်တစ်ခု အမှီအခိုမရှိသော asynchronous အလုပ်များကို စုပေါင်းလုပ်ဆောင်ရန် အကောင်းဆုံးဖြစ်ပါတယ်။

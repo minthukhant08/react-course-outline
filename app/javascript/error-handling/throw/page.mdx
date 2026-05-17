@@ -1,0 +1,32 @@
+# Throwing Errors
+
+`throw` statement ကိုသုံးပြီး ကိုယ်တိုင် error တွေကို ဖန်တီးပြီး ထုတ်ပေး (throw) နိုင်ပါတယ်။
+
+---
+
+## 1. Using throw keyword
+
+Error တစ်ခုကို message နဲ့အတူ throw လုပ်နိုင်ပါတယ်။ ဒါကို များသောအားဖြင့် logic validation တွေမှာ သုံးကြပါတယ်။
+
+```js
+function checkAge(age) {
+  if (age < 18) {
+    throw new Error("အသက် ၁၈ နှစ်အောက် ဖြစ်လို့ မရပါ");
+  }
+  return "ဝင်ခွင့်ပြုသည်";
+}
+
+try {
+  console.log(checkAge(15));
+} catch (error) {
+  console.log("Error:", error.message);
+}
+```
+
+### Output
+
+```txt
+Error: အသက် ၁၈ နှစ်အောက် ဖြစ်လို့ မရပါ
+```
+
+👉 `throw` ကိုသုံးပြီး custom error message တွေ ပေးပို့နိုင်ပါတယ်။

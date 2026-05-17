@@ -1,0 +1,37 @@
+# Finally Block
+
+`finally` block ကတော့ error တက်သည်ဖြစ်စေ၊ မတက်သည်ဖြစ်စေ နောက်ဆုံးမှာ မဖြစ်မနေ run စေချင်တဲ့ code တွေအတွက် သုံးပါတယ်။
+
+---
+
+## 1. Using finally
+
+ဥပမာအားဖြင့် file closing logic တွေ၊ database connection ပိတ်တာတွေ သို့မဟုတ် loading state ကို false ပြန်လုပ်တာတွေမှာ သုံးလေ့ရှိပါတယ်။
+
+```js
+let isLoading = true;
+
+try {
+  console.log("Data fetching...");
+  // error တစ်ခု တမင်ဖန်တီးမယ်
+  throw new Error("Connection failed");
+} catch (error) {
+  console.log("Error:", error.message);
+} finally {
+  isLoading = false;
+  console.log("Loading state closed");
+}
+
+console.log("Is Loading:", isLoading);
+```
+
+### Output
+
+```txt
+Data fetching...
+Error : Connection failed
+Loading state closed။
+Is Loading: false
+```
+
+👉 `finally` block က error result ပေါ်မမူတည်ဘဲ အမြဲတမ်း run တယ်။

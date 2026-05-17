@@ -1,0 +1,18 @@
+# POST Method
+
+POST method ကို server ဆီကို data အသစ်တွေ ပေးပို့ပြီး resource အသစ်တစ်ခု ဖန်တီး (create) ချင်တဲ့အခါမှာ သုံးပါတယ်။
+
+---
+
+## 1. Characteristics of POST
+
+- **Writing**: POST က server ပေါ်မှာ data အသစ်တစ်ခု တိုးလာစေပါတယ်။
+- **Secure**: Data တွေကို URL မှာ မပြဘဲ request body ထဲမှာ ထည့်ပို့တဲ့အတွက် GET ထက် ပိုလုံခြုံပါတယ်။
+- **Non-Idempotent**: POST request တစ်ခုတည်းကို ခဏခဏ ပို့ရင် server ပေါ်မှာ data အသစ်တွေ အများကြီး ထပ်ခါထပ်ခါ ဖြစ်နေနိုင်ပါတယ်။
+
+```text
+POST /api/users
+Body: { "name": "Mg Mg", "age": 20 }
+```
+
+👉 POST ကို များသောအားဖြင့် form တွေ တင်တဲ့အခါနဲ့ file upload လုပ်တဲ့အခါတွေမှာ သုံးပါတယ်။

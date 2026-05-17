@@ -1,0 +1,18 @@
+# GET Method
+
+GET method ကို server ဆီကနေ resource (data) တစ်ခုခုကို ဖတ်ယူ (retrieve) ချင်တဲ့အခါမှာ သုံးပါတယ်။
+
+---
+
+## 1. Characteristics of GET
+
+- **Read-Only**: GET က data ကို ဖတ်ရုံပဲ လုပ်ပြီး server ပေါ်က data ကို သွားမပြင်ပါဘူး။
+- **Caching**: GET requests တွေကို browser က မှတ်ထား (cache လုပ်) လို့ ရပါတယ်။
+- **Parameters**: Data တွေကို URL ရဲ့ query string မှာ ထည့်ပေးပို့လေ့ရှိပါတယ်။
+
+```text
+GET /api/users
+GET /api/users/1
+```
+
+👉 GET request သည် data ရယူရန်အတွက်သာ ဖြစ်ပြီး sensitive data များ ပို့ဆောင်ရန် မသင့်တော်ပါ။

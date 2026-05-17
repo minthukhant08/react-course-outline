@@ -1,7 +1,49 @@
 # Introduction
+## React Prerequisites (JS & TS)
 
-## 1. Javascript   
-Modern JS style တွေကို အရင် အကျွမ်းတဝင်ရှိဖို့လိုပါမယ်။ `map, filter, anonymous functions declaration, module import/export` etc... ရေးတဲ့ style တွေအမျိုးမျိုးရှိလို့ သူများ code တွေ ဖတ်တဲ့အခါ အခက်အခဲမဖြစ်နိုင်ဖို့လိုပါတယ်။
+React ကို စတင်လေ့လာတော့မယ်ဆိုရင် အခြေခံအုတ်မြစ်ဖြစ်တဲ့ JavaScript နဲ့ TypeScript တို့ကို ကောင်းမွန်စွာ နားလည်ထားဖို့ လိုအပ်ပါတယ်။ ဒါမှသာ React ရဲ့ logic တွေကို ရေးသားတဲ့အခါ ပိုမိုလွယ်ကူပြီး စနစ်တကျ ရှိမှာ ဖြစ်ပါတယ်။
 
-## 2. Typescript
-သူကတော့ `runtime` အတွက် မလိုပေမဲ့ `development` အတွက် `type safety` အရမ်းကောင်းပါတယ်။ တော်ရုံသတိမထားမိပဲ `runtime` မှတက်နိုင်တဲ့ `error` တွေကို `code` ရေးနေချိန်မှာပဲ `error` ပြပြီး `type safety` ကို `enforce` လုပ်ပေးတယ်။
+---
+
+### 1. JavaScript (Modern ES6+)
+
+React ဟာ JavaScript library တစ်ခုဖြစ်တဲ့အတွက် JavaScript (အထူးသဖြင့် Modern ES6+ syntax) တွေကို ကျွမ်းကျင်ဖို့ အလွန်အရေးကြီးပါတယ်။ React development မှာ အသုံးအများဆုံး feature တွေကတော့ -
+- **Arrow Functions & Closures**: Function တွေကို တိုတိုတုတ်တုတ် ရေးသားခြင်း။
+- **Array Methods**: `map()`, `filter()`, `reduce()` တို့ကို သုံးပြီး data display လုပ်ခြင်း။
+- **Destructuring**: Object နဲ့ Array ထဲက data တွေကို လွယ်ကူစွာ ထုတ်ယူခြင်း။
+- **Modules (Import/Export)**: Code တွေကို `file` ခွဲပြီး စနစ်တကျ စီမံခြင်း။
+
+```js
+// ES6+ Syntax Example
+const users = [{ id: 1, name: "Mg Mg" }, { id: 2, name: "Kyaw Kyaw" }];
+
+// map() ကို သုံးပြီး list ထုတ်ခြင်း
+const names = users.map(user => user.name);
+console.log(names);
+```
+
+#### Output
+
+```txt
+["Mg Mg", "Kyaw Kyaw"]
+```
+
+### 2. TypeScript (Type Safety)
+
+TypeScript ဆိုတာ JavaScript ပေါ်မှာ ထပ်ဆင့်တည်ဆောက်ထားတဲ့ SuperSet တစ်ခုဖြစ်ပါတယ်။ သူက runtime မှာ အလုပ်လုပ်ဖို့ မလိုအပ်ပေမယ့် development ပိုင်းမှာတော့ type safety အတွက် အရမ်းကောင်းပါတယ်။
+
+တော်ရုံ သတိမထားမိဘဲ runtime မှ တက်နိုင်တဲ့ error တွေကို code ရေးနေစဉ်မှာတင် ကြိုတင်ပြသပေးပြီး type safety ကို enforce လုပ်ပေးတဲ့အတွက် project တွေကို ပိုမိုခိုင်မာစေပါတယ်။
+
+- **Type Safety**: Variable တွေ၊ Props တွေမှာ ဘယ်လို data မျိုးပဲ လက်ခံမယ်ဆိုတာ သတ်မှတ်နိုင်ခြင်း။
+- **Better Developer Experience**: Auto-completion နဲ့ documentation တွေကို code editor ထဲမှာတင် မြင်နိုင်ခြင်း။
+
+```ts
+interface User {
+  id: number;
+  name: string;
+}
+
+const user: User = { id: 1, name: "Mg Mg" };
+```
+
+👉 React ကို မလေ့လာခင် JavaScript logic တွေကို ပိုင်နိုင်အောင် အရင်လေ့ကျင့်ထားဖို့ အကြံပြုလိုပါတယ်။

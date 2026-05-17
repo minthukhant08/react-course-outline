@@ -1,4 +1,5 @@
 export default {
+    index: "Basic",
     let: "let",
     var: "var",
     'let-vs-var': "let vs var",

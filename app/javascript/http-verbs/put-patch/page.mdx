@@ -1,0 +1,20 @@
+# PUT & PATCH Methods
+
+PUT နဲ့ PATCH နှစ်ခုစလုံးကို server ပေါ်က ရှိပြီးသား data တွေကို ပြင်ဆင် (update) တဲ့အခါမှာ သုံးပါတယ်။
+
+---
+
+## 1. Difference between PUT and PATCH
+
+- **PUT**: Data တစ်ခုလုံးကို အသစ်နဲ့ အစားထိုး (Replace) တာ ဖြစ်ပါတယ်။ (ဥပမာ- user info အကုန်လုံးကို အသစ်ပြန်ပို့တာ)
+- **PATCH**: လိုအပ်တဲ့ data အစိတ်အပိုင်း (Partial) ကိုပဲ ပြင်တာ ဖြစ်ပါတယ်။ (ဥပမာ- user ရဲ့ email တစ်ခုတည်းကိုပဲ ပြင်တာ)
+
+```text
+PUT /api/users/1
+Body: { "name": "Mg Mg", "age": 21, "city": "Yangon" }
+
+PATCH /api/users/1
+Body: { "age": 22 }
+```
+
+👉 PUT သည် idempotent ဖြစ်သော်လည်း PATCH သည် အခြေအနေပေါ် မူတည်၍ non-idempotent ဖြစ်နိုင်ပါသည်။

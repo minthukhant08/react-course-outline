@@ -1,0 +1,33 @@
+# Try...Catch Block
+
+`try...catch` block ကိုသုံးပြီး runtime မှာဖြစ်ပေါ်လာတဲ့ error တွေကို ဖမ်းယူ (catch) နိုင်ပါတယ်။
+
+---
+
+## 1. Basic Usage
+
+`try` block ထဲမှာ run စေချင်တဲ့ code တွေကို ထည့်ရပြီး၊ အကယ်၍ code ထဲမှာ error တက်ခဲ့ရင် `catch` block က လက်ခံပြီး အလုပ်လုပ်ပေးပါတယ်။
+
+```js
+try {
+  let result = 10 / 0;
+  console.log("Doing something...");
+  // မရှိတဲ့ function ကို ခေါ်ကြည့်မယ်
+  callNonExistentFunction();
+} catch (error) {
+  console.log("Error ဖြစ်သွားပါပြီ:");
+  console.log(error.name);
+  console.log(error.message);
+}
+```
+
+### Output
+
+```txt
+Doing something...
+Error ဖြစ်သွားပါပြီ:
+ReferenceError
+callNonExistentFunction is not defined
+```
+
+👉 `try` block ထဲမှာ error မတက်ရင် `catch` block ကိုကျော်သွားမှာဖြစ်ပါတယ်။

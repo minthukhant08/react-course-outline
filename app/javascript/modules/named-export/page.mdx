@@ -1,0 +1,47 @@
+# Named Export
+
+Named Export ကို `file` တစ်ခုထဲကနေ variable သို့မဟုတ် function အများကြီးကို နာမည်သီးသန့်စီနဲ့ ထုတ်ပေးချင်တဲ့အခါ သုံးပါတယ်။
+
+---
+
+## 1. Exporting Named Items
+
+Export လုပ်ချင်တဲ့ အရာတွေရဲ့ ရှေ့မှာ `export` keyword ကို ထည့်ပေးရုံပါပဲ။
+
+```js
+// lib.js
+export const pi = 3.14;
+export function add(a, b) {
+  return a + b;
+}
+```
+
+သို့မဟုတ် အကုန်စုပြီး အောက်မှာ တစ်ခါတည်း export လုပ်နိုင်ပါတယ်။
+
+```js
+const pi = 3.14;
+const add = (a, b) => a + b;
+
+export { pi, add };
+```
+
+## 2. Importing Named Items
+
+Import လုပ်တဲ့အခါမှာတော့ Curly braces `{}` ကို သုံးပြီး export လုပ်ခဲ့တဲ့ နာမည်အတိုင်း ပြန်ယူရပါတယ်။
+
+```js
+// main.js
+import { pi, add } from './lib.js';
+
+console.log(pi); 
+console.log(add(2, 3));
+```
+
+### Output
+
+```txt
+3.14
+5
+```
+
+👉 Named export မှာ နာမည်တွေကို `as` သုံးပြီး alias (နာမည်လွှဲ) ပေးလို့လည်း ရပါတယ်။

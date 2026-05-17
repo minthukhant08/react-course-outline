@@ -1,0 +1,21 @@
+# API Requests (Fetch)
+
+JavaScript မှာ server တွေဆီကနေ data တွေ လှမ်းယူဖို့ ဒါမှမဟုတ် data တွေ ပို့ဖို့အတွက် `fetch()` API ကို အသုံးပြုပါတယ်။
+
+---
+
+## 1. What is Fetch?
+
+`fetch()` ဆိုတာ modern browser တွေမှာ ပါဝင်တဲ့ asynchronous function တစ်ခုဖြစ်ပြီး network requests တွေကို Promise အနေနဲ့ ကိုင်တွယ်ပေးပါတယ်။ သူက callback တွေထက် ပိုမိုကောင်းမွန်တဲ့ ပုံစံနဲ့ server ဆီက data တွေကို access လုပ်နိုင်အောင် ကူညီပေးပါတယ်။
+
+```js
+fetch('https://jsonplaceholder.typicode.com/posts/1')
+  .then(response => response.json())
+  .then(json => console.log(json));
+```
+
+## 2. JSON Response
+
+Server ကနေ data ပြန်လာတဲ့အခါ များသောအားဖြင့် JSON format နဲ့ ပြန်လာတတ်ပါတယ်။ `fetch()` မှာ အဲ့ဒီ data ကို readable ဖြစ်အောင် `.json()` ဆိုတဲ့ method ကို သုံးပြီး ပြောင်းပေးရပါတယ်။
+
+👉 `fetch()` API ကို သုံးခြင်းဖြင့် website ကို refresh လုပ်စရာမလိုဘဲ data တွေကို dynamic ဖြစ်ဖြစ် ပြောင်းလဲနိုင်ပါတယ်။

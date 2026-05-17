@@ -1,0 +1,41 @@
+# Promises
+
+JavaScript မှာ Promise ဆိုတာ အနာဂတ်မှာ ဖြစ်လာမယ့် data တစ်ခု (သို့မဟုတ်) အလုပ်တစ်ခုရဲ့ ရလဒ်ကို စောင့်ဆိုင်းဖို့သုံးတဲ့ object တစ်ခုဖြစ်ပါတယ်။
+
+---
+
+## 1. Asynchronous Callbacks (The Old Way)
+
+Promise တွေ မပေါ်ခင်က asynchronous အလုပ်တွေကို Callback function တွေနဲ့ လုပ်ဆောင်ခဲ့ကြပါတယ်။ Callback တွေ အများကြီး ထပ်လာတဲ့အခါ code တွေက ရှုပ်ထွေးပြီး ဖတ်ရခက်တဲ့ "Callback Hell" ပြဿနာကို ဖြစ်စေပါတယ်။
+
+```js
+// Callback Hell Example
+getData(function(a) {
+  getMoreData(a, function(b) {
+    getEvenMoreData(b, function(c) {
+      console.log(c);
+    });
+  });
+});
+```
+
+## 2. Why Promises?
+
+Promise က အပေါ်က Callback Hell ပြဿနာကို ဖြေရှင်းပေးပြီး code ကို ပိုမိုသပ်ရပ်စေပါတယ်။ Promise တစ်ခုမှာ အခြေအနေ (၃) မျိုး ရှိနိုင်ပါတယ် -
+
+1.  **Pending**: အလုပ်လုပ်နေဆဲ (စောင့်ဆိုင်းဆဲ) အခြေအနေ။
+2.  **Fulfilled**: အလုပ်အောင်မြင်သွားတဲ့ အခြေအနေ။
+3.  **Rejected**: အလုပ်မအောင်မြင်ဘဲ error တက်သွားတဲ့ အခြေအနေ။
+
+```js
+const myPromise = new Promise((resolve, reject) => {
+  const success = true;
+  if (success) {
+    resolve("အလုပ်အောင်မြင်သွားပါပြီ!");
+  } else {
+    reject("တစ်ခုခု မှားယွင်းသွားပါတယ်။");
+  }
+});
+```
+
+👉 Promise တွေက modern JavaScript development မှာ မရှိမဖြစ် အရေးကြီးတဲ့ အစိတ်အပိုင်း တစ်ခု ဖြစ်ပါတယ်။

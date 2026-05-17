@@ -1,0 +1,64 @@
+# .then() & .catch()
+
+Promise တစ်ခုကနေ ပြန်လာတဲ့ ရလဒ် (Result) ကို ကိုင်တွယ်ဖို့အတွက် `.then()` နဲ့ `.catch()` ကို အသုံးပြုပါတယ်။
+
+---
+
+## 1. Handling Success and Errors
+
+အောင်မြင်တဲ့ ရလဒ်ကို `.then()` နဲ့ ဖမ်းယူပြီး၊ အဆင်မပြေမှု (Error) ကိုတော့ `.catch()` နဲ့ ဖမ်းယူပါတယ်။
+
+```js
+const checkNumber = new Promise((resolve, reject) => {
+  const num = 10;
+  if (num > 5) {
+    resolve("Number is greater than 5");
+  } else {
+    reject("Number is too small");
+  }
+});
+
+checkNumber
+  .then((message) => {
+    console.log("Success:", message);
+  })
+  .catch((error) => {
+    console.log("Error:", error);
+  });
+```
+
+### Output
+
+```txt
+Success: Number is greater than 5
+```
+
+## 2. Promise Hell (Nested Promises)
+
+Promise တွေကို သုံးတဲ့အခါ `.then()` block တွေထဲမှာ နောက်ထပ် Promise တွေကို ထပ်ခါတလဲလဲ nest လုပ်မိတတ်ပါတယ်။ ဒါကို Promise Hell လို့ ခေါ်ပြီး code ဖတ်ရခက်စေပါတယ်။
+
+```js
+// ❌ မကောင်းတဲ့ ပုံစံ (Nested Promises)
+getUser(1).then(user => {
+  getPosts(user.id).then(posts => {
+    getComments(posts[0].id).then(comments => {
+      console.log(comments);
+    });
+  });
+});
+```
+
+## 3. Promise Chaining (The Right Way)
+
+Promise Hell ကို ဖြေရှင်းဖို့အတွက် `.then()` တွေကို တစ်ခုပြီးတစ်ခု chain လုပ်ပြီး ရေးသားသင့်ပါတယ်။
+
+```js
+// ✅ ကောင်းတဲ့ ပုံစံ (Chaining)
+getUser(1)
+  .then(user => getPosts(user.id))
+  .then(posts => getComments(posts[0].id))
+  .then(comments => console.log(comments))
+  .catch(error => console.log(error));
+```
+
+👉 `.then()` နဲ့ `.catch()` ကို သုံးခြင်းဖြင့် asynchronous flow ကို စနစ်တကျ ထိန်းချုပ်နိုင်ပါတယ်။
