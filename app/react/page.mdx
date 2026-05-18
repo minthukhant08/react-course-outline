@@ -1,0 +1,33 @@
+# ReactJS Overview
+
+React ဆိုတာ UI (User Interface) တွေကို တည်ဆောက်ဖို့အတွက် Facebook (Meta) က ထုတ်လုပ်ထားတဲ့ ကမ္ဘာ့အသုံးအများဆုံး JavaScript library တစ်ခု ဖြစ်ပါတယ်။
+
+---
+
+## 1. What is React?
+
+React ဟာ website တစ်ခုရဲ့ UI (View layer) ကို ကိုင်တွယ်တဲ့နေရာမှာ component-based architecture ကို အသုံးပြုပါတယ်။ ဆိုလိုတာက website တစ်ခုလုံးကို အစိတ်အပိုင်းလေးတွေ (Components) ခွဲပြီး စနစ်တကျ တည်ဆောက်တာ ဖြစ်ပါတယ်။
+
+React ရဲ့ အဓိက ထူးခြားချက်များ -
+- **Declarative**: React က UI ကို ဘယ်လိုပုံစံ ဖြစ်ချင်တာလဲဆိုတာပဲ ပြောရုံပါပဲ။ အပြောင်းအလဲတွေကို React က နောက်ကွယ်ကနေ အလိုအလျောက် ကိုင်တွယ်ပေးပါတယ်။
+- **Component-Based**: Code တွေကို တစ်ခါရေးထားပြီး နေရာအနှံ့မှာ ပြန်သုံးနိုင်တဲ့ (Reusable) components တွေအဖြစ် တည်ဆောက်နိုင်ပါတယ်။
+- **Virtual DOM**: Website ရဲ့ အစိတ်အပိုင်းတွေကို တိုက်ရိုက်မပြင်ဘဲ Virtual DOM ကို သုံးပြီး လျင်မြန်စွာ update လုပ်ပေးတဲ့အတွက် performance အရမ်းကောင်းပါတယ်။
+
+## 2. Basic Example
+
+React မှာ code တွေကို JSX (JavaScript XML) ပုံစံနဲ့ ရေးသားပါတယ်။ ဒါဟာ JavaScript ထဲမှာ HTML ရေးသလိုမျိုး ဖြစ်ပါတယ်။
+
+```jsx
+import React from 'react';
+
+function Welcome() {
+  return (
+    <div>
+      <h1>Hello, React!</h1>
+      <p>ဒါကတော့ ပထမဆုံး React Component ပါ။</p>
+    </div>
+  );
+}
+
+export default Welcome;
+```
