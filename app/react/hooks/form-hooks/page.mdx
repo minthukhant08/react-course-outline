@@ -1,0 +1,81 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Form Hooks (React 19)
+
+React 19 မှာ Form တွေကို ပိုမိုလွယ်ကူစွာ ကိုင်တွယ်နိုင်ဖို့အတွက် Hooks အသစ်တွေကို မိတ်ဆက်ခဲ့ပါတယ်။ အဓိကအားဖြင့် Form Actions တွေနဲ့ တွဲဖက်အသုံးပြုရတာ ဖြစ်ပါတယ်။
+
+---
+
+## 1. useActionState
+
+`useActionState` ကတော့ Form action တစ်ခုရဲ့ ရလဒ် (State) ကို သိမ်းဆည်းဖို့နဲ့ အဲဒီ action အလုပ်လုပ်နေလား (Pending) ဆိုတာကို သိရှိဖို့ သုံးပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "500px" }}
+  files={{
+    "/App.tsx": `import { useActionState } from 'react';
+
+async function updateName(prevState: any, formData: FormData) {
+  const name = formData.get("name");
+  await new Promise(res => setTimeout(res, 1000)); // Mock API
+  
+  if (name === "error") return "Error: Name not allowed!";
+  return "Updated name: " + name;
+}
+
+export default function App() {
+  const [state, formAction, isPending] = useActionState(updateName, null);
+
+  return (
+    <form action={formAction}>
+      <input name="name" placeholder="Enter name..." required />
+      <button type="submit" disabled={isPending}>
+        {isPending ? "Updating..." : "Update"}
+      </button>
+      <p>Result: {state}</p>
+    </form>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. useFormStatus
+
+`useFormStatus` ကိုတော့ Form ရဲ့ အောက်မှာရှိတဲ့ Child components တွေကနေ Form ရဲ့ status (ဥပမာ - `pending`) ကို သိချင်တဲ့အခါ သုံးပါတယ်။ ဒါဟာ props တွေ အဆင့်ဆင့် ပေးပို့စရာမလိုဘဲ သိရှိနိုင်တဲ့ နည်းလမ်းဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "500px" }}
+  files={{
+    "/App.tsx": `import { useFormStatus } from 'react-dom';
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" disabled={pending}>
+      {pending ? "Sending..." : "Submit Task"}
+    </button>
+  );
+}
+
+export default function App() {
+  async function action() {
+    await new Promise(res => setTimeout(res, 2000));
+  }
+
+  return (
+    <form action={action}>
+      <input placeholder="New Task" required />
+      <SubmitButton />
+    </form>
+  );
+}`,
+  }}
+/>
+
+👉 React 19 မှာ Form တွေကို action အခြေခံပြီး ကိုင်တွယ်လာတာကြောင့် ယခင်က `onSubmit` နဲ့ state update ရတဲ့ အဆင့်တွေကို များစွာ လျှော့ချပေးနိုင်ပါတယ်။

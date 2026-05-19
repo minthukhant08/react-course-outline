@@ -1,0 +1,141 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Zustand Basics
+
+Zustand ဆိုတာ React application တွေမှာ state management ပြုလုပ်ဖို့အတွက် အသုံးပြုတဲ့ အရမ်းကို ပေါ့ပါးပြီး မြန်ဆန်တဲ့ library တစ်ခု ဖြစ်ပါတယ်။ သူဟာ Redux လိုမျိုး ရှုပ်ထွေးမှု မရှိဘဲ ရိုးရှင်းတဲ့ hook-based API ကို အသုံးပြုထားပါတယ်။
+
+---
+
+## 1. Store Creation
+
+Zustand မှာ store တစ်ခု တည်ဆောက်ဖို့ `create` ဆိုတဲ့ function ကို အသုံးပြုရပါတယ်။ Store ထဲမှာ data (state) တွေနဲ့ အဲဒီ data တွေကို ပြောင်းလဲပေးမယ့် functions (actions) တွေကို အတူတူ သိမ်းဆည်းထားနိုင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  customSetup={{ dependencies: { "zustand": "latest" } }}
+  files={{
+    "/store.ts": `import { create } from 'zustand';
+
+interface CounterState {
+  count: number;
+  increase: () => void;
+  reset: () => void;
+}
+
+export const useStore = create<CounterState>((set) => ({
+  count: 0,
+  increase: () => set((state) => ({ count: state.count + 1 })),
+  reset: () => set({ count: 0 }),
+}));`,
+    "/App.tsx": `import { useStore } from './store';
+
+export default function CounterApp() {
+  const count = useStore((state) => state.count);
+  const increase = useStore((state) => state.increase);
+
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={increase}>Increase</button>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. Getting State (Selectors)
+
+Store ထဲက data တွေကို လှမ်းယူတဲ့အခါ component ထဲမှာ selector function ကို သုံးတာဟာ အကောင်းဆုံး ဖြစ်ပါတယ်။ ဒါမှသာ မသက်ဆိုင်တဲ့ data တွေ ပြောင်းလဲတဲ့အခါ component က မလိုအပ်ဘဲ render ပြန်မဖြစ်မှာ ဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  customSetup={{ dependencies: { "zustand": "latest" } }}
+  files={{
+    "/store.ts": `import { create } from 'zustand';
+
+interface UserStore {
+  username: string;
+  points: number;
+}
+
+export const useUserStore = create<UserStore>(() => ({
+  username: "Aung Aung",
+  points: 100,
+}));`,
+    "/App.tsx": `import { useUserStore } from './store';
+
+export default function Profile() {
+  // Selector: Only get 'username'
+  const username = useUserStore((state) => state.username);
+  
+  return <h1>User: {username}</h1>;
+}`,
+  }}
+/>
+
+---
+
+## 3. Updating State (Set)
+
+State ကို update လုပ်တဲ့အခါ `set` function ကို သုံးပါတယ်။ သူဟာ လက်ရှိ state ကို အခြေခံပြီး ပြောင်းလဲမှုတွေကို merge လုပ်ပေးပါတယ်။ Functional update ကို သုံးခြင်းအားဖြင့် လက်ရှိ state ကို တိကျစွာ ရယူနိုင်ပါတယ်။
+
+```ts
+// Direct update
+reset: () => set({ count: 0 })
+
+// Functional update (Recommended for logic)
+increase: () => set((state) => ({ count: state.count + 1 }))
+```
+
+---
+
+## 4. Accessing State Outside React
+
+Zustand ရဲ့ အားသာချက်ကတော့ React components တွေရဲ့ အပြင်ဘက် (ဥပမာ - Utility functions) မှာလည်း store ကို လှမ်းယူနိုင်တာ ဖြစ်ပါတယ်။ ဒါအတွက် `getState()` နဲ့ `setState()` ကို သုံးနိုင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  customSetup={{ dependencies: { "zustand": "latest" } }}
+  options={{ showConsole: true, showConsoleButton: true }}
+  files={{
+    "/store.ts": `import { create } from 'zustand';
+
+export const useStore = create(() => ({ count: 10 }));`,
+    "/App.tsx": `import { useStore } from './store';
+
+export default function App() {
+  const handleClick = () => {
+    // Accessing outside the component logic
+    const current = useStore.getState().count;
+    console.log("Current count outside React:", current);
+    
+    // Setting outside
+    useStore.setState({ count: current + 5 });
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Log & Update Outside</button>
+      <p>Count: {useStore((s) => s.count)}</p>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 5. Official Documentation
+
+Zustand မှာ middleware (ဥပမာ - persist, devtools), async actions နဲ့ တခြားအဆင့်မြင့် feature တွေ အများကြီးရှိပါသေးတယ်။ အသေးစိတ်ကို တရားဝင် documentation မှာ ဆက်လက်လေ့လာနိုင်ပါတယ်။
+
+👉 [Zustand Official Documentation](https://zustand-demo.pmnd.rs/)
+
+---
+
+👉 Zustand ကို အသုံးပြုခြင်းဖြင့် application ရဲ့ global state ကို ပိုမိုစနစ်တကျနဲ့ ရိုးရှင်းစွာ ထိန်းချုပ်နိုင်ပါတယ်။

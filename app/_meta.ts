@@ -3,4 +3,6 @@ export default {
     javascript: "JavaScript",
     typescript: "TypeScript",
     react: "ReactJS",
+    zod: "Zod",
+    zustand: "Zustand",
 }

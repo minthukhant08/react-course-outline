@@ -1,0 +1,63 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Lifting State Up
+
+React မှာ ညီအစ်ကို component (Sibling components) နှစ်ခုကြား data တစ်ခုတည်းကို မျှဝေအသုံးပြုချင်တဲ့အခါ၊ အဲဒီ state ကို သူတို့ရဲ့ အနီးစပ်ဆုံး ဘုံမိဘ (Common Parent) ဆီကို ရွှေ့ပြောင်းပေးရပါတယ်။ ဒါကို **Lifting State Up** လို့ ခေါ်ပါတယ်။
+
+---
+
+## 1. Sharing State
+
+အောက်ပါ example မှာ `InputComponent` မှာ ရေးလိုက်တဲ့စာကို `DisplayComponent` မှာ ပြချင်ပါတယ်။ ဒါကြောင့် state ကို သူတို့နှစ်ခုလုံးရဲ့ parent ဖြစ်တဲ့ `App` ဆီကို ပို့ထားရပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "600px" }}
+  files={{
+    "/App.tsx": `import { useState } from 'react';
+
+export default function App() {
+  const [text, setText] = useState("");
+
+  return (
+    <div style={{ padding: '20px', border: '2px solid #333' }}>
+      <h2>Parent (App)</h2>
+      <InputComponent text={text} onTextChange={setText} />
+      <hr />
+      <DisplayComponent text={text} />
+    </div>
+  );
+}
+
+function InputComponent({ text, onTextChange }: { text: string, onTextChange: (val: string) => void }) {
+  return (
+    <div style={{ padding: '10px', border: '1px solid blue' }}>
+      <h3>Input Sibling</h3>
+      <input 
+        value={text} 
+        onChange={(e) => onTextChange(e.target.value)} 
+        placeholder="Type here..."
+      />
+    </div>
+  );
+}
+
+function DisplayComponent({ text }: { text: string }) {
+  return (
+    <div style={{ padding: '10px', border: '1px solid green' }}>
+      <h3>Display Sibling</h3>
+      <p>Data from sibling: <b>{text}</b></p>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. One-Way Data Flow
+
+Lifting state up ဟာ React ရဲ့ "Single Source of Truth" နဲ့ "One-Way Data Flow" စည်းကမ်းတွေကို လိုက်နာဖို့ အဓိက နည်းလမ်းဖြစ်ပါတယ်။ Data ဟာ အမြဲတမ်း အပေါ် (Parent) ကနေ အောက် (Child) ဆီကိုသာ စီးဆင်းပါတယ်။
+
+👉 State တွေ အရမ်းများလာပြီး lifting လုပ်ရတာ ခက်ခဲလာရင်တော့ Context API သို့မဟုတ် Redux စတဲ့ state management tools တွေကို စဉ်းစားသင့်ပါတယ်။

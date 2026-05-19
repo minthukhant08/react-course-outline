@@ -1,0 +1,90 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Controlled Components (Forms)
+
+React မှာ input elements တွေရဲ့ data တွေကို React state နဲ့ တိုက်ရိုက်ထိန်းချုပ်တာကို **Controlled Components** လို့ ခေါ်ပါတယ်။ ဒါဟာ form data တွေကို အမြဲတမ်း တိကျမှန်ကန်နေစေဖို့ ကူညီပေးပါတယ်။
+
+---
+
+## 1. Handling Input
+
+Input ရဲ့ `value` ကို state ထဲက value နဲ့ ချိတ်ဆက်ထားပြီး၊ `onChange` event ဖြစ်တိုင်း state ကို update လုပ်ပေးရပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "500px" }}
+  files={{
+    "/App.tsx": `import { useState } from 'react';
+
+export default function NameForm() {
+  const [name, setName] = useState("");
+
+  return (
+    <form onSubmit={(e) => { e.preventDefault(); alert("Hello " + name); }}>
+      <label>
+        Name: 
+        <input 
+          type="text" 
+          value={name} 
+          onChange={(e) => setName(e.target.value)} 
+        />
+      </label>
+      <button type="submit">Submit</button>
+      <p>Current input value: {name}</p>
+    </form>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. Multi-Input Form
+
+Input တွေ အများကြီးပါတဲ့ form တွေကို ကိုင်တွယ်တဲ့အခါ state တစ်ခုတည်းမှာ object အနေနဲ့ သိမ်းဆည်းနိုင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "600px" }}
+  files={{
+    "/App.tsx": `import { useState } from 'react';
+
+export default function RegisterForm() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: ""
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  return (
+    <form>
+      <input 
+        name="username" 
+        value={formData.username} 
+        onChange={handleChange} 
+        placeholder="Username" 
+      />
+      <br />
+      <input 
+        name="email" 
+        value={formData.email} 
+        onChange={handleChange} 
+        placeholder="Email" 
+      />
+      <pre>{JSON.stringify(formData, null, 2)}</pre>
+    </form>
+  );
+}`,
+  }}
+/>
+
+👉 Form တွေက အရမ်းကြီးမားလာရင်တော့ React Hook Form သို့မဟုတ် Formik စတဲ့ libraries တွေကို သုံးတာက ပိုမိုသက်သာစေပါတယ်။

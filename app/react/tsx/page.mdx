@@ -1,0 +1,78 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# TSX (TypeScript XML)
+
+TSX ဆိုတာ React မှာ UI တွေကို ရေးသားဖို့အတွက် အသုံးပြုတဲ့ syntax ဖြစ်ပါတယ်။ သူဟာ JavaScript ထဲမှာ HTML ရေးသလိုမျိုး ဖြစ်ပေမယ့် ပိုမိုတင်းကြပ်တဲ့ rules တွေရှိပြီး TypeScript ရဲ့ type-checking feature တွေကို အပြည့်အဝ အသုံးပြုနိုင်ပါတယ်။
+
+---
+
+## 1. Single Parent Element
+
+TSX component တစ်ခုဟာ element တစ်ခုတည်းကိုပဲ return ပြန်ရပါမယ်။ Element အများကြီးကို return ပြန်ချင်ရင် `<div>` သို့မဟုတ် React Fragment `<>...</>` နဲ့ အုပ်ပေးရပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `export default function App() {
+  return (
+    <>
+      <h1>First Heading</h1>
+      <p>Second Paragraph</p>
+    </>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+First Heading
+Second Paragraph
+```
+
+---
+
+## 2. Closing Tags
+
+TSX မှာ tag တိုင်းဟာ closing tag ရှိရပါမယ်။ `<br>`, `<img>`, `<input>` စတဲ့ tags တွေကိုလည်း self-closing slash `/` နဲ့ ပိတ်ပေးရပါတယ်။ (ဥပမာ `<br />`)
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `export default function App() {
+  return (
+    <div>
+      <h3>Self Closing Tags:</h3>
+      <input type="text" placeholder="Type here..." />
+      <br />
+      <img src="https://placehold.co/100" alt="Placeholder" />
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 3. camelCase Attributes
+
+HTML attributes တွေကို TSX မှာ ရေးတဲ့အခါ `camelCase` ကို အသုံးပြုရပါတယ်။ အသုံးအများဆုံးကတော့ `class` အစား `className` ကို သုံးရတာ ဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `export default function App() {
+  return (
+    <div className="container">
+      <h2 style={{ color: 'skyblue' }}>Styled Heading</h2>
+      <button onClick={() => alert('Clicked!')}>Click Me</button>
+    </div>
+  );
+}`,
+  }}
+/>
+
+👉 TSX ကို သုံးခြင်းအားဖြင့် TypeScript က သင့်ရဲ့ UI code ထဲမှာ ရှိနိုင်တဲ့ error တွေကို coding ရေးနေစဉ်မှာတင် ကြိုတင်သတိပေးနိုင်ပါတယ်။

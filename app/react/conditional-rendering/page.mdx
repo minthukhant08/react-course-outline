@@ -1,0 +1,91 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Conditional Rendering
+
+React မှာ အခြေအနေ (Condition) ပေါ် မူတည်ပြီး UI ရဲ့ အစိတ်အပိုင်းတွေကို ပြသချင်တဲ့အခါ JavaScript ရဲ့ logic တွေကို အသုံးပြုပါတယ်။ ဒါကို **Conditional Rendering** လို့ ခေါ်ပါတယ်။
+
+---
+
+## 1. Using Ternary Operator (`? :`)
+
+တိုတောင်းတဲ့ logic တွေအတွက် ternary operator ကို အသုံးအများဆုံး ဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `import { useState } from 'react';
+
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  return (
+    <div>
+      <h1>{isLoggedIn ? "Welcome Back!" : "Please Log In"}</h1>
+      <button onClick={() => setIsLoggedIn(!isLoggedIn)}>
+        {isLoggedIn ? "Logout" : "Login"}
+      </button>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. Logical AND Operator (`&&`)
+
+အခြေအနေ တစ်ခု မှန်ကန်မှသာ UI တစ်ခုကို ပြသချင်ပြီး၊ မှားရင် ဘာမှ မပြချင်တဲ့အခါ `&&` ကို သုံးပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `import { useState } from 'react';
+
+export default function Mailbox() {
+  const [unreadMessages] = useState(["Hi!", "How are you?"]);
+
+  return (
+    <div>
+      <h3>Mailbox</h3>
+      {unreadMessages.length > 0 && (
+        <p>You have {unreadMessages.length} unread messages.</p>
+      )}
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 3. Early Return
+
+အခြေအနေတစ်ခုပေါ် မူတည်ပြီး component တစ်ခုလုံးကို ဘာမှ render မလုပ်စေချင်တဲ့အခါ `null` ကို return ပြန်ခြင်းအားဖြင့် render ကို ရပ်တန့်နိုင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "400px" }}
+  files={{
+    "/App.tsx": `function Warning({ isOpen }: { isOpen: boolean }) {
+  if (!isOpen) {
+    return null; // Don't render anything
+  }
+
+  return <div style={{ color: 'red' }}>Warning: Something is wrong!</div>;
+}
+
+export default function App() {
+  return (
+    <div>
+      <h2>Dashboard</h2>
+      <Warning isOpen={true} />
+    </div>
+  );
+}`,
+  }}
+/>
+
+👉 `&&` operator ကို သုံးတဲ့အခါ ဘယ်ဘက်က တန်ဖိုးဟာ `0` ဖြစ်နေရင် UI မှာ `0` လို့ ပေါ်လာနိုင်တဲ့အတွက် သတိထားရပါမယ်။

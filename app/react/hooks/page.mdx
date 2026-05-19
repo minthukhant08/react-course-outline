@@ -1,0 +1,38 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# React Hooks Overview
+
+React Hooks ဆိုတာ Functional components တွေမှာ state management နဲ့ တခြား React features တွေကို (ဥပမာ - lifecycle, context) အသုံးပြုနိုင်အောင် ပြုလုပ်ပေးတဲ့ functions တွေ ဖြစ်ပါတယ်။ 
+
+Hooks တွေကို React version 16.8 မှာ စတင်မိတ်ဆက်ခဲ့ပြီး ယခင်က Class components တွေမှာပဲ သုံးလို့ရခဲ့တဲ့ features တွေကို function components တွေမှာပါ ရိုးရှင်းစွာ အသုံးပြုနိုင်စေပါတယ်။
+
+---
+
+## 1. Why Hooks?
+
+ယခင်က React မှာ state သုံးချင်ရင် Class components တွေကို အသုံးပြုရပါတယ်။ ဒါဟာ code တွေကို ရှည်လျားစေပြီး နားလည်ရ ခက်ခဲစေပါတယ်။ Hooks တွေ ပေါ်လာတဲ့အခါမှာတော့:
+- Code တွေ ပိုမိုတိုတောင်းပြီး ဖတ်ရလွယ်ကူလာခြင်း။
+- Logic တွေကို သီးခြားစီ ခွဲထုတ်ပြီး ပြန်လည်အသုံးပြု (Reusable) ရ လွယ်ကူလာခြင်း။
+- Class components တွေရဲ့ ရှုပ်ထွေးတဲ့ `this` keyword ပြဿနာကို ဖြေရှင်းနိုင်ခြင်း။
+
+---
+
+## 2. Rules of Hooks
+
+Hooks တွေကို အသုံးပြုတဲ့အခါ အရေးကြီးဆုံး လိုက်နာရမယ့် စည်းကမ်း (၂) ခု ရှိပါတယ်။
+
+1. **Only Call Hooks at the Top Level**: Hooks တွေကို component function ရဲ့ ထိပ်ဆုံးမှာပဲ ခေါ်ရပါမယ်။ Loops, conditions သို့မဟုတ် nested functions တွေထဲမှာ ခေါ်ယူအသုံးပြုခွင့် မရှိပါဘူး။
+2. **Only Call Hooks from React Functions**: Hooks တွေကို React function components တွေနဲ့ Custom Hooks တွေထဲမှာပဲ ခေါ်ယူနိုင်ပါတယ်။ သာမန် JavaScript functions တွေထဲမှာ ခေါ်ယူလို့ မရပါဘူး။
+
+---
+
+## 3. Common Hooks
+
+React မှာ built-in hooks အများကြီးရှိတဲ့အနက် အသုံးအများဆုံး hooks များမှာ:
+
+- **`useState`**: Component ထဲမှာ data (state) သိမ်းဖို့။
+- **`useEffect`**: Side effects (ဥပမာ - data fetching, timers) တွေ ကိုင်တွယ်ဖို့။
+- **`useContext`**: Global data တွေကို လှမ်းယူသုံးဖို့။
+- **`useRef`**: DOM elements တွေကို တိုက်ရိုက်ကိုင်တွယ်ဖို့။
+
+👉 Hooks တွေရဲ့ အမည်ဟာ အမြဲတမ်း `use` ဆိုတဲ့ စကားလုံးနဲ့ စတင်ရပါမယ် (ဥပမာ - `useState`, `useEffect`)။

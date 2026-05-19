@@ -1,0 +1,201 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Context Hook (useContext)
+
+React မှာ component တစ်ခုနဲ့တစ်ခုကြား data ပေးပို့တဲ့အခါ (ဥပမာ - Theme, User Info) props တွေအဆင့်ဆင့်ပေးပို့စရာမလိုဘဲ တိုက်ရိုက်အသုံးပြုနိုင်ဖို့ **Context API** ကို အသုံးပြုပါတယ်။ `useContext` hook က အဲဒီ data တွေကို လှမ်းယူအသုံးပြုပေးတာ ဖြစ်ပါတယ်။
+
+---
+
+## 1. The Problem (Prop Drilling)
+
+သာမန်အားဖြင့် parent ကနေ deep child ဆီကို data ပို့ချင်ရင် ကြားထဲက component တွေအားလုံးကို props ပေးပို့ရပါတယ်။ ဒါကို **Prop Drilling** လို့ ခေါ်ပြီး code တွေကို ရှုပ်ထွေးစေပါတယ်။
+
+အောက်ပါ code မှာ `theme` value ကို `App` ကနေ `GrandChild` ဆီ ပို့ဖို့အတွက် ကြားထဲက `Parent` နဲ့ `Child` တို့ဟာ သူတို့ကိုယ်တိုင် မသုံးပေမယ့် prop ကို လက်ဆင့်ကမ်း သယ်ပေးနေရတာကို တွေ့ရမှာပါ။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{
+    editorHeight: "600px"
+  }}
+  files={{
+    "/App.tsx": `export default function App() {
+  const theme = "dark";
+
+  return (
+    <div>
+      <h1>App Component</h1>
+      <Parent theme={theme} />
+    </div>
+  );
+}
+
+function Parent({ theme }: { theme: string }) {
+  return (
+    <div style={{ border: '1px solid #ccc', padding: '10px' }}>
+      <h3>Parent Component</h3>
+      <Child theme={theme} />
+    </div>
+  );
+}
+
+function Child({ theme }: { theme: string }) {
+  return (
+    <div style={{ border: '1px solid #ccc', padding: '10px' }}>
+      <h3>Child Component</h3>
+      <GrandChild theme={theme} />
+    </div>
+  );
+}
+
+function GrandChild({ theme }: { theme: string }) {
+  return (
+    <div style={{ background: theme === 'dark' ? '#333' : '#fff', color: theme === 'dark' ? '#fff' : '#000', padding: '10px' }}>
+      <h4>GrandChild Component</h4>
+      <p>Theme is: {theme}</p>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. Using useContext (The Solution)
+
+Context ကို အသုံးပြုရင် အဆင့်ဆင့်ပို့စရာမလိုဘဲ ကြိုက်တဲ့နေရာကနေ data ကို လှမ်းယူနိုင်ပါတယ်။ အဓိက အဆင့် (၃) ဆင့် ရှိပါတယ်။
+1. `createContext` နဲ့ context တစ်ခု တည်ဆောက်ခြင်း။
+2. `<Context.Provider>` နဲ့ data တွေကို ပံ့ပိုးပေးခြင်း။
+3. `useContext` နဲ့ data ကို လှမ်းယူသုံးခြင်း။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{
+    editorHeight: "600px"
+  }}
+  files={{
+    "/App.tsx": `import { createContext, useContext, useState } from 'react';
+
+// 1. Create Context
+const ThemeContext = createContext('light');
+
+export default function App() {
+  const [theme, setTheme] = useState('light');
+
+  return (
+    // 2. Provide Context value
+    <ThemeContext.Provider value={theme}>
+      <div>
+        <h1>Current Theme: {theme}</h1>
+        <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+          Toggle Theme
+        </button>
+        <hr />
+        <ParentComponent />
+      </div>
+    </ThemeContext.Provider>
+  );
+}
+
+function ParentComponent() {
+  return (
+    <div>
+      <h3>Parent Component</h3>
+      <p>I don't use the theme, but my child does.</p>
+      <ChildComponent />
+    </div>
+  );
+}
+
+function ChildComponent() {
+  // 3. Consume Context value
+  const theme = useContext(ThemeContext);
+  
+  const style = {
+    backgroundColor: theme === 'light' ? '#fff' : '#333',
+    color: theme === 'light' ? '#000' : '#fff',
+    padding: '20px',
+    border: '1px solid #ccc'
+  };
+
+  return (
+    <div style={style}>
+      <h4>Child Component</h4>
+      <p>The theme is: <b>{theme}</b></p>
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+(Toggling the button updates the theme in the deepest child component)
+```
+
+---
+
+## 3. Practical Example: User Auth
+
+User login ဝင်ထားတဲ့ အခြေအနေကို app တစ်ခုလုံးမှာ သိရှိနိုင်အောင် context ကို အသုံးများပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "600px" }}
+  files={{
+    "/App.tsx": `import { createContext, useContext, useState } from 'react';
+
+interface UserContextType {
+  user: string | null;
+  login: (name: string) => void;
+  logout: () => void;
+}
+
+const UserContext = createContext<UserContextType | null>(null);
+
+export default function App() {
+  const [user, setUser] = useState<string | null>(null);
+
+  const login = (name: string) => setUser(name);
+  const logout = () => setUser(null);
+
+  return (
+    <UserContext.Provider value={{ user, login, logout }}>
+      <Navbar />
+      <MainContent />
+    </UserContext.Provider>
+  );
+}
+
+function Navbar() {
+  const context = useContext(UserContext);
+  return (
+    <nav style={{ display: 'flex', justifyContent: 'space-between', padding: '10px', background: '#eee' }}>
+      <span>My App</span>
+      {context?.user ? (
+        <span>Welcome, {context.user}! <button onClick={context.logout}>Logout</button></span>
+      ) : (
+        <button onClick={() => context?.login('Mg Mg')}>Login</button>
+      )}
+    </nav>
+  );
+}
+
+function MainContent() {
+  const context = useContext(UserContext);
+  return (
+    <div style={{ padding: '20px' }}>
+      {context?.user ? (
+        <h2>Welcome to the dashboard, {context.user}!</h2>
+      ) : (
+        <h2>Please login to continue.</h2>
+      )}
+    </div>
+  );
+}`,
+  }}
+/>
+
+👉 `useContext` ကို state အနည်းငယ် (ဥပမာ - language, theme, auth) အတွက်ပဲ သုံးသင့်ပါတယ်။ အရမ်းများပြားတဲ့ dynamic data တွေအတွက်ဆိုရင် performance issue ရှိနိုင်ပါတယ်။

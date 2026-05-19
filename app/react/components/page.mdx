@@ -1,0 +1,72 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Components
+
+React Components ဆိုတာ UI (User Interface) ရဲ့ အစိတ်အပိုင်းလေးတွေကို သီးခြားစီ ခွဲထုတ်ပြီး reusable ဖြစ်အောင် တည်ဆောက်ထားတဲ့ အရာတွေ ဖြစ်ပါတယ်။ TypeScript မှာ component တွေရဲ့ return type ကို သတ်မှတ်ပေးစရာမလိုဘဲ အလိုအလျောက် (Inference) သိရှိနိုင်ပါတယ်။
+
+---
+
+## 1. Functional Components
+
+Modern React မှာ component တွေကို JavaScript/TypeScript function အနေနဲ့ပဲ ရေးသားကြပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `function Welcome() {
+  return <h1>Hello from React + TypeScript Component!</h1>;
+}
+
+export default function App() {
+  return (
+    <div>
+      <Welcome />
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+Hello from React + TypeScript Component!
+```
+
+---
+
+## 2. Component Composition
+
+Components တွေကို တစ်ခုထဲမှာ တစ်ခုထပ်ပြီး စုပေါင်းအသုံးပြုနိုင်ပါတယ်။ TypeScript မှာ functions တွေရဲ့ return types တွေကို သေချာသတ်မှတ်ပေးနိုင်သလို၊ components တွေအတွက်တော့ inference ကိုပဲ အသုံးပြုလေ့ရှိပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "400px" }}
+  files={{
+    "/App.tsx": `const Header = () => {
+  return <header><h3>Header Section</h3></header>;
+}
+
+const Content = () => {
+  return <main><p>This is the main content using TypeScript.</p></main>;
+}
+
+export default function App() {
+  return (
+    <div>
+      <Header />
+      <Content />
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+Header Section
+This is the main content using TypeScript.
+```
+
+👉 TypeScript က component ရဲ့ return type ကို အလိုအလျောက် သိရှိတဲ့အတွက် code ရေးသားရတာ ပိုမိုမြန်ဆန်စေပါတယ်။

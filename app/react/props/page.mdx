@@ -1,0 +1,176 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Props with TypeScript
+
+TypeScript ကို အသုံးပြုပြီး props တွေရဲ့ data type ကို တိတိကျကျ သတ်မှတ်နိုင်ပါတယ်။ ဒါဟာ component တွေဆီကို မှားယွင်းတဲ့ data တွေ မရောက်အောင် တားဆီးပေးပါတယ်။
+
+---
+
+## 1. Defining Prop Types (Interface)
+
+Component တစ်ခုဆီကို ပေးပို့မယ့် props တွေကို `interface` သို့မဟုတ် `type` သုံးပြီး သတ်မှတ်နိုင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "400px" }}
+  files={{
+    "/App.tsx": `interface WelcomeProps {
+  name: string;
+}
+
+function Welcome({ name }: WelcomeProps) {
+  return <h1>Hello, {name}!</h1>;
+}
+
+export default function App() {
+  return (
+    <div>
+      <Welcome name="Aung Aung" />
+      <Welcome name="Ma Ma" />
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+Hello, Aung Aung!
+Hello, Ma Ma!
+```
+
+---
+
+## 2. Optional Props
+
+တစ်ခါတစ်ရံမှာ props တွေက မဖြစ်မနေ ထည့်ပေးစရာ မလိုတဲ့ အခြေအနေမျိုး (Optional) ရှိနိုင်ပါတယ်။ အဲဒီအခါမှာ `?` သင်္ကေတကို အသုံးပြုပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "600px" }}
+  files={{
+    "/App.tsx": `interface UserCardProps {
+  name: string;
+  age?: number; // Optional prop
+}
+
+function UserCard({ name, age }: UserCardProps) {
+  return (
+    <div style={{ border: '1px solid #ccc', padding: '10px', margin: '5px' }}>
+      <h3>Name: {name}</h3>
+      {age && <p>Age: {age}</p>}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <div>
+      <UserCard name="Kyaw Kyaw" age={25} />
+      <UserCard name="Su Su" />
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+Name: Kyaw Kyaw
+Age: 25
+
+Name: Su Su
+```
+
+---
+
+## 3. Passing Complex Types
+
+Props အနေနဲ့ strings, numbers တွေတင်မကဘဲ Objects, Arrays သို့မဟုတ် Functions တွေကိုပါ ပေးပို့နိုင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "500px" }}
+  files={{
+    "/App.tsx": `interface ButtonProps {
+  label: string;
+  onClick: () => void;
+}
+
+function CustomButton({ label, onClick }: ButtonProps) {
+  return <button onClick={onClick}>{label}</button>;
+}
+
+export default function App() {
+  return (
+    <div>
+      <CustomButton 
+        label="Click Me" 
+        onClick={() => alert('Button Clicked!')} 
+      />
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 4. The `children` Prop
+
+Component တစ်ခုရဲ့ tags ကြားထဲမှာ ထည့်သွင်းလိုက်တဲ့ content တွေကို လက်ခံချင်တဲ့အခါ `children` ဆိုတဲ့ special prop ကို အသုံးပြုရပါတယ်။ ဒါဟာ layout components တွေ တည်ဆောက်တဲ့အခါမှာ အရမ်းအသုံးဝင်ပါတယ်။ TypeScript မှာတော့ `children` ရဲ့ type ကို `React.ReactNode` လို့ သတ်မှတ်ပေးရပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "600px" }}
+  files={{
+    "/App.tsx": `import React from 'react';
+
+interface CardProps {
+  title: string;
+  children: React.ReactNode; // Type for nested content
+}
+
+function Card({ title, children }: CardProps) {
+  return (
+    <div style={{ border: '2px solid blue', padding: '20px', borderRadius: '8px' }}>
+      <h2 style={{ color: 'blue' }}>{title}</h2>
+      <div className="content">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <div>
+      <Card title="Card 1">
+        <p>This is some text inside the card.</p>
+        <button>Learn More</button>
+      </Card>
+      
+      <br />
+      
+      <Card title="Card 2">
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+        </ul>
+      </Card>
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+(Cards will render their specific nested content inside the blue border)
+```
+
+👉 TypeScript မှာ Props တွေကို interface နဲ့ သတ်မှတ်ခြင်းက documentation တစ်ခုလိုပါပဲ၊ ဘာ data တွေ လိုအပ်လဲဆိုတာ ချက်ချင်း သိနိုင်ပါတယ်။

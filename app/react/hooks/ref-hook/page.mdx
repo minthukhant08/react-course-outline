@@ -1,0 +1,90 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Ref Hook (useRef)
+
+`useRef` ဆိုတာ component တစ်ခုမှာ render logic ထဲမှာ မပါဝင်တဲ့ (UI မှာ မပြသတဲ့) data တွေကို သိမ်းဆည်းထားဖို့နဲ့ DOM elements တွေကို တိုက်ရိုက်ကိုင်တွယ်ဖို့ အသုံးပြုတဲ့ Hook တစ်ခု ဖြစ်ပါတယ်။
+
+---
+
+## 1. Accessing DOM Elements
+
+React မှာ HTML elements တွေကို (ဥပမာ - Input တစ်ခုကို focus လုပ်ချင်တာမျိုး) တိုက်ရိုက်ကိုင်တွယ်ချင်တဲ့အခါ `useRef` ကို အသုံးအများဆုံး ဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "600px" }}
+  files={{
+    "/App.tsx": `import { useRef } from 'react';
+
+export default function TextInputWithFocusButton() {
+  // 1. Create a ref with initial value null
+  const inputEl = useRef<HTMLInputElement>(null);
+
+  const onButtonClick = () => {
+    // 3. Access the DOM node via .current
+    inputEl.current?.focus();
+  };
+
+  return (
+    <>
+      {/* 2. Attach the ref to the element */}
+      <input ref={inputEl} type="text" placeholder="Click button to focus" />
+      <button onClick={onButtonClick}>Focus the input</button>
+    </>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. Persisting Values (Without Re-render)
+
+`useRef` ထဲမှာ သိမ်းထားတဲ့ value ပြောင်းလဲသွားရင် component က ပြန်ပြီး Render (UI update) လုပ်မှာ မဟုတ်ပါဘူး။ ဒါဟာ state နဲ့ ကွာခြားတဲ့ အဓိက အချက်ဖြစ်ပါတယ်။ Rendering နဲ့ မသက်ဆိုင်တဲ့ values တွေကို သိမ်းထားချင်ရင် အသုံးဝင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{
+    showConsole: true,
+    showConsoleButton: true,
+    editorHeight: "600px"
+  }}
+  files={{
+    "/App.tsx": `import { useRef } from 'react';
+
+export default function Counter() {
+  const countRef = useRef(0);
+
+  const handleIncrement = () => {
+    countRef.current = countRef.current + 1;
+    console.log("Clicked " + countRef.current + " times");
+  };
+
+  return (
+    <div>
+      <p>Check the console to see the count update.</p>
+      <button onClick={handleIncrement}>Click Me (No UI change)</button>
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+(UI doesn't update, but console logs show the increasing value)
+```
+
+---
+
+## 3. useRef vs useState
+
+| Feature | `useState` | `useRef` |
+|---------|------------|----------|
+| **Re-render** | Value ပြောင်းရင် UI ပြန်ဆွဲတယ် | Value ပြောင်းရင် UI ပြန်မဆွဲဘူး |
+| **Usage** | UI မှာ ပြသရမယ့် data အတွက်သုံးတယ် | UI နဲ့ မပတ်သက်တဲ့ background data အတွက်သုံးတယ် |
+| **Access** | Variable ကို တိုက်ရိုက်သုံးတယ် | `.current` property ကနေတစ်ဆင့် သုံးရတယ် |
+
+👉 `useRef` ရဲ့ `.current` value ကို component rendering ဖြစ်နေစဉ်အတွင်း (return ထဲမှာ) တိုက်ရိုက်မပြောင်းလဲသင့်ပါဘူး။

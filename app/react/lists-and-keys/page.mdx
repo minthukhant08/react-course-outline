@@ -1,0 +1,68 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Lists and Keys
+
+React မှာ data collection တွေကို (ဥပမာ - Array of objects) UI အဖြစ် ပြသချင်တဲ့အခါ JavaScript ရဲ့ `.map()` method ကို အသုံးပြုပါတယ်။ ဒီလို rendering လုပ်တဲ့အခါ item တစ်ခုချင်းစီကို ခွဲခြားသိမြင်နိုင်ဖို့ `key` prop က မဖြစ်မနေ လိုအပ်ပါတယ်။
+
+---
+
+## 1. Rendering Lists
+
+Array ထဲမှာ ရှိတဲ့ data တစ်ခုချင်းစီကို component သို့မဟုတ် element အဖြစ် ပြောင်းလဲပြီး render လုပ်တဲ့ ပုံစံဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `export default function FruitList() {
+  const fruits = ["Apple", "Banana", "Orange", "Mango"];
+
+  return (
+    <div>
+      <h3>My Fruit List</h3>
+      <ul>
+        {fruits.map((fruit, index) => (
+          <li key={index}>{fruit}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. Why do we need Keys?
+
+`key` ဆိုတာ React က list ထဲက ဘယ် item ပြောင်းလဲသွားလဲ၊ အသစ်ရောက်လာလဲ သို့မဟုတ် ဖယ်ရှားလိုက်လဲဆိုတာကို သိရှိဖို့အတွက် အသုံးပြုတဲ့ identity တစ်ခု ဖြစ်ပါတယ်။ 
+- Key တွေဟာ သူတို့ရဲ့ sibling တွေကြားမှာ unique (မတူညီဘဲ တစ်ခုတည်း) ဖြစ်ရပါမယ်။
+- ဖြစ်နိုင်ရင် index နံပါတ်ကို key အဖြစ် မသုံးဘဲ data ထဲမှာပါတဲ့ stable `id` ကိုသာ သုံးသင့်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "400px" }}
+  files={{
+    "/App.tsx": `export default function UserList() {
+  const users = [
+    { id: 101, name: "Mg Mg" },
+    { id: 102, name: "Su Su" },
+    { id: 103, name: "Kyaw Kyaw" }
+  ];
+
+  return (
+    <div>
+      <h3>User List</h3>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}`,
+  }}
+/>
+
+👉 Key တွေကို list ရဲ့ အပြင်ဘက်ဆုံး element မှာသာ ထည့်သွင်းပေးရပါမယ်။

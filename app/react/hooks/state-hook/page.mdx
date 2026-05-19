@@ -1,0 +1,119 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# State Hook (useState)
+
+React မှာ data တွေ ပြောင်းလဲသွားတဲ့အခါ UI ကိုပါ အလိုအလျောက် update ဖြစ်စေချင်ရင် **State** ကို အသုံးပြုရပါတယ်။
+
+---
+
+## 1. Why we need State? (The Problem)
+
+သာမန် JavaScript variables တွေနဲ့ data ကို သိမ်းဆည်းပြီး UI မှာ ပြမယ်ဆိုရင် အဲဒီ variable တန်ဖိုး ပြောင်းလဲသွားပေမယ့် UI ကတော့ အလိုအလျောက် ပြောင်းလဲသွားမှာ မဟုတ်ပါဘူး။ အောက်ပါ code မှာ button ကို နှိပ်ရင် console မှာ value တက်လာပေမယ့် screen ပေါ်မှာတော့ ပြောင်းလဲမှာ မဟုတ်တာကို တွေ့ရမှာပါ။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ showConsole: true, showConsoleButton: true, editorHeight: "400px" }}
+  files={{
+    "/App.tsx": `export default function NoStateCounter() {
+  let count = 0;
+
+  const handleClick = () => {
+    count = count + 1;
+    console.log("Current count value:", count);
+  };
+
+  return (
+    <div>
+      <h3>Regular Variable (No State)</h3>
+      <p>Count: {count}</p>
+      <button onClick={handleClick}>
+        Increment
+      </button>
+      <p style={{ color: '#888', fontSize: '14px' }}>
+        * Check the console. UI won't update.
+      </p>
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+Count: 0
+(Console logs show the value changing, but the UI stays at 0)
+```
+
+---
+
+## 2. Using useState (The Solution)
+
+`useState` ကို အသုံးပြုတဲ့အခါမှာတော့ React က အဲဒီ state variable ရဲ့ တန်ဖိုးပြောင်းလဲမှုကို စောင့်ကြည့်နေပြီး ပြောင်းလဲသွားတာနဲ့ UI (Component) ကို အလိုအလျောက် ပြန်ပြီး render လုပ်ပေးပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "400px" }}
+  files={{
+    "/App.tsx": `import { useState } from 'react';
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <h3>React State (useState)</h3>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+Count: 0
+(Clicking button updates the UI automatically)
+```
+
+---
+
+## 3. Handling Input with State
+
+Form inputs တွေဆီက data တွေကို state ထဲမှာ သိမ်းဆည်းပြီး ကိုင်တွယ်တဲ့ နည်းလမ်းဟာ React မှာ အရမ်းအသုံးများပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "400px" }}
+  files={{
+    "/App.tsx": `import { useState } from 'react';
+
+export default function InputExample() {
+  const [text, setText] = useState("");
+
+  return (
+    <div>
+      <input 
+        type="text" 
+        value={text} 
+        onChange={(e) => setText(e.target.value)} 
+        placeholder="Type something..."
+      />
+      <p>You typed: {text}</p>
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+(The text updates as you type)
+```
+
+👉 `useState` ကို component ရဲ့ ထိပ်ဆုံး (Top level) မှာပဲ အမြဲတမ်း ခေါ်ယူအသုံးပြုရပါမယ်။

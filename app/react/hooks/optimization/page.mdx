@@ -1,0 +1,100 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Performance Optimization
+
+React application တစ်ခု ပိုမိုမြန်ဆန်စေဖို့နဲ့ မလိုအပ်ဘဲ re-render ဖြစ်တာတွေကို လျှော့ချဖို့အတွက် Optimization hooks တွေကို အသုံးပြုပါတယ်။ အဓိကအားဖြင့် `useMemo` နဲ့ `useCallback` တို့ ဖြစ်ကြပါတယ်။
+
+---
+
+## 1. useMemo
+
+`useMemo` ကတော့ တွက်ချက်ရ ခက်ခဲတဲ့ (Expensive Calculation) ရလဒ်တွေကို မှတ်ထားပေး (Memoize) တဲ့နေရာမှာ သုံးပါတယ်။ Dependency variable မပြောင်းမချင်း အဲဒီတွက်ချက်မှုကို ထပ်မလုပ်တော့ဘဲ အရင်ရလဒ်ကိုပဲ ပြန်သုံးပေးတာ ဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{
+    showConsole: true,
+    showConsoleButton: true,
+    editorHeight: "600px"
+  }}
+  files={{
+    "/App.tsx": `import { useState, useMemo } from 'react';
+
+export default function MemoExample() {
+  const [count, setCount] = useState(0);
+  const [items] = useState([1, 2, 3, 4, 5]);
+
+  // Expensive calculation simulation
+  const expensiveValue = useMemo(() => {
+    console.log("Calculating expensive value...");
+    return items.reduce((acc, curr) => acc + curr, 0) + count;
+  }, [items]); // Only re-calculates if 'items' change
+
+  return (
+    <div>
+      <h3>useMemo Example</h3>
+      <p>Expensive Value: {expensiveValue}</p>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increase Count</button>
+      <p style={{ fontSize: '12px' }}>* Check console: Notice that calculation doesn't run when count changes.</p>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. useCallback
+
+`useCallback` ကတော့ function တစ်ခုကို မှတ်ထားပေး (Memoize) တဲ့နေရာမှာ သုံးပါတယ်။ ဒါဟာ parent component က re-render ဖြစ်တိုင်း function အသစ် ထပ်မဖြစ်အောင် တားဆီးပေးပြီး child components တွေ မလိုအပ်ဘဲ render ဖြစ်တာကို လျှော့ချပေးပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{
+    showConsole: true,
+    showConsoleButton: true,
+    editorHeight: "600px"
+  }}
+  files={{
+    "/App.tsx": `import { useState, useCallback, memo } from 'react';
+
+// Memoized child component
+const ChildButton = memo(({ onClick }: { onClick: () => void }) => {
+  console.log("ChildButton rendered!");
+  return <button onClick={onClick}>Click Me (Child)</button>;
+});
+
+export default function CallbackExample() {
+  const [count, setCount] = useState(0);
+
+  // Memoize the function
+  const handleClick = useCallback(() => {
+    console.log("Button clicked!");
+  }, []); // Always the same instance
+
+  return (
+    <div>
+      <h3>useCallback Example</h3>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Update Parent State</button>
+      <hr />
+      <ChildButton onClick={handleClick} />
+      <p style={{ fontSize: '12px' }}>* Check console: ChildButton won't re-render even if parent state updates.</p>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 3. When to optimize?
+
+Optimization တိုင်းမှာ cost ရှိတဲ့အတွက် အလွန်အကျွံ မသုံးသင့်ပါဘူး။ အောက်ပါ အခြေအနေမျိုးတွေမှာပဲ သုံးသင့်ပါတယ်:
+- တွက်ချက်မှုက အရမ်းကြီးမားပြီး performance ထိခိုက်နိုင်တဲ့အခါ။
+- Function သို့မဟုတ် Object တွေကို child component ဆီ prop အဖြစ် ပို့နေပြီး အဲဒီ child က `memo` ကို သုံးထားတဲ့အခါ။
+
+👉 "Premature optimization is the root of all evil." လိုအပ်မှသာ optimization hooks တွေကို သုံးစွဲပါ။

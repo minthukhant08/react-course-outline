@@ -1,0 +1,77 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Custom Hooks
+
+Custom Hooks ဆိုတာ React ရဲ့ built-in hooks (useState, useEffect, etc.) တွေကို အသုံးပြုပြီး ကိုယ်ပိုင် logic တွေကို သီးခြား function တစ်ခုအနေနဲ့ ထုတ်နှုတ်ရေးသားထားခြင်း ဖြစ်ပါတယ်။ ဒါဟာ logic တွေကို components အများကြီးမှာ ပြန်လည်အသုံးပြု (Reusable) နိုင်အောင် ကူညီပေးပါတယ်။
+
+---
+
+## 1. Creating a Custom Hook
+
+Custom Hook တစ်ခု တည်ဆောက်တဲ့အခါ အမည်ကို အမြဲတမ်း `use` ဆိုတဲ့ စကားလုံးနဲ့ စတင်ရပါမယ်။ ဥပမာ - `useCounter`, `useToggle`။
+
+အောက်ပါ example မှာ toggle လုပ်တဲ့ logic ကို components တိုင်းမှာ ပြန်ရေးနေမယ့်အစား `useToggle` ဆိုတဲ့ custom hook တစ်ခု တည်ဆောက်ပြီး အသုံးပြုပုံကို လေ့လာနိုင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "500px" }}
+  files={{
+    "/useToggle.ts": `import { useState } from 'react';
+
+export function useToggle(initialValue: boolean = false) {
+  const [value, setValue] = useState(initialValue);
+  
+  const toggle = () => setValue(prev => !prev);
+  
+  return [value, toggle] as const;
+}`,
+    "/App.tsx": `import { useToggle } from './useToggle';
+
+export default function App() {
+  const [isOn, toggle] = useToggle(false);
+  const [isModalOpen, toggleModal] = useToggle(false);
+
+  return (
+    <div>
+      <h3>Custom Hook: useToggle</h3>
+      <div>
+        <p>Light is: <b>{isOn ? 'ON' : 'OFF'}</b></p>
+        <button onClick={toggle}>Toggle Light</button>
+      </div>
+      <hr />
+      <div>
+        <button onClick={toggleModal}>
+          {isModalOpen ? 'Close Modal' : 'Open Modal'}
+        </button>
+        {isModalOpen && (
+          <div style={{ border: '1px solid #ccc', padding: '10px', marginTop: '10px' }}>
+            This is a simulated modal content!
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. Why use Custom Hooks?
+
+- **Reusability**: Logic တစ်ခုတည်းကို နေရာအနှံ့မှာ ပြန်သုံးနိုင်ပါတယ်။
+- **Readability**: Component တွေထဲမှာ logic တွေ အများကြီး ရေးမယ့်အစား hook တစ်ခုတည်းနဲ့ အုပ်လိုက်တဲ့အတွက် component code က ပိုပြီး ရှင်းလင်းသွားပါတယ်။
+- **Testing**: UI နဲ့ မသက်ဆိုင်ဘဲ logic သက်သက်ကိုပဲ test လုပ်ဖို့ ပိုမိုလွယ်ကူစေပါတယ်။
+
+---
+
+## 3. Official Reference
+
+React မှာ built-in hooks အများကြီး ရှိပါတယ်။ ဒီ guide မှာ မပါဝင်သေးတဲ့ တခြား hooks တွေကို လေ့လာချင်ရင် React ရဲ့ တရားဝင် documentation မှာ သွားရောက်ကြည့်ရှုနိုင်ပါတယ်။
+
+👉 [React Official Hooks Reference](https://react.dev/reference/react/hooks)
+
+---
+
+👉 Custom hooks တွေဟာ သာမန် JavaScript functions တွေနဲ့ ဆင်တူပေမယ့် သူတို့ထဲမှာ React hooks တွေကို ခေါ်ယူအသုံးပြုနိုင်တာက အဓိက ကွာခြားချက် ဖြစ်ပါတယ်။

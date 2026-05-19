@@ -5,13 +5,22 @@ This file defines the foundational architecture, coding standards, and documenta
 ## 🏗 Architectural Conventions
 
 ### Directory Naming
-- All documentation resides under `app/javascript/`.
-- Category directories **MUST** be pluralized (e.g., `arrays`, `objects`, `operators`, `loops`).
+- Documentation resides under `app/javascript/`, `app/react/`, `app/typescript/`, `app/zod/`, and `app/zustand/`.
+- JavaScript category directories **MUST** be pluralized (e.g., `arrays`, `objects`).
+- React category directories should follow functional naming (e.g., `components`, `state-hook`).
+- Zod category directories should follow schema naming (e.g., `basic-types`, `objects`).
+- Zustand category directories should follow store naming (e.g., `basic-store`, `middleware`).
 - Every sub-topic requires a dedicated subdirectory containing a `page.mdx` file.
 
 ### Metadata Management
 - Each directory must contain a `_meta.ts` file to define sidebar order and labels.
 - Sidebar labels should be concise and capitalized (e.g., `index: "Basic"`, `map: "Array.map()"`).
+
+### React & TypeScript Standards
+- **Interactivity**: Use `sandpack-react` with the `react-ts` template for all code examples.
+- **Console Visibility**: If an example relies on `console.log`, include `options={{ showConsole: true, showConsoleButton: true }}` in the `Sandpack` component.
+- **Extensions**: Use `.tsx` for all React component files.
+- **Typing**: Prefer TypeScript. Use inferred return types for components (omit `: JSX.Element`) but explicitly define props using `interface`.
 
 ## ✍️ MDX Documentation Standards
 

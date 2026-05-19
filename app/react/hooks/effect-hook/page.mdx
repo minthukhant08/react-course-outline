@@ -1,0 +1,121 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Effect Hook (useEffect)
+
+React component တစ်ခုမှာ UI ကို ပြသရုံတင်မကဘဲ API ကနေ data လှမ်းယူတာ၊ Timer တွေ သတ်မှတ်တာ စတဲ့ Side Effects တွေကို လုပ်ဆောင်ချင်တဲ့အခါ `useEffect` ကို အသုံးပြုပါတယ်။
+
+---
+
+## 1. Basic Usage (Mounting)
+
+`useEffect` ထဲမှာ ရှိတဲ့ code တွေဟာ component က screen ပေါ်ကို စတင်ရောက်ရှိလာချိန် (Mount) မှာ တစ်ကြိမ် အလုပ်လုပ်ပါတယ်။ Empty dependency array `[]` ကို ထည့်သွင်းပေးခြင်းအားဖြင့် component စစချင်းမှာပဲ တစ်ကြိမ်ပဲ အလုပ်လုပ်စေမှာ ဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ editorHeight: "400px" }}
+  files={{
+    "/App.tsx": `import { useState, useEffect } from 'react';
+
+export default function App() {
+  const [data, setData] = useState("Loading...");
+
+  useEffect(() => {
+    // API call mock up
+    setTimeout(() => {
+      setData("Data loaded from API!");
+    }, 2000);
+  }, []); // Empty array means run only once on mount
+
+  return <h1>{data}</h1>;
+}`,
+  }}
+/>
+
+### Output
+```txt
+Loading...
+(After 2 seconds)
+Data loaded from API!
+```
+
+---
+
+## 2. Dependency Array
+
+`useEffect` ရဲ့ ဒုတိယ parameter မှာ variable တွေကို ထည့်သွင်းပေးထားမယ်ဆိုရင် အဲဒီ variable ပြောင်းလဲတိုင်းမှာ effect code က ပြန်ပြီး အလုပ်လုပ်ပေးမှာ ဖြစ်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{
+    showConsole: true,
+    showConsoleButton: true,
+    editorHeight: "450px"
+  }}
+  files={{
+    "/App.tsx": `import { useState, useEffect } from 'react';
+
+export default function CounterEffect() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log("Count is now:", count);
+    document.title = "Clicked " + count + " times";
+  }, [count]); // Runs whenever 'count' changes
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increase and check title
+      </button>
+    </div>
+  );
+}`,
+  }}
+/>
+
+### Output
+```txt
+Count: 0
+(Document title updates on each click)
+```
+
+---
+
+## 3. Cleanup Function
+
+တစ်ခါတစ်ရံမှာ effect ကနေ လုပ်ထားတဲ့ အလုပ်တွေကို (ဥပမာ - Timer တွေ၊ Event Listeners တွေ) component ပျက်သွားတဲ့အခါ (Unmount) ပြန်ပြီး ရှင်းလင်းပေးဖို့ လိုအပ်ပါတယ်။ အဲဒီအခါမှာ effect ထဲကနေ function တစ်ခုကို return ပြန်ပေးရပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+   options={{
+    showConsole: true,
+    showConsoleButton: true,
+    editorHeight: "450px"
+  }}
+  files={{
+    "/App.tsx": `import { useState, useEffect } from 'react';
+
+export default function Timer() {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds(s => s + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval); // Component ပိတ်သွားရင် timer ကို ရပ်ပစ်မယ်
+      console.log("Timer cleaned up!");
+    };
+  }, []);
+
+  return <h1>Time: {seconds}s</h1>;
+}`,
+  }}
+/>
+
+👉 `useEffect` ကို မလိုအပ်ဘဲ အလွန်အကျွံ သုံးခြင်းက application ရဲ့ performance ကို ကျဆင်းစေနိုင်တဲ့အတွက် စနစ်တကျ သုံးစွဲဖို့ လိုအပ်ပါတယ်။

@@ -1,0 +1,83 @@
+import { Sandpack } from "@codesandbox/sandpack-react";
+
+# Event Handling
+
+React မှာ user ရဲ့ လုပ်ဆောင်ချက်တွေကို (ဥပမာ - clicks, typing, form submits) ကိုင်တွယ်ဖို့ HTML events တွေနဲ့ ဆင်တူတဲ့ event handlers တွေကို အသုံးပြုပါတယ်။
+
+---
+
+## 1. Basic Event Handlers
+
+React events တွေကို `camelCase` နဲ့ ရေးသားရပါတယ်။ (ဥပမာ - `onclick` အစား `onClick`)။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `export default function Button() {
+  function handleClick() {
+    alert('Button clicked!');
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Click Me
+    </button>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 2. Passing Arguments
+
+Event handler ထဲကို data တွေ ပေးပို့ချင်ရင် anonymous function (arrow function) ကို အသုံးပြုရပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  files={{
+    "/App.tsx": `export default function App() {
+  const sayHello = (name: string) => {
+    alert("Hello, " + name);
+  };
+
+  return (
+    <div>
+      <button onClick={() => sayHello("Mg Mg")}>Greet Mg Mg</button>
+      <button onClick={() => sayHello("Su Su")}>Greet Su Su</button>
+    </div>
+  );
+}`,
+  }}
+/>
+
+---
+
+## 3. The Event Object
+
+Event handlers တွေဟာ event object ကို parameter အနေနဲ့ လက်ခံရရှိပါတယ်။ ဒါကို သုံးပြီး `e.preventDefault()` စတဲ့ standard actions တွေကို လုပ်ဆောင်နိုင်ပါတယ်။
+
+<Sandpack 
+  template="react-ts"
+  theme="dark"
+  options={{ showConsole: true, showConsoleButton: true }}
+  files={{
+    "/App.tsx": `export default function Form() {
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault(); // Page refresh မဖြစ်အောင် တားဆီးခြင်း
+    console.log('Form submitted!');
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder="Type something..." />
+      <button type="submit">Submit</button>
+    </form>
+  );
+}`,
+  }}
+/>
+
+👉 Inline arrow functions တွေကို သုံးခြင်းဟာ အဆင်ပြေပေမယ့် component ကြီးမားလာတဲ့အခါမှာတော့ သီးခြား function အဖြစ် ခွဲထုတ်ရေးသားတာက ပိုကောင်းပါတယ်။
