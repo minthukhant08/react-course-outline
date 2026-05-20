@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
+
+import { Footer, Layout, Navbar, } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import "./globals.css";
@@ -27,17 +26,21 @@ export default async function RootLayout({
       dir="ltr"
       suppressHydrationWarning
     >
-        <Head />
+      <Head />
       <body>
         <ThemeProvider 
         attribute={"class"} 
         defaultTheme="system"
         enableSystem>
         <Layout
+        sidebar={{
+          autoCollapse: false,
+          defaultMenuCollapseLevel: 1
+        }}
           navbar={navbar}
           pageMap={pageMap}
-          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           footer={footer}
+          
         >
           {children}
         </Layout>
