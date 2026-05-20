@@ -1,0 +1,33 @@
+# Server Components (Default)
+
+Next.js မှာ default အားဖြင့် components အားလုံးဟာ **Server Components** တွေ ဖြစ်ပါတယ်။ သူတို့ဟာ server ပေါ်မှာပဲ render လုပ်ပြီး browser ဆီကို HTML result ပဲ ပို့ပေးပါတယ်။
+
+---
+
+## 1. Pros
+
+- **Data Fetching**: Database သို့မဟုတ် API တွေနဲ့ နီးကပ်စွာရှိတဲ့အတွက် data လှမ်းယူရတာ မြန်ဆန်ပါတယ်။
+- **Security**: API keys တွေနဲ့ tokens တွေကို client ဘက်ကို မပို့ဘဲ server မှာတင် လုံခြုံစွာ သုံးနိုင်ပါတယ်။
+- **Bundle Size**: JavaScript code တွေကို client ဆီ ပို့စရာမလိုတဲ့အတွက် browser မှာ load လုပ်ရတာ ပေါ့ပါးသွားပါတယ်။
+- **Async Support**: `async/await` ကို component level မှာတင် တိုက်ရိုက် သုံးနိုင်ပါတယ်။
+
+---
+
+## 2. Example Usage
+
+```tsx
+// app/page.tsx (Server Component by default)
+import { getPosts } from '@/lib/data';
+
+export default async function Page() {
+  const posts = await getPosts(); // Direct server-side fetching
+
+  return (
+    <ul>
+      {posts.map(post => <li key={post.id}>{post.title}</li>)}
+    </ul>
+  );
+}
+```
+
+👉 Server Components ကို တတ်နိုင်သမျှ များများသုံးခြင်းက application ကို ပိုမိုမြန်ဆန်စေပါတယ်။

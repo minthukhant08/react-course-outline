@@ -1,0 +1,43 @@
+# Font and Script
+
+Next.js မှာ font တွေနဲ့ scripts တွေကို optimize လုပ်ဖို့အတွက် သီးသန့် components တွေ ပေးထားပါတယ်။
+
+---
+
+## 1. `next/font`
+
+Google Fonts သို့မဟုတ် local fonts တွေကို layout shift မရှိဘဲနဲ့ privacy-friendly ဖြစ်အောင် load လုပ်ပေးပါတယ်။
+
+```tsx
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export default function Layout({ children }) {
+  return (
+    <html lang="en" className={inter.className}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+---
+
+## 2. `next/script`
+
+Third-party scripts တွေကို (ဥပမာ - Analytics) website ရဲ့ load speed ကို မထိခိုက်စေဘဲ ဘယ်အချိန်မှာ run မလဲဆိုတာကို ထိန်းချုပ်ပေးပါတယ်။
+
+```tsx
+import Script from 'next/script';
+
+export default function Page() {
+  return (
+    <>
+      <Script src="https://example.com/script.js" />
+    </>
+  );
+}
+```
+
+👉 [Font Reference](https://nextjs.org/docs/app/api-reference/components/font) | [Script Reference](https://nextjs.org/docs/app/api-reference/components/script)

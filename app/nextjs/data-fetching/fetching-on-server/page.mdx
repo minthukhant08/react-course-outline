@@ -1,0 +1,31 @@
+# Fetching on the Server
+
+Server Components တွေမှာ `async/await` ကို သုံးပြီး data တွေကို server-side မှာတင် တိုက်ရိုက် လှမ်းယူနိုင်ပါတယ်။ ဒါဟာ application ကို ပိုမိုမြန်ဆန်စေသလို security အတွက်လည်း ပိုကောင်းပါတယ်။
+
+---
+
+## 1. Example Usage
+
+```tsx
+// app/posts/page.tsx
+export default async function Page() {
+  const res = await fetch('https://api.example.com/posts');
+  const posts = await res.json();
+
+  return (
+    <ul>
+      {posts.map((post: any) => <li key={post.id}>{post.title}</li>)}
+    </ul>
+  );
+}
+```
+
+---
+
+## 2. Pros
+
+- **Direct Backend Access**: Database သို့မဟုတ် secret APIs တွေကို တိုက်ရိုက် လှမ်းယူနိုင်ပါတယ်။
+- **Reduced Client JS**: Fetch လုပ်တဲ့ code တွေက browser ဆီ မရောက်တဲ့အတွက် bundle size သေးသွားပါတယ်။
+- **Sequential and Parallel Fetching**: JavaScript ရဲ့ standard async patterns တွေကို စိတ်ကြိုက် သုံးနိုင်ပါတယ်။
+
+👉 [Official Data Fetching Guide](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching)

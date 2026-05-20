@@ -5,11 +5,12 @@ This file defines the foundational architecture, coding standards, and documenta
 ## 🏗 Architectural Conventions
 
 ### Directory Naming
-- Documentation resides under `app/javascript/`, `app/react/`, `app/typescript/`, `app/zod/`, and `app/zustand/`.
+- Documentation resides under `app/javascript/`, `app/react/`, `app/typescript/`, `app/zod/`, `app/zustand/`, and `app/nextjs/`.
 - JavaScript category directories **MUST** be pluralized (e.g., `arrays`, `objects`).
 - React category directories should follow functional naming (e.g., `components`, `state-hook`).
 - Zod category directories should follow schema naming (e.g., `basic-types`, `objects`).
 - Zustand category directories should follow store naming (e.g., `basic-store`, `middleware`).
+- Next.js category directories should follow feature naming (e.g., `basics`, `routing`, `data-fetching`).
 - Every sub-topic requires a dedicated subdirectory containing a `page.mdx` file.
 
 ### Metadata Management
@@ -21,6 +22,11 @@ This file defines the foundational architecture, coding standards, and documenta
 - **Console Visibility**: If an example relies on `console.log`, include `options={{ showConsole: true, showConsoleButton: true }}` in the `Sandpack` component.
 - **Extensions**: Use `.tsx` for all React component files.
 - **Typing**: Prefer TypeScript. Use inferred return types for components (omit `: JSX.Element`) but explicitly define props using `interface`.
+
+### Next.js Specifics
+- **Breaking Changes**: This version of Next.js has significant breaking changes in APIs, conventions, and file structure compared to standard versions.
+- **Internal Guides**: ALWAYS read the relevant internal guide in `node_modules/next/dist/docs/` before writing code or documentation for Next.js.
+- **Deprecations**: Strictly heed all deprecation notices found in the internal documentation.
 
 ## ✍️ MDX Documentation Standards
 

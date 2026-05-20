@@ -1,0 +1,33 @@
+# Client Components
+
+အကယ်၍ user နဲ့ interaction လုပ်ဖို့ လိုအပ်လာရင် (ဥပမာ - clicks, forms) သို့မဟုတ် browser APIs (ဥပမာ - `localStorage`) သုံးဖို့ လိုအပ်လာရင် **Client Components** ကို သုံးရပါတယ်။ file ရဲ့ ထိပ်ဆုံးမှာ `"use client"` directive ကို ထည့်သွင်းပေးရပါတယ်။
+
+---
+
+## 1. When to use?
+
+- Interactivity လိုအပ်တဲ့အခါ (`onClick`, `onChange`).
+- React Hooks သုံးချင်တဲ့အခါ (`useState`, `useEffect`).
+- Browser-only APIs သုံးချင်တဲ့အခါ (`window`, `document`).
+
+---
+
+## 2. Example Usage
+
+```tsx
+"use client"; // Mark this as a Client Component
+
+import { useState } from 'react';
+
+export default function LikeButton() {
+  const [likes, setLikes] = useState(0);
+
+  return (
+    <button onClick={() => setLikes(likes + 1)}>
+      Likes: {likes}
+    </button>
+  );
+}
+```
+
+👉 Client Components ကို interactivity လိုအပ်တဲ့ အစိတ်အပိုင်းလေးတွေမှာပဲ သီးခြားခွဲသုံးတာက အကောင်းဆုံး (Best Practice) ဖြစ်ပါတယ်။

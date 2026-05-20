@@ -1,0 +1,51 @@
+# Rendering Methods
+
+Next.js (App Router) မှာ rendering လုပ်တဲ့ပုံစံဟာ Static နဲ့ Dynamic ဆိုပြီး နှစ်ခုထဲက တစ်ခုကို ရွေးရတာမျိုးမဟုတ်ဘဲ component level အထိ စိတ်ကြိုက် ရောနှောအသုံးပြုနိုင်တဲ့ spectrum တစ်ခုဖြစ်ပါတယ်။
+
+---
+
+## 1. Static Rendering (Default)
+
+Static rendering မှာ component တွေကို build time (သို့မဟုတ်) နောက်ကွယ်မှာ data fetch လုပ်ပြီး HTML အဖြစ် ကြိုတင်ထုတ်ထားပါတယ်။
+
+- **Performance**: CDN ကနေ တိုက်ရိုက် cache လုပ်ပြီး ပို့ပေးနိုင်တဲ့အတွက် အမြန်ဆုံးဖြစ်ပါတယ်။
+- **Use Case**: User အားလုံးအတွက် တူညီတဲ့ content တွေ (ဥပမာ - Blog posts, Documentation) အတွက် သင့်တော်ပါတယ်။
+
+---
+
+## 2. Dynamic Rendering
+
+Request တက်လာတဲ့အချိန် (User က page ကို ခေါ်တဲ့အချိန်) မှသာ server ကနေ HTML ကို ထုတ်ပေးတာဖြစ်ပါတယ်။
+
+- **Personalization**: User တစ်ယောက်ချင်းစီအလိုက် မတူညီတဲ့ data တွေ (ဥပမာ - Shopping Cart, User Profile) ပြဖို့ သုံးပါတယ်။
+- **Real-time**: အမြဲတမ်း နောက်ဆုံးရ data တွေကို ပြသနိုင်ပါတယ်။
+
+---
+
+## 3. Streaming
+
+Streaming ကတော့ page တစ်ခုလုံး render ပြီးမှ HTML ပို့တာမျိုးမဟုတ်ဘဲ၊ အဆင်သင့်ဖြစ်တဲ့ အစိတ်အပိုင်းတွေကို အရင်ပို့ပေးတာဖြစ်ပါတယ်။ နှေးကွေးတဲ့ data fetch တွေရှိနေရင်တောင် ကျန်တဲ့ UI တွေကို user က ချက်ချင်း မြင်နေရမှာဖြစ်ပါတယ်။
+
+```tsx
+import { Suspense } from 'react';
+import { PostFeed, PostSkeleton } from './components';
+
+export default function BlogPage() {
+  return (
+    <section>
+      <h1>My Blog Posts</h1>
+      {/* နှေးနိုင်တဲ့ component ကို Suspense နဲ့ အုပ်ထားခြင်း */}
+      <Suspense fallback={<PostSkeleton />}>
+        <PostFeed />
+      </Suspense>
+    </section>
+  );
+}
+```
+
+### Output
+```txt
+The page title "My Blog Posts" appears instantly. The "PostFeed" content streams in and replaces the "PostSkeleton" once the data is ready.
+```
+
+👉 Next.js မှာ `use cache` directive သို့မဟုတ် data fetching logic ပေါ်မူတည်ပြီး component တစ်ခုချင်းစီကို static သို့မဟုတ် dynamic ဖြစ်အောင် အလိုအလျောက် ဆုံးဖြတ်ပေးပါတယ်။

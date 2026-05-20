@@ -1,4 +1,5 @@
 export default {
+    index: "Overview",
     variables: "Variables",
     operators: "Operators",
     conditions: "Conditions",

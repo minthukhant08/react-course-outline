@@ -1,0 +1,29 @@
+# Server Actions in Client Components
+
+Client Component ထဲမှာ Server Action ကို သုံးချင်ရင် သီးခြား file တစ်ခု (ဥပမာ - `actions.ts`) မှာ အရင်ရေးပြီးမှ import လုပ်ပြီး သုံးရပါတယ်။
+
+---
+
+## 1. Usage Pattern
+
+Client Component မှာ interaction တွေ (ဥပမာ - `onClick`) ကနေတစ်ဆင့် Server Action ကို လှမ်းခေါ်နိုင်ပါတယ်။
+
+---
+
+## 2. Example Usage
+
+```tsx
+"use client";
+
+import { createPost } from './actions';
+
+export default function ClientButton() {
+  return (
+    <button onClick={() => createPost(new FormData())}>
+      Create Empty Post
+    </button>
+  );
+}
+```
+
+👉 Client Component မှာ `onClick` စတဲ့ event handlers တွေနဲ့ တွဲသုံးနိုင်တဲ့အတွက် ပိုမို interactive ဖြစ်တဲ့ UI တွေကို တည်ဆောက်နိုင်ပါတယ်။

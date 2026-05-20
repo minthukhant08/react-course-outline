@@ -1,0 +1,12 @@
+# Summary
+
+| Feature | Server Component | Client Component |
+|---------|------------------|------------------|
+| Fetch data | ✅ (Direct) | ⚠️ (via API) |
+| Access backend resources | ✅ | ❌ |
+| Keep secrets (API Keys) | ✅ | ❌ |
+| Use Hooks (`useState`, etc.) | ❌ | ✅ |
+| Use Browser APIs | ❌ | ✅ |
+| Event Listeners (`onClick`) | ❌ | ✅ |
+
+👉 Server Components ကို တတ်နိုင်သမျှ များများသုံးပြီး Client Components ကိုတော့ interactivity လိုအပ်တဲ့ အစိတ်အပိုင်းလေးတွေမှာပဲ သီးခြားခွဲသုံးတာက အကောင်းဆုံး (Best Practice) ဖြစ်ပါတယ်။

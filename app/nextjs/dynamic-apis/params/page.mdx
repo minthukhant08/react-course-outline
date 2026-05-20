@@ -1,0 +1,55 @@
+# Dynamic Routes (`params`)
+
+Next.js မှာ dynamic route segments တွေဆီက data တွေကို ရယူဖို့အတွက် `params` ကို အသုံးပြုပါတယ်။ ၎င်းကို Server Components (Pages & Layouts) မှာ prop အနေနဲ့ ရရှိနိုင်သလို Client Components မှာတော့ `useParams` hook ကို သုံးပြီး ရယူနိုင်ပါတယ်။
+
+---
+
+## 1. Server Components
+
+Server Components (Pages သို့မဟုတ် Layouts) မှာ `params` ဟာ **Promise** တစ်ခု ဖြစ်ပါတယ်။ ဒါကြောင့် `async/await` ဒါမှမဟုတ် React ရဲ့ `use()` function နဲ့ unwrap လုပ်ပြီး သုံးရပါတယ်။
+
+```tsx
+// app/blog/[slug]/page.tsx
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params;
+  return <h1>Post: {slug}</h1>;
+}
+```
+
+---
+
+## 2. Client Components
+
+Client Components မှာတော့ `next/navigation` ကလာတဲ့ `useParams` hook ကို သုံးပြီး parameters တွေကို တိုက်ရိုက် ရယူနိုင်ပါတယ်။
+
+```tsx
+"use client";
+
+import { useParams } from 'next/navigation';
+
+export default function BlogPost() {
+  const params = useParams();
+  
+  // Route -> /blog/[slug]
+  // URL -> /blog/hello-world
+  // params -> { slug: 'hello-world' }
+  
+  return <h1>Post: {params.slug}</h1>;
+}
+```
+
+---
+
+## 3. Comparison
+
+| Feature | Server Component (`params`) | Client Component (`useParams`) |
+|---------|-----------------------------|-------------------------------|
+| Component Type | Server Component | Client Component |
+| Access Type | Promise (needs await/use) | Hook (direct access) |
+| Location | Pages & Layouts | Any Client Component |
+
+👉 Dynamic routes တွေကို သုံးခြင်းဖြင့် URL တစ်ခုတည်းကနေ data အမျိုးမျိုးကို dynamic ဖြစ်အောင် ပြသနိုင်ပါတယ်။

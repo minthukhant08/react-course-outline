@@ -1,0 +1,63 @@
+# Error Handling
+
+Next.js (App Router) မှာ error တွေကို category နှစ်ခုခွဲပြီး ကိုင်တွယ်ပါတယ်။ ပထမတစ်ခုက normal logic ထဲမှာဖြစ်တဲ့ **Expected Errors** ဖြစ်ပြီး၊ ဒုတိယတစ်ခုကတော့ runtime မှာ မထင်မှတ်ဘဲဖြစ်လာတဲ့ **Uncaught Exceptions** ဖြစ်ပါတယ်။
+
+---
+
+## 1. Expected Errors (Action State)
+
+Form validation သို့မဟုတ် API request ကျရှုံးတာမျိုးတွေဟာ application ရဲ့ normal operation မှာ ဖြစ်လေ့ဖြစ်ထရှိတဲ့ expected errors တွေဖြစ်ပါတယ်။ ဒီလို error တွေကို `try/catch` နဲ့ throw လုပ်မယ့်အစား return value အနေနဲ့ ပြန်ပေးပြီး Client ဘက်မှာ `useActionState` နဲ့ ကိုင်တွယ်ဖို့ အကြံပြုထားပါတယ်။
+
+```tsx
+// actions.ts
+"use server";
+
+export async function createPost(prevState: any, formData: FormData) {
+  const res = await fetch('https://api.example.com/posts', { method: 'POST' });
+  
+  if (!res.ok) {
+    return { message: "Failed to create post" }; // Error ကို return ပြန်ခြင်း
+  }
+  // ...
+}
+```
+
+---
+
+## 2. Uncaught Exceptions (`error.js`)
+
+Runtime မှာဖြစ်တဲ့ error တွေကိုတော့ `error.js` ဆိုတဲ့ special file convention နဲ့ ကိုင်တွယ်ပါတယ်။ ၎င်းဟာ React Error Boundary ကို အလိုအလျောက် တည်ဆောက်ပေးပါတယ်။
+
+```tsx
+// app/dashboard/error.tsx
+"use client"; // Error components must be Client Components
+
+import { useEffect } from 'react';
+
+export default function Error({
+  error,
+  unstable_retry,
+}: {
+  error: Error & { digest?: string };
+  unstable_retry: () => void;
+}) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
+  return (
+    <div>
+      <h2>Something went wrong!</h2>
+      <button onClick={() => unstable_retry()}>Try again</button>
+    </div>
+  );
+}
+```
+
+👉 `unstable_retry()` (ယခင် `reset()`) ကို ခေါ်လိုက်ရင် Next.js က error ဖြစ်သွားတဲ့ segment ကို data ပြန် fetch ပြီး re-render လုပ်ဖို့ ကြိုးစားပေးမှာဖြစ်ပါတယ်။
+
+---
+
+## 3. Global Errors (`global-error.js`)
+
+Root layout မှာ error ဖြစ်သွားရင် ကိုင်တွယ်နိုင်ဖို့ `app/global-error.js` ကို သုံးနိုင်ပါတယ်။ ၎င်းဟာ application တစ်ခုလုံးရဲ့ 404 သို့မဟုတ် runtime errors တွေကို fallback အနေနဲ့ ပြပေးမှာဖြစ်ပါတယ်။

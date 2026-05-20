@@ -1,0 +1,34 @@
+# Revalidating Data
+
+Cache လုပ်ထားတဲ့ data တွေကို အချိန်တစ်ခုကြာရင် update လုပ်ချင်တဲ့အခါ **Revalidation** ကို အသုံးပြုပါတယ်။ ၎င်းကို နည်းလမ်းနှစ်မျိုးဖြင့် လုပ်ဆောင်နိုင်ပါတယ်။
+
+---
+
+## 1. Time-based Revalidation
+
+သတ်မှတ်ထားတဲ့ စက္ကန့်အကြာမှာ data ကို update လုပ်ခိုင်းခြင်း ဖြစ်ပါတယ်။
+
+```tsx
+// Revalidate every 1 hour (3600 seconds)
+fetch('https://api.example.com/data', { 
+  next: { revalidate: 3600 } 
+});
+```
+
+---
+
+## 2. Path-based Revalidation
+
+Path တစ်ခုလုံးရဲ့ cache ကို ချက်ချင်း ဖျက်ပစ်ချင်ရင် `revalidatePath` ကို သုံးနိုင်ပါတယ်။
+
+```tsx
+import { revalidatePath } from 'next/cache';
+
+export async function updateBlog() {
+  // Update logic...
+  
+  revalidatePath('/blog'); // /blog path က data အားလုံးကို refresh လုပ်မယ်
+}
+```
+
+👉 [Official Revalidation Guide](https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating)

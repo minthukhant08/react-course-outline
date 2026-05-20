@@ -1,0 +1,31 @@
+# Composition Patterns
+
+Server နဲ့ Client components တွေကို ရောပြီး သုံးတဲ့အခါ အရေးကြီးဆုံး စည်းကမ်းကတော့ **Server Component ကို Client Component ထဲမှာ တိုက်ရိုက် import လုပ်လို့ မရပါဘူး။**
+
+---
+
+## Recommended Pattern
+
+Server Component ကို Client Component ရဲ့ `props` သို့မဟုတ် `children` အဖြစ် ပေးပို့ပြီး အသုံးပြုနိုင်ပါတယ်။
+
+```tsx
+// app/layout.tsx (Server Component)
+import ClientWrapper from './ClientWrapper';
+import ServerContent from './ServerContent';
+
+export default function Layout() {
+  return (
+    <ClientWrapper>
+      <ServerContent /> {/* Passed as children */}
+    </ClientWrapper>
+  );
+}
+```
+
+---
+
+## Important Note
+
+Server Component တစ်ခုကို Client Component ထဲမှာ တိုက်ရိုက် import လုပ်ပြီး အသုံးပြုလိုက်ရင် (children အဖြစ် မဟုတ်ဘဲ) အဲဒီ component ဟာ client-side bundle ထဲမှာ ပါဝင်သွားပြီး Client Component တစ်ခုအနေနဲ့ပဲ အလုပ်လုပ်သွားမှာ ဖြစ်ပါတယ်။ ဒါကြောင့် Server Component ရဲ့ အကျိုးကျေးဇူးတွေကို ရရှိဖို့အတွက် `children` pattern ကို အသုံးပြုရခြင်း ဖြစ်ပါတယ်။
+
+ဒီ pattern ကို အသုံးပြုခြင်းဖြင့် Client Component အတွင်းမှာလည်း Server Component ရဲ့ အကျိုးကျေးဇူးတွေကို ဆက်လက်ရရှိနိုင်မှာ ဖြစ်ပါတယ်။

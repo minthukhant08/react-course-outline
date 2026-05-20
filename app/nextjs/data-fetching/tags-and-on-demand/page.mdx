@@ -1,0 +1,38 @@
+# Tags & On-demand Revalidation
+
+**Tags** ဆိုတာ fetch လုပ်ထားတဲ့ data တွေကို အုပ်စုဖွဲ့ပြီး နာမည်ပေးထားခြင်း ဖြစ်ပါတယ်။ ဒါမှသာ data တစ်ခုခု ပြောင်းလဲသွားတဲ့အခါ အဲဒီ tag နာမည်ကို သုံးပြီး cache ကို ချက်ချင်း ဖျက်ပစ် (invalidate) လို့ ရမှာဖြစ်ပါတယ်။
+
+---
+
+## 1. Creating Tag
+
+`fetch` မှာ `tags` ကို သတ်မှတ်နိုင်ပါတယ်။
+
+```tsx
+// Using fetch
+await fetch('https://api.example.com/products', {
+  next: { tags: ['products'] }
+});
+
+// Using "use cache"
+import { cacheTag } from 'next/cache';
+
+async function getProducts() {
+  'use cache';
+  cacheTag('products');
+  return db.query(...);
+}
+```
+
+---
+
+## 2. `revalidateTag` vs `updateTag`
+
+Server Action တစ်ခုခုထဲမှာ cache ကို update လုပ်တဲ့အခါ အောက်ပါ methods တွေကို သုံးနိုင်ပါတယ်။
+
+| Function | Behavior | Usage Context |
+|----------|----------|---------------|
+| `revalidateTag` | Stale content ကို အရင်ပြပြီး background မှာ data အသစ်ယူပါတယ်။ | Route Handlers, Server Actions |
+| `updateTag` | Cache ကို ချက်ချင်း ဖျက်လိုက်ပြီး data အသစ်မရမချင်း စောင့်ခိုင်းပါတယ်။ | **Server Actions Only** |
+
+👉 User က data တစ်ခုခုကို update လုပ်လိုက်တဲ့အခါ ချက်ချင်း အပြောင်းအလဲကို မြင်ချင်ရင် Server Action ထဲမှာ `updateTag` ကို သုံးဖို့ အကြံပြုထားပါတယ်။

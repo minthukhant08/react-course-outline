@@ -1,0 +1,38 @@
+# Organizational Folders
+
+Routing မှာ မပါဝင်စေချင်တဲ့အခါ (သို့မဟုတ်) logic အလိုက် စုစည်းချင်တဲ့အခါ folder organization နည်းလမ်းများ ရှိပါတယ်။
+
+---
+
+## 1. Private Folders (`_folder`)
+
+Folder အမည်ရှေ့မှာ underscore `_` ခံထားရင် Next.js က routing ထဲမှာ ထည့်သွင်းစဉ်းစားမှာ မဟုတ်ပါဘူး။ Project ထဲမှာပဲ သုံးမယ့် internal components တွေ၊ helper functions တွေကို သိမ်းဖို့ သုံးပါတယ်။
+
+---
+
+## 2. Route Groups (`(group)`)
+
+Folder အမည်ကို လက်သည်းကွင်း `()` နဲ့ အုပ်ထားရင် ၎င်းက URL path မှာ ပါဝင်မှာ မဟုတ်ပါဘူး။ Layout တွေကို အုပ်စုဖွဲ့ဖို့ (ဥပမာ - public layout နဲ့ Private Layout ခွဲချင်တဲ့အခါ) သုံးပါတယ်။
+
+---
+
+## 3. Dynamic Routes (`[slug]`)
+
+Folder အမည်ကို square brackets `[]` နဲ့ ရေးရင် dynamic route ဖြစ်လာပါတယ်။ (ဥပမာ - `app/blog/[id]/page.tsx` က `/blog/1`, `/blog/abc` စတဲ့ route တွေကို လက်ခံနိုင်ပါတယ်)
+
+---
+
+## 4. Example Hierarchy
+
+```txt
+app/
+├── (marketing)/      <-- Route Group (Doesn't affect URL)
+│   ├── layout.tsx
+│   └── page.tsx      <-- Becomes "/"
+├── _components/      <-- Private Folder (Not routable)
+│   └── button.tsx
+├── blog/
+│   ├── [slug]/       <-- Dynamic Route
+│   │   └── page.tsx
+│   └── page.tsx      <-- Becomes "/blog"
+```

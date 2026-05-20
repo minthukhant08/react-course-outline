@@ -1,0 +1,28 @@
+# Defining Server Actions
+
+Server Actions ဆိုတာ server ပေါ်မှာ တိုက်ရိုက် run တဲ့ asynchronous functions တွေ ဖြစ်ပါတယ်။ API routes တွေ သီးခြားရေးစရာမလိုဘဲ data mutations တွေကို တိုက်ရိုက် လုပ်ဆောင်နိုင်ပါတယ်။
+
+---
+
+## 1. `"use server"` Directive
+
+Server Action တစ်ခုဖြစ်ဖို့အတွက် function ရဲ့ ထိပ်ဆုံးမှာ `"use server"` ဆိုတဲ့ directive ကို ထည့်သွင်းပေးရပါတယ်။ ဒါဟာ Next.js ကို ဒီ function က server မှာပဲ run ရမယ်လို့ ပြောလိုက်တာ ဖြစ်ပါတယ်။
+
+---
+
+## 2. Example Usage
+
+```tsx
+// app/actions.ts
+'use server';
+
+export async function createPost(formData: FormData) {
+  const title = formData.get('title');
+  const content = formData.get('content');
+
+  // Database ထဲကို save လုပ်ခြင်း (Mock)
+  console.log("Saving post:", { title, content });
+}
+```
+
+👉 Server Actions တွေကို Component ထဲမှာတင် ရေးနိုင်သလို သီးခြား file ခွဲပြီးလည်း ရေးနိုင်ပါတယ်။

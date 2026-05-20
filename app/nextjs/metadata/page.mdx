@@ -1,0 +1,76 @@
+# Metadata API
+
+Next.js မှာ SEO (Search Engine Optimization) နဲ့ web shareability ပိုကောင်းစေဖို့အတွက် metadata တွေကို နည်းလမ်းနှစ်မျိုးနဲ့ သတ်မှတ်နိုင်ပါတယ်။
+
+---
+
+## 1. Static Metadata
+
+Page တစ်ခုချင်းစီအတွက် ပုံသေသတ်မှတ်ထားတဲ့ metadata တွေရှိရင် `Metadata` object ကို export လုပ်ပြီး သုံးနိုင်ပါတယ်။
+
+```tsx
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'My Next.js App',
+  description: 'Welcome to my application',
+};
+
+export default function Page() {
+  return <h1>Hello World</h1>;
+}
+```
+
+---
+
+## 2. Dynamic Metadata
+
+Data ပေါ်မူတည်ပြီး metadata ကို ပြောင်းလဲချင်တဲ့အခါ (ဥပမာ - Blog post ခေါင်းစဉ်ကို metadata ထဲ ထည့်ချင်တာမျိုး) `generateMetadata` function ကို သုံးရပါတယ်။
+
+```tsx
+import type { Metadata, ResolvingMetadata } from 'next';
+
+type Props = {
+  params: { id: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // Data fetch လုပ်ခြင်း
+  const post = await fetch(`https://api.example.com/posts/${params.id}`).then((res) => res.json());
+
+  return {
+    title: post.title,
+    description: post.summary,
+  };
+}
+
+export default function Page({ params }: Props) {
+  // ...
+}
+```
+
+---
+
+## 3. File-based Metadata
+
+Next.js က အောက်ပါ special files တွေကို အလိုအလျောက် metadata အနေနဲ့ serve လုပ်ပေးပါတယ်။
+
+- `favicon.ico`, `apple-icon.jpg`, `icon.jpg`: Site icon များအတွက်။
+- `opengraph-image.jpg`, `twitter-image.jpg`: Social media မှာ share တဲ့အခါ ပေါ်မယ့် ပုံများအတွက်။
+- `robots.txt`: Search engine crawlers များအတွက်။
+- `sitemap.xml`: Site structure ကို search engine ကို ပြောပြရန်။
+
+👉 ဒီဖိုင်တွေကို route segment folder ထဲမှာ ထည့်ထားလိုက်ရုံနဲ့ Next.js က သက်ဆိုင်ရာ `<head>` tags တွေကို အလိုအလျောက် generate လုပ်ပေးမှာ ဖြစ်ပါတယ်။
+
+---
+
+## 4. Ordering & Merging
+
+Metadata တွေကို root layout ကနေ page အထိ merge လုပ်သွားပါတယ်။ အကယ်၍ layout မှာလည်း metadata ပါပြီး၊ page မှာလည်း ပါရင် page က metadata က layout က metadata ကို override လုပ်သွားမှာဖြစ်ပါတယ်။
+
+### Output
+```txt
+Next.js injects the defined metadata into the <head> of the HTML document. For dynamic routes, it ensures the metadata is generated before the page is sent to the client.
+```
+
+👉 Metadata တွေကို Server Components မှာပဲ သတ်မှတ်နိုင်ပါတယ်။ Client Components မှာ `export const metadata` သုံးလို့မရပါဘူး။

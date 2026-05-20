@@ -1,0 +1,35 @@
+# Link (`next/link`)
+
+Next.js မှာ page တစ်ခုနဲ့တစ်ခု ချိတ်ဆက်ဖို့အတွက် standard HTML `<a>` tag အစား `<Link>` component ကို အသုံးပြုရပါတယ်။ သူဟာ client-side navigation ကို အသုံးပြုထားတဲ့အတွက် page refresh မဖြစ်ဘဲ ကူးပြောင်းနိုင်ပါတယ်။
+
+---
+
+## 1. Pros
+
+- **Prefetching**: Link တစ်ခုက user ရဲ့ မြင်ကွင်း (viewport) ထဲရောက်တာနဲ့ နောက်ကွယ်ကနေ အဲဒီ page ကို ကြိုတင် load လုပ်ထားပေးပါတယ်။
+- **Fast Navigation**: Browser refresh မဖြစ်ဘဲ UI အစိတ်အပိုင်းတွေကိုပဲ အစားထိုးပေးပါတယ်။
+
+---
+
+## 2. Example Usage
+
+```ts 
+import Link from 'next/link';
+
+export default function Navbar() {
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link href="/" style={{ color: 'blue' }}>Home</Link>
+        </li>
+        <li>
+          <Link href="/about" style={{ color: 'blue' }}>About Us</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
+```
+
+👉 [Official API Reference](https://nextjs.org/docs/app/api-reference/components/link)

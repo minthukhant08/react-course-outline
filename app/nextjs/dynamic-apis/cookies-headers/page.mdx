@@ -1,0 +1,61 @@
+# Cookies & Headers
+
+Server Components ထဲမှာ browser ရဲ့ cookies တွေနဲ့ HTTP headers တွေကို ရယူဖို့အတွက် `next/headers` ကလာတဲ့ `cookies()` နဲ့ `headers()` functions တွေကို အသုံးပြုရပါတယ်။
+
+---
+
+## 1. Cookies
+
+`cookies()` function ကိုသုံးပြီး user ဆီကလာတဲ့ cookies တွေကို ဖတ်နိုင်ပါတယ်။ Next.js v15+ မှာ ၎င်းဟာ **async** function ဖြစ်ပါတယ်။
+
+```tsx
+import { cookies } from 'next/headers';
+
+export default async function Page() {
+  const cookieStore = await cookies();
+  const theme = cookieStore.get('theme');
+
+  return <div>Current theme: {theme?.value}</div>;
+}
+```
+
+---
+
+## 2. Headers
+
+HTTP request headers တွေကို ဖတ်ဖို့အတွက် `headers()` ကို သုံးပါတယ်။ ၎င်းသည်လည်း **async** function ဖြစ်ပါတယ်။
+
+```tsx
+import { headers } from 'next/headers';
+
+export default async function Page() {
+  const headersList = await headers();
+  const userAgent = headersList.get('user-agent');
+
+  return <div>Your browser: {userAgent}</div>;
+}
+```
+
+---
+
+## 3. Writing Cookies (Server Functions)
+
+Server Components ထဲမှာ cookie ကို ဖတ်ရုံပဲ လုပ်လို့ရပါတယ်။ Cookie အသစ် သတ်မှတ်ချင်ရင်တော့ **Server Functions** (သို့မဟုတ်) **Route Handlers** ထဲမှာပဲ လုပ်ဆောင်နိုင်ပါတယ်။
+
+```tsx
+"use server";
+
+import { cookies } from 'next/headers';
+
+export async function setTheme(theme: string) {
+  const cookieStore = await cookies();
+  cookieStore.set('theme', theme); // Cookie သတ်မှတ်ခြင်း
+}
+```
+
+### Output
+```txt
+The server reads the "Cookie" or "User-Agent" header from the incoming request. When setting a cookie, it adds a "Set-Cookie" header to the response.
+```
+
+👉 `cookies()` သို့မဟုတ် `headers()` ကို ခေါ်လိုက်တာနဲ့ အဲဒီ route ဟာ dynamic rendering (Request-time rendering) အဖြစ် အလိုအလျောက် ပြောင်းလဲသွားမှာ ဖြစ်ပါတယ်။

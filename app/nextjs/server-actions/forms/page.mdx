@@ -1,0 +1,29 @@
+# Using in Forms
+
+Server Actions တွေကို HTML `<form>` ရဲ့ `action` prop မှာ တိုက်ရိုက် ထည့်သွင်းအသုံးပြုနိုင်ပါတယ်။
+
+---
+
+## 1. Progressive Enhancement
+
+ဒါဟာ JavaScript load မဖြစ်သေးခင်မှာတောင် (သို့မဟုတ် JS ပိတ်ထားရင်တောင်) အလုပ်လုပ်နိုင်တဲ့ **Progressive Enhancement** ကို ရရှိစေပါတယ်။
+
+---
+
+## 2. Example Usage
+
+```tsx
+import { createPost } from './actions';
+
+export default function NewPostForm() {
+  return (
+    <form action={createPost}>
+      <input name="title" placeholder="Title" required />
+      <textarea name="content" placeholder="Content" required />
+      <button type="submit">Create Post</button>
+    </form>
+  );
+}
+```
+
+👉 Form data တွေကို `FormData` object အနေနဲ့ Action ထဲမှာ အလိုအလျောက် ရရှိမှာဖြစ်ပါတယ်။

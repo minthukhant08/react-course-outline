@@ -1,0 +1,50 @@
+# Overview
+
+Next.js ဆိုတာ React ကို အခြေခံပြီး တည်ဆောက်ထားတဲ့ "The React Framework for the Web" ဖြစ်ပါတယ်။ ဒီ documentation မှာ ဖော်ပြထားတဲ့ features တွေဟာ လက်ရှိအသုံးပြုနေတဲ့ **Next.js version 16.2.6** ပေါ်မှာ အခြေခံထားပါတယ်။
+
+---
+
+## 1. Why Next.js?
+
+React သက်သက်သုံးတာထက် Next.js ကို သုံးရတဲ့ အဓိက အကြောင်းရင်းများ -
+- **Full-stack Capabilities**: Frontend ရော Backend ပါ တစ်ခါတည်း ရေးနိုင်ပါတယ်။
+- **Rendering Options**: Server Components, SSR (Server-side Rendering) နဲ့ SSG (Static Site Generation) တို့ကို စိတ်ကြိုက် ရွေးချယ်နိုင်ပါတယ်။
+- **File-based Routing**: Folders နှင့် Files များ create လိုက်ရုံဖြင့် Routes များ အလိုအလျောက် တည်ဆောက်ပေးပါတယ်။
+- **Optimization**: Images, Fonts နဲ့ Scripts တွေကို အလိုအလျောက် optimize လုပ်ပေးပါတယ်။
+
+---
+
+## 2. App Router (Recommended)
+
+Next.js (version 13+) မှာ `app` directory ကို အသုံးပြုပြီး routing ကို manage လုပ်ပါတယ်။ Folder တစ်ခုချင်းစီဟာ route တစ်ခု ဖြစ်ပြီး အဲဒီထဲမှာ `page.tsx` ရှိနေရင် အဲဒီ route ကို browser ကနေခေါ်နိုင်မှာ ဖြစ်ပါတယ်။ ဒါဟာ React Server Components (RSC) ကို support ပေးတဲ့ modern နည်းလမ်းဖြစ်ပါတယ်။
+
+**ထူးခြားချက်များ:**
+- **Folder-based Routing**: Folder hierarchy အတိုင်း URL path ဖြစ်လာပါတယ်။
+- **React Server Components**: Component level မှာတင် async/await နဲ့ data fetch လုပ်နိုင်ပါတယ်။
+- **Layouts & Streaming**: UI ကို share သုံးနိုင်သလို `Suspense` နဲ့ streaming ကိုလည်း အသုံးပြုနိုင်ပါတယ်။
+
+---
+
+## 3. Pages Router (Legacy)
+
+App Router မတိုင်ခင်က Next.js ရဲ့ အဓိက routing စနစ်ဖြစ်ပါတယ်။ `pages` directory ထဲမှာ file တွေ တည်ဆောက်လိုက်ရုံနဲ့ route တွေ ဖြစ်ပေါ်လာပါတယ်။
+
+- `pages/index.tsx` -> `/`
+- `pages/about.tsx` -> `/about`
+
+👉 Project အဟောင်းတွေကို ထိန်းသိမ်းတဲ့အခါ (သို့မဟုတ်) App Router မသုံးနိုင်တဲ့ အခြေအနေတွေမှာ Pages Router ကို သုံးနိုင်ပါတယ်။
+
+---
+
+## 4. Server vs Client Components
+
+Next.js မှာ components တွေကို အလုပ်လုပ်တဲ့ နေရာပေါ်မူတည်ပြီး နှစ်မျိုး ခွဲခြားထားပါတယ်။
+
+- **Server Components (Default)**: Server မှာတင် အလုပ်လုပ်ပြီး HTML ပဲ ပို့ပေးပါတယ်။ Data fetching အတွက် အထူးသင့်လျော်ပါတယ်။
+- **Client Components**: User interaction တွေ (clicks, forms) သို့မဟုတ် browser APIs သုံးဖို့ လိုအပ်ရင် `"use client"` directive ကို သုံးရပါတယ်။
+
+👉 အသေးစိတ် နှိုင်းယှဉ်ချက်တွေကို **Server & Client Components** section မှာ ဆက်လက်လေ့လာနိုင်ပါတယ်။
+
+---
+
+👉 Next.js ရဲ့ အခြေခံ သဘောတရားတွေကို နားလည်ထားခြင်းဖြင့် ပိုမိုကောင်းမွန်တဲ့ full-stack application တွေကို ဖန်တီးနိုင်မှာ ဖြစ်ပါတယ်။

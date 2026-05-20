@@ -1,0 +1,35 @@
+# Modern Caching (`"use cache"`)
+
+React 19 နဲ့ Next.js မှာ အသစ်ပါဝင်လာတဲ့ `"use cache"` directive ကို သုံးပြီး component တစ်ခုလုံး ဒါမှမဟုတ် data fetching function တစ်ခုလုံးရဲ့ ရလဒ်ကို cache လုပ်နိုင်ပါတယ်။
+
+---
+
+## 1. Usage
+
+ဒါဟာ `fetch` options တွေထက် ပိုမိုရိုးရှင်းပြီး အစွမ်းထက်ပါတယ်။
+
+```tsx
+// lib/data.ts
+import { cacheLife } from 'next/cache';
+
+export async function getCachedData() {
+  'use cache';
+  cacheLife('hours');
+  
+  // ဒီထဲမှာရှိတဲ့ logic အားလုံးရဲ့ ရလဒ်ကို cache လုပ်သွားမှာပါ
+  return await db.query(...);
+}
+```
+
+---
+
+## 2. `cacheLife` Profiles
+
+| Profile | Description |
+|---------|-------------|
+| `seconds` | ခဏတာ cache လုပ်ဖို့ |
+| `minutes` | မိနစ်ပိုင်းအတွင်း cache ထားဖို့ |
+| `hours` | နာရီပိုင်းအထိ cache ထားဖို့ |
+| `days` | ရက်ပိုင်းအထိ cache ထားဖို့ |
+
+👉 `"use cache"` က low-level logic တွေကိုပါ cache လုပ်ပေးနိုင်တဲ့အတွက် database queries တွေအတွက် အလွန်အသုံးဝင်ပါတယ်။

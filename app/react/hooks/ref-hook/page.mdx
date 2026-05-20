@@ -2,7 +2,7 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 
 # Ref Hook (useRef)
 
-`useRef` ဆိုတာ component တစ်ခုမှာ render logic ထဲမှာ မပါဝင်တဲ့ (UI မှာ မပြသတဲ့) data တွေကို သိမ်းဆည်းထားဖို့နဲ့ DOM elements တွေကို တိုက်ရိုက်ကိုင်တွယ်ဖို့ အသုံးပြုတဲ့ Hook တစ်ခု ဖြစ်ပါတယ်။
+`useRef` ဆိုတာ component တစ်ခုမှာ render logic ထဲမှာ မပါဝင်တဲ့ (UI မှာ မပြတဲ့) data တွေကို သိမ်းဆည်းထားဖို့နဲ့ DOM elements တွေကို တိုက်ရိုက်ကိုင်တွယ်ဖို့ အသုံးပြုတဲ့ Hook တစ်ခု ဖြစ်ပါတယ်။
 
 ---
 
@@ -84,7 +84,7 @@ export default function Counter() {
 | Feature | `useState` | `useRef` |
 |---------|------------|----------|
 | **Re-render** | Value ပြောင်းရင် UI ပြန်ဆွဲတယ် | Value ပြောင်းရင် UI ပြန်မဆွဲဘူး |
-| **Usage** | UI မှာ ပြသရမယ့် data အတွက်သုံးတယ် | UI နဲ့ မပတ်သက်တဲ့ background data အတွက်သုံးတယ် |
+| **Usage** | UI မှာ ပြရမယ့် data အတွက်သုံးတယ် | UI နဲ့ မပတ်သက်တဲ့ background data အတွက်သုံးတယ် |
 | **Access** | Variable ကို တိုက်ရိုက်သုံးတယ် | `.current` property ကနေတစ်ဆင့် သုံးရတယ် |
 
 👉 `useRef` ရဲ့ `.current` value ကို component rendering ဖြစ်နေစဉ်အတွင်း (return ထဲမှာ) တိုက်ရိုက်မပြောင်းလဲသင့်ပါဘူး။

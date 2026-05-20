@@ -1,0 +1,36 @@
+# Revalidating and Redirecting
+
+Server Action တစ်ခု အလုပ်လုပ်ပြီးတဲ့အခါ UI မှာ data အသစ်တွေ ချက်ချင်းပေါ်လာဖို့ cache ကို update လုပ်ခြင်းနဲ့ တခြား page ကို ကူးပြောင်းခြင်းတွေကို လုပ်ဆောင်နိုင်ပါတယ်။
+
+---
+
+## 1. Revalidating Path/Tag
+
+UI မှာ data အသစ်တွေ ချက်ချင်းပေါ်လာဖို့ `revalidatePath` သို့မဟုတ် `revalidateTag` ကို သုံးရပါတယ်။
+
+```tsx
+'use server';
+import { revalidatePath } from 'next/cache';
+
+export async function deletePost(id: string) {
+  // Delete logic...
+  revalidatePath('/posts'); // Posts page ကို refresh လုပ်မယ်
+}
+```
+
+---
+
+## 2. Redirecting
+
+အလုပ်လုပ်ပြီးသွားတဲ့အခါ တခြား page တစ်ခုခုကို ပို့ချင်ရင် `redirect` ကို သုံးနိုင်ပါတယ်။
+
+```tsx
+import { redirect } from 'next/navigation';
+
+export async function createAndRedirect() {
+  // Logic...
+  redirect('/dashboard');
+}
+```
+
+👉 Server Actions တွေဟာ default အားဖြင့် POST method ကို သုံးပြီး အလုပ်လုပ်တာဖြစ်လို့ လုံခြုံမှု ပိုမိုရှိပါတယ်။

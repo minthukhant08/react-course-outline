@@ -1,0 +1,24 @@
+# Caching Options
+
+Next.js က standard `fetch` API ကို cache configuration တွေနဲ့ တိုးချဲ့ထားပြီး request တစ်ခုချင်းစီကို ဘယ်လို cache လုပ်မလဲဆိုတာ ထိန်းချုပ်နိုင်ပါတယ်။
+
+---
+
+## 1. Caching Strategies
+
+- **`force-cache` (Default)**: Data ကို cache လုပ်ထားပြီး နောက်တစ်ကြိမ် တောင်းရင် cache ထဲကပဲ ပြန်ပေးပါတယ်။ Static content တွေအတွက် သင့်တော်ပါတယ်။
+- **`no-store`**: Cache မလုပ်ဘဲ request တိုင်းမှာ data အသစ်ကို အမြဲတမ်း fetch လုပ်ပါတယ်။ Dynamic content တွေအတွက် သုံးပါတယ်။
+
+---
+
+## 2. Code Example
+
+```tsx
+// Cache individual requests
+fetch('https://api.example.com/data', { cache: 'force-cache' });
+
+// Disable caching for this request
+fetch('https://api.example.com/dynamic-data', { cache: 'no-store' });
+```
+
+👉 `cache` option ကို မထည့်ထားရင် Next.js က route ရဲ့ အမျိုးအစား (Static or Dynamic) ပေါ်မူတည်ပြီး အကောင်းဆုံးဖြစ်အောင် အလိုအလျောက် ဆုံးဖြတ်ပေးပါတယ်။

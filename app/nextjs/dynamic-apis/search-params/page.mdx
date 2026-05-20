@@ -1,0 +1,69 @@
+# Search Parameters (`searchParams`)
+
+URL ရဲ့ query string (ဥပမာ - `?query=nextjs&sort=asc`) တွေကို ဖတ်ဖို့အတွက် `searchParams` ကို အသုံးပြုပါတယ်။
+
+---
+
+## 1. Server Components (Pages Only)
+
+Server Component **Pages** မှာ `searchParams` ကို prop အနေနဲ့ ရရှိနိုင်ပါတယ်။ ၎င်းဟာ **Promise** တစ်ခု ဖြစ်တဲ့အတွက် `async/await` နဲ့ unwrap လုပ်ရပါတယ်။
+
+> **Note:** Layouts များတွင် `searchParams` ကို prop အနေနဲ့ ရရှိနိုင်မည်မဟုတ်ပါ။ ဘာလို့လဲဆိုတော့ navigation လုပ်တဲ့အခါ Layout တွေက re-render မဖြစ်တာကြောင့် stale (ဟောင်းနွမ်းသော) data များ ဖြစ်သွားနိုင်သည့်အတွက် ဖြစ်ပါတယ်။
+
+```tsx
+// app/shop/page.tsx
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const { query, sort } = await searchParams;
+  
+  return (
+    <div>
+      <p>Search: {query}</p>
+      <p>Sort: {sort}</p>
+    </div>
+  );
+}
+```
+
+---
+
+## 2. Client Components
+
+Client Components မှာတော့ `useSearchParams` hook ကို သုံးပြီး query parameters တွေကို ဖတ်နိုင်ပါတယ်။ ၎င်းဟာ read-only ဖြစ်တဲ့ `URLSearchParams` object ကို return ပြန်ပေးပါတယ်။
+
+```tsx
+"use client";
+
+import { useSearchParams } from 'next/navigation';
+
+export default function SearchBar() {
+  const searchParams = useSearchParams();
+  const search = searchParams.get('query');
+
+  return <div>Search Term: {search}</div>;
+}
+```
+
+---
+
+## 3. Suspense Boundary
+
+Client Component ထဲမှာ `useSearchParams` ကို သုံးထားရင် ၎င်းကို **`<Suspense>`** နဲ့ ပတ်ထားဖို့ လိုအပ်ပါတယ်။ ဒါမှသာ build လုပ်တဲ့အခါ error မတက်ဘဲ static rendering ကို ကောင်းမွန်စွာ လုပ်ဆောင်နိုင်မှာ ဖြစ်ပါတယ်။
+
+```tsx
+import { Suspense } from 'react';
+import SearchBar from './search-bar';
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchBar />
+    </Suspense>
+  );
+}
+```
+
+👉 `searchParams` ကို သုံးလိုက်တာနဲ့ အဲဒီ page ဟာ dynamic rendering အဖြစ်သို့ အလိုအလျောက် ပြောင်းလဲသွားမှာ ဖြစ်ပါတယ်။

@@ -1,0 +1,18 @@
+# Overview
+
+Next.js မှာ URL ကလာတဲ့ data တွေကို (Parameters သို့မဟုတ် Query Strings) ရယူဖို့အတွက် dynamic APIs တွေကို အသုံးပြုရပါတယ်။ ဒါတွေကို **Request-time APIs** လို့လည်း ခေါ်ပါတယ်။
+
+## Contents
+- **Dynamic Routes (params)**: `[slug]` စတဲ့ route segments တွေဆီက data ယူခြင်း
+- **Search Parameters (searchParams)**: `?query=...` စတဲ့ URL query string တွေဆီက data ယူခြင်း
+
+---
+
+## Key Differences
+
+| API | Type | Available in Layouts? | Available in Pages? |
+|-----|------|-----------------------|---------------------|
+| `params` | Dynamic Routes | ✅ Yes | ✅ Yes |
+| `searchParams` | Query Strings | ❌ No | ✅ Yes |
+
+👉 ဒီ APIs တွေကို အသုံးပြုခြင်းက website ကို dynamic ဖြစ်စေပြီး user experience ကို ပိုမိုကောင်းမွန်စေပါတယ်။

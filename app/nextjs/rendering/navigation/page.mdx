@@ -1,0 +1,105 @@
+# Navigation
+
+Next.js မှာ page တစ်ခုနဲ့တစ်ခု ကူးပြောင်းဖို့ (navigation) အတွက် သုံးတဲ့နည်းလမ်းတွေဟာ component အမျိုးအစားပေါ်မူတည်ပြီး ကွာခြားမှုရှိပါတယ်။
+
+---
+
+## 1. Comparison
+
+| Method | Component Type | Usage |
+|--------|----------------|-------|
+| `<Link>` | Both | UI မှာ link အနေနဲ့သုံးဖို့ (prefer) |
+| `useRouter()` | Client | Button click စတဲ့ event တွေမှာ programmatic navigation လုပ်ဖို့ |
+| `redirect()` | Server | Data fetching သို့မဟုတ် logic အခြေအနေအရ တိုက်ရိုက် redirect လုပ်ဖို့ |
+| `notFound()` | Both | Resource မတွေ့တဲ့အခါ 404 error page ပြဖို့ |
+
+---
+
+## 2. Programmatic Navigation (Client)
+
+Client Component မှာဆိုရင် `next/navigation` ကလာတဲ့ `useRouter` hook ကို သုံးရပါတယ်။
+
+```tsx
+"use client";
+
+import { useRouter } from 'next/navigation';
+
+export default function OrderButton() {
+  const router = useRouter();
+
+  return (
+    <button onClick={() => router.push('/checkout')}>
+      Buy Now
+    </button>
+  );
+}
+```
+
+### `useRouter` Methods
+
+
+| Method | Description |
+|--------|-------------|
+| `router.push(href)` | Page အသစ်ကို သွားပါတယ်။ browser history ထဲမှာ entry အသစ်တစ်ခု တိုးသွားပါတယ်။ |
+| `router.replace(href)` | လက်ရှိ page ကို page အသစ်နဲ့ အစားထိုးလိုက်ပါတယ်။ browser history ထဲမှာ entry အသစ် မတိုးပါဘူး။ |
+| `router.refresh()` | လက်ရှိ page ကို server ကနေ data ပြန်ယူပြီး refresh လုပ်ပါတယ်။ client-side state တွေ (ဥပမာ - `useState`) မပျက်ပါဘူး။ |
+| `router.back()` | Browser history ထဲက အရင်သွားခဲ့တဲ့ page ကို ပြန်သွားပါတယ်။ |
+| `router.forward()` | Browser history ထဲက နောက်ထပ်သွားမယ့် page ကို သွားပါတယ်။ |
+| `router.prefetch(href)` | Page တစ်ခုကို user မသွားခင် ကြိုတင် load လုပ်ထားပေးပါတယ်။ |
+
+---
+
+## 3. Redirect (Server)
+
+Server Component မှာဆိုရင် `redirect` function ကို တိုက်ရိုက်ခေါ်သုံးနိုင်ပါတယ်။
+
+```tsx
+import { redirect } from 'next/navigation';
+import { getSession } from './auth';
+
+export default async function Dashboard() {
+  const session = await getSession();
+  
+  if (!session) {
+    redirect('/login'); // Redirect if not authenticated
+  }
+
+  return <div>Welcome to Dashboard</div>;
+}
+```
+
+---
+
+## 4. Not Found (Server & Client)
+
+`notFound()` function ကို ခေါ်လိုက်တဲ့အခါ Next.js က လက်ရှိ route rendering ကို ရပ်လိုက်ပြီး အနီးစပ်ဆုံး `not-found.js` file ကို ပြပေးမှာဖြစ်ပါတယ်။
+
+```tsx
+import { notFound } from 'next/navigation';
+
+async function fetchPost(id: string) {
+  const res = await fetch(`https://api.example.com/posts/${id}`);
+  if (!res.ok) return undefined;
+  return res.json();
+}
+
+export default async function PostPage({ params }: { params: { id: string } }) {
+  const post = await fetchPost(params.id);
+
+  if (!post) {
+    notFound(); // show 404 page 
+  }
+
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+    </div>
+  );
+}
+```
+
+
+Client Component တွေလည်း `notFound()` ကို အသုံးပြုနိုင်ပြီး အလားတူပင် `not-found` UI ကို toggle လုပ်ပေးပါတယ်။
+
+👉 `notFound()` ကို return ပြန်ပေးဖို့မလိုပါဘူး၊ ခေါ်လိုက်တာနဲ့ current execution ကို throw error လုပ်ပြီး ရပ်ပစ်မှာဖြစ်ပါတယ်။

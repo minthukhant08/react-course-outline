@@ -1,0 +1,35 @@
+# Special Files (App Router)
+
+`app` directory ထဲမှာ folder တိုင်းဟာ route segment တစ်ခု ဖြစ်ပါတယ်။ အဲဒီထဲမှာ အထူးသီးသန့် အလုပ်လုပ်ပေးတဲ့ file convention အမည်များ ရှိပါတယ်။
+
+---
+
+## 1. `page.tsx`
+
+Route တစ်ခုရဲ့ အဓိက UI ဖြစ်ပါတယ်။ Folder တစ်ခုထဲမှာ `page.tsx` ရှိနေမှသာ အဲဒီ route က browser ကနေ ဝင်ရောက်နိုင်တဲ့ public route ဖြစ်မှာပါ။
+
+---
+
+## 2. `layout.tsx`
+
+Route segments အများကြီးမှာ share သုံးမယ့် UI (ဥပမာ - Navbar, Footer) ဖြစ်ပါတယ်။ Layout တွေက stateful ဖြစ်ပြီး navigation လုပ်တဲ့အခါ re-render မဖြစ်ပါဘူး။
+
+---
+
+## 3. `loading.tsx`
+
+Data loading ဖြစ်နေစဉ်မှာ browser မှာ ပြမယ့် Loading UI ဖြစ်ပါတယ်။ ၎င်းက page content ကို React Suspense boundary နဲ့ အလိုအလျောက် wrap ပေးပါတယ်။
+
+---
+
+## 4. `error.tsx`
+
+Runtime errors တွေကို ကိုင်တွယ်ပေးမယ့် Error UI ဖြစ်ပါတယ်။ Client Component ဖြစ်ရပါမယ်။
+
+---
+
+## 5. `not-found.tsx`
+
+404 error (page ရှာမတွေ့တဲ့အခါ) ပြမယ့် UI ဖြစ်ပါတယ်။ `notFound()` function ခေါ်တဲ့အခါမှာလည်း ဒီ UI ကို ပြပေးပါတယ်။
+
+👉 ဒီ Special files တွေက Next.js ရဲ့ feature တွေကို configuration ရေးစရာမလိုဘဲ အသုံးပြုနိုင်အောင် ကူညီပေးပါတယ်။

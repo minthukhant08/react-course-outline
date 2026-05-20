@@ -1,0 +1,34 @@
+# Image (`next/image`)
+
+`<Image>` component ဟာ standard `<img>` tag ကို optimization တွေနဲ့ wrap ထားတာ ဖြစ်ပါတယ်။
+
+---
+
+## 1. Pros
+
+- **Size Optimization**: User ရဲ့ screen size ပေါ်မူတည်ပြီး သင့်တော်တဲ့ ပုံအရွယ်အစားကိုပဲ ပို့ပေးပါတယ်။
+- **Prevent CLS**: ပုံ load ဖြစ်လာတဲ့အခါ layout တွေ ရွေ့သွားတာ (Cumulative Layout Shift) ကို အလိုအလျောက် ကာကွယ်ပေးပါတယ်။
+- **Lazy Loading**: ပုံက viewport ထဲရောက်မှသာ load လုပ်ပေးပါတယ်။
+
+---
+
+## 2. Example Usage
+
+```tsx
+import Image from 'next/image';
+
+export default function Profile() {
+  return (
+    <div>
+      <Image
+        src="/me.png"
+        alt="Author profile"
+        width={500}
+        height={500}
+      />
+    </div>
+  );
+}
+```
+
+👉 [Official API Reference](https://nextjs.org/docs/app/api-reference/components/image)

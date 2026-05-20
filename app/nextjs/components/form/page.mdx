@@ -1,0 +1,30 @@
+# Form (`next/form`)
+
+`<Form>` component ဟာ standard HTML `<form>` tag ကို wrap ထားတာဖြစ်ပြီး client-side navigation နဲ့ prefetching features တွေ ပါဝင်ပါတယ်။ ရှာဖွေမှု (search) တွေလုပ်တဲ့အခါ URL search params တွေကို handle လုပ်ဖို့အတွက် အထူးသင့်လျော်ပါတယ်။
+
+---
+
+## 1. Pros
+
+- **Prefetching**: Form က viewport ထဲရောက်လာတာနဲ့ navigation အတွက် လိုအပ်တဲ့ loading UI တွေကို ကြိုတင် load လုပ်ပေးပါတယ်။
+- **Client-side Navigation**: Form submit လုပ်တဲ့အခါ full page reload မဖြစ်ဘဲ client-side ကနေပဲ ကူးပြောင်းပေးပါတယ်။
+- **Progressive Enhancement**: JavaScript load မဖြစ်သေးခင် (သို့မဟုတ်) JS ပိတ်ထားတဲ့ အခြေအနေမှာလည်း standard HTML form အနေနဲ့ အလုပ်လုပ်နိုင်ပါတယ်။
+
+---
+
+## 2. Example Usage
+
+```tsx
+import Form from 'next/form';
+
+export default function Search() {
+  return (
+    <Form action="/search">
+      <input name="query" placeholder="Search..." />
+      <button type="submit">Submit</button>
+    </Form>
+  );
+}
+```
+
+👉 [Official API Reference](https://nextjs.org/docs/app/api-reference/components/form)

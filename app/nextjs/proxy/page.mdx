@@ -1,0 +1,72 @@
+# Proxy (formerly Middleware)
+
+Next.js version 16.0.0 မှာ `middleware` convention ကို deprecate လုပ်လိုက်ပြီး `proxy` အဖြစ် အမည်ပြောင်းလဲလိုက်ပါတယ်။ သူက request တစ်ခုမပြီးဆုံးခင် server မှာ code တွေ ကြိုတင် run ဖို့အတွက် အသုံးပြုပါတယ်။
+
+---
+
+## 1. Why Proxy?
+
+"Middleware" ဆိုတဲ့ အမည်က Express.js middleware တွေနဲ့ မှားယွင်းနိုင်တဲ့အတွက်ကြောင့်၎င်း၊ network boundary တစ်ခုအနေနဲ့ အလုပ်လုပ်တာကို ပိုမိုပေါ်လွင်စေဖို့အတွက်ကြောင့် **Proxy** လို့ ပြောင်းလဲခေါ်ဆိုခြင်းဖြစ်ပါတယ်။
+
+---
+
+## 2. Basic Usage
+
+`proxy.ts` (သို့မဟုတ် `.js`) ဖိုင်ကို project ရဲ့ root directory မှာ create ရပါတယ်။ အဲဒီဖိုင်ကနေ `proxy` ဆိုတဲ့ function ကို export လုပ်ပေးရပါမယ်။
+
+```tsx
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function proxy(request: NextRequest) {
+  // အကယ်၍ /about path ကိုသွားရင် /home ကို redirect လုပ်မယ်
+  if (request.nextUrl.pathname.startsWith('/about')) {
+    return NextResponse.redirect(new URL('/home', request.url))
+  }
+}
+
+// ဘယ် path တွေမှာ proxy run မလဲဆိုတာ သတ်မှတ်ခြင်း
+export const config = {
+  matcher: '/about/:path*',
+}
+```
+
+---
+
+## 3. Matching Paths
+
+`matcher` ကိုသုံးပြီး proxy အလုပ်လုပ်မယ့် path တွေကို တိတိကျကျ သတ်မှတ်နိုင်ပါတယ်။
+
+- **Specific Path**: `matcher: '/dashboard'`
+- **Multiple Paths**: `matcher: ['/dashboard', '/admin']`
+- **Regex**: Exclude လုပ်ချင်တဲ့ path တွေကို regex နဲ့ ဖယ်ထုတ်ထားနိုင်ပါတယ်။
+
+---
+
+## 4. Cookies & Headers
+
+Proxy ထဲမှာ request ရဲ့ cookies နဲ့ headers တွေကို ဖတ်နိုင်သလို၊ response မှာလည်း အသစ်တွေ ထည့်ပေးလိုက်လို့ ရပါတယ်။
+
+```tsx
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function proxy(request: NextRequest) {
+  // Cookie ဖတ်ခြင်း
+  let theme = request.cookies.get('theme')
+
+  const response = NextResponse.next()
+
+  // Cookie အသစ် set ခြင်း
+  response.cookies.set('last-visit', new Date().toISOString())
+
+  return response
+}
+```
+
+### Output
+```txt
+browser မှာ "last-visit" timestamp ပါတဲ့ "Set-Cookie" header ကို set သွားဖြစ်မှာဖြစ်ပါတယ်။
+```
+
+👉 Proxy ဟာ route တိုင်းအတွက် run နေမှာဖြစ်တဲ့အတွက် `matcher` ကို သေချာသုံးပြီး performance မထိခိုက်အောင် ဂရုစိုက်သင့်ပါတယ်။
