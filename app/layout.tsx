@@ -3,9 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
-import 'nextra-theme-docs/style.css'
 import "./globals.css";
-
+import 'nextra-theme-docs/style.css'
+import { ThemeProvider } from 'next-themes'
 
 const navbar = (
   <Navbar
@@ -27,8 +27,12 @@ export default async function RootLayout({
       dir="ltr"
       suppressHydrationWarning
     >
-      <Head />
+        <Head />
       <body>
+        <ThemeProvider 
+        attribute={"class"} 
+        defaultTheme="system"
+        enableSystem>
         <Layout
           navbar={navbar}
           pageMap={pageMap}
@@ -37,6 +41,7 @@ export default async function RootLayout({
         >
           {children}
         </Layout>
+        </ThemeProvider>
       </body>
     </html>
   );
