@@ -1,5 +1,6 @@
 export default {
     index: "Overview",
     zod: "Zod",
-    zustand: "Zustand"
+    zustand: "Zustand",
+    husky: "Husky"
 }

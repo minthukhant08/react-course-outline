@@ -1,0 +1,83 @@
+# Husky
+
+Husky ဆိုတာ Git hooks တွေကို လွယ်လွယ်ကူကူ အသုံးပြုနိုင်အောင် လုပ်ပေးတဲ့ tool တစ်ခု ဖြစ်ပါတယ်။ Commit မတင်ခင် ဒါမှမဟုတ် Push မလုပ်ခင် code linting လုပ်တာ၊ tests တွေ run တာ စတာတွေကို automatic လုပ်ဆောင်ပေးနိုင်ပါတယ်။
+
+---
+
+## 1. Installation
+
+Husky ကို project မှာ စတင်အသုံးပြုဖို့အတွက် အောက်ပါ command ကို run ရပါမယ်။ ဒါဟာ husky ကို install လုပ်ပေးပြီး `package.json` မှာ လိုအပ်တဲ့ script တွေကို ထည့်သွင်းပေးမှာ ဖြစ်ပါတယ်။
+
+```bash
+npx husky-init && npm install
+```
+
+### Output
+
+```txt
+husky - Git hooks installed
+```
+
+---
+
+## 2. Adding a Pre-commit Hook
+
+ဥပမာ - commit မတင်ခင် `npm test` ကို run ချင်ရင် အောက်ပါအတိုင်း hook တစ်ခု ထပ်ထည့်နိုင်ပါတယ်။
+
+```bash
+npx husky add .husky/pre-commit "npm test"
+```
+
+### Output
+
+```txt
+husky - created .husky/pre-commit
+```
+
+---
+
+## 3. Formatting with Prettier (Pre-commit)
+
+Code တွေ ဖတ်ရလွယ်ကူစေဖို့နဲ့ Code Review လုပ်တဲ့အခါ သပ်ရပ်နေစေဖို့ Commit မတင်ခင် Prettier နဲ့ automatic format လုပ်ခိုင်းနိုင်ပါတယ်။ ဒါဟာ manual format လုပ်ဖို့ မေ့လျော့တာကို ကာကွယ်ပေးပါတယ်။
+
+```bash
+npx husky add .husky/pre-commit "npx prettier --write ."
+```
+
+### Output
+
+```txt
+husky - created .husky/pre-commit
+```
+
+---
+
+## 4. Build and Lint (Pre-push)
+
+Server (CI/CD) ပေါ်ရောက်မှ Build fail တာမျိုး ဒါမှမဟုတ် Lint error တက်တာမျိုး မဖြစ်စေဖို့အတွက် Push မလုပ်ခင် Build နဲ့ Lint ကို စစ်ဆေးခိုင်းခြင်း ဖြစ်ပါတယ်။
+
+```bash
+npx husky add .husky/pre-push "npm run lint && npm run build"
+```
+
+### Output
+
+```txt
+husky - created .husky/pre-push
+```
+
+---
+
+## 5. Manual Configuration
+
+`package.json` မှာလည်း scripts တွေကို အခုလို တွေ့မြင်နိုင်ပါတယ်။
+
+```js
+{
+  "scripts": {
+    "prepare": "husky install"
+  }
+}
+```
+
+👉 Husky ကို အသုံးပြုခြင်းဖြင့် team project တွေမှာ code quality ကို git level ကနေ တိကျစွာ ထိန်းချုပ်နိုင်ပါတယ်။
