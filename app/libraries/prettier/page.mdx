@@ -1,0 +1,79 @@
+# Prettier
+
+Prettier ဆိုတာ opinionated code formatter တစ်ခု ဖြစ်ပါတယ်။ Code ရဲ့ style တွေကို သတ်မှတ်ထားတဲ့ rule တွေအတိုင်း automatic ညှိပေးတဲ့အတွက် code ဖတ်ရတာ ပိုမိုလွယ်ကူစေပြီး team တစ်ခုလုံးမှာ format တစ်ခုတည်း ဖြစ်နေစေပါတယ်။
+
+---
+
+## 1. Installation
+
+Prettier ကို project မှာ အသုံးပြုဖို့အတွက် dev dependency အနေနဲ့ install လုပ်ရပါမယ်။
+
+```bash
+npm install --save-dev --save-exact prettier
+```
+
+### Output
+
+```txt
+added 1 package, and audited 2 packages in 2s
+```
+
+---
+
+## 2. Configuration (.prettierrc)
+
+Prettier ရဲ့ rule တွေကို သတ်မှတ်ဖို့ `.prettierrc` ဖိုင်ကို project root မှာ ဆောက်ရပါမယ်။ JSON format နဲ့ အခုလို ရေးသားနိုင်ပါတယ်။
+
+```json
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "tabWidth": 2
+}
+```
+
+---
+
+## 3. Scripts in package.json
+
+Command line ကနေ ခဏခဏ run ဖို့ အဆင်ပြေအောင် `package.json` မှာ script အနေနဲ့ ထည့်သွင်းထားနိုင်ပါတယ်။ ဥပမာ - `.ts`, `.tsx`, `.mdx` စတဲ့ file extensions တွေကို သတ်မှတ်ပေးနိုင်ပါတယ်။
+
+```json
+{
+  "scripts": {
+    "format": "prettier --write \"app/**/*.{ts,tsx,mdx}\""
+  }
+}
+```
+
+---
+
+## 4. Ignoring Files (.prettierignore)
+
+Format မလုပ်ချင်တဲ့ files တွေ (ဥပမာ - `node_modules`, `dist`) ကို `.prettierignore` ဖိုင်ထဲမှာ ထည့်သွင်းထားနိုင်ပါတယ်။
+
+```txt
+node_modules
+dist
+build
+```
+
+---
+
+## 5. Running Prettier
+
+Code တွေကို format လုပ်ဖို့ အောက်ပါ command ကို အသုံးပြုနိုင်ပါတယ်။
+
+```bash
+npx prettier --write .
+```
+
+### Output
+
+```txt
+Checking formatting...
+All matched files updated.
+```
+
+👉 Prettier ကို အသုံးပြုခြင်းဖြင့် code review လုပ်တဲ့အခါ format issues တွေအတွက် အချိန်ကုန်စရာ မလိုတော့ဘဲ logic ကိုပဲ အာရုံစိုက်နိုင်ပါတယ်။
