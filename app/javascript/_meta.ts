@@ -14,4 +14,6 @@ export default {
     "http-status-codes": "HTTP Status Codes",
     "http-verbs": "HTTP Verbs",
     "api-requests": "API Requests (Fetch)",
+    "http-headers": "HTTP Headers",
+    exercises: "Exercises"
 }

@@ -1,0 +1,348 @@
+# JavaScript Exercises
+
+JavaScript အခြေခံများကို ပိုမိုကျွမ်းကျင်စေရန်အတွက် excercises များကို စမ်း‌ရေးကြည့်ပါ။
+
+---
+
+## 1. FizzBuzz
+
+နံပါတ် 1 မှ 100 အထိ print ထုတ်ပေးရပါမယ်။ 3 နဲ့စားပြတ်လျှင် "Fizz", 5 နဲ့စားပြတ်လျှင် "Buzz", 3 နဲ့ 5 နှစ်ခုလုံးနဲ့စားပြတ်လျှင် "FizzBuzz" လို့ print ထုတ်ပေးရပါမယ်။
+
+
+### Output
+```txt
+1
+2
+Fizz
+4
+Buzz
+Fizz
+...
+14
+FizzBuzz
+...
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 1; i <= 100; i++) {
+  if (i % 3 === 0 && i % 5 === 0) {
+    console.log("FizzBuzz");
+  } else if (i % 3 === 0) {
+    console.log("Fizz");
+  } else if (i % 5 === 0) {
+    console.log("Buzz");
+  } else {
+    console.log(i);
+  }
+}
+```
+</details>
+
+
+
+## 2. Even or Odd Checker
+
+နံပါတ် 1 မှ 20 အထိ loop ပတ်ပြီး ၎င်းနံပါတ်သည် "Even" (စုံကိန်း) သို့မဟုတ် "Odd" (မကိန်း) ဖြစ်ကြောင်း check** ပြီး **print ထုတ်ပေးရပါမယ်။
+
+
+### Output
+```txt
+1 is odd
+2 is even
+3 is odd
+4 is even
+...
+20 is even
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 1; i <= 20; i++) {
+  if (i % 2 === 0) {
+    console.log(`${i} is even`);
+  } else {
+    console.log(`${i} is odd`);
+  }
+}
+```
+
+
+</details>
+
+## 3. Sum of Numbers
+
+နံပါတ် 1 မှ 100 အထိ ပေါင်းလဒ်ကို loop သုံးပြီး တွက်ချက်ပေးရပါမယ်။
+
+### Output
+```txt
+5050
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+let sum = 0;
+for (let i = 1; i <= 100; i++) {
+  sum += i;
+}
+console.log(sum);
+```
+
+</details>
+
+## 4. Find All Numbers Divisible by 7
+
+နံပါတ် 1 မှ 100 အကြား 7 နှင့် စားပြတ်သော နံပါတ်များကို ရှာဖွေပြီး print ထုတ်ပေးရပါမယ်။
+
+
+### Output
+```txt
+7
+14
+21
+28
+35
+42
+49
+56
+63
+70
+77
+84
+91
+98
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 1; i <= 100; i++) {
+  if (i % 7 === 0) {
+    console.log(i);
+  }
+}
+```
+
+</details>
+
+## 5. Shape Challenges
+
+Loop များနှင့် `repeat()` method ကို အသုံးပြုပြီး အောက်ပါ ပုံစံများကို ထုတ်ပေးရပါမယ်။
+
+### Shape A
+
+### Output
+```txt
+*
+**
+***
+****
+*****
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 1; i <= 5; i++) {
+  console.log("*".repeat(i));
+}
+```
+
+
+</details>
+
+### Shape B
+
+### Output
+```txt
+    *
+   **
+  ***
+ ****
+*****
+```
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 1; i <= 5; i++) {
+  console.log(" ".repeat(5 - i) + "*".repeat(i));
+}
+```
+
+</details>
+
+### Shape C
+### Output
+```txt
+*****
+****
+***
+**
+*
+```
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 5; i >= 1; i--) {
+  console.log("*".repeat(i));
+}
+```
+
+
+</details>
+
+### Shape D (Pyramid)
+### Output
+```txt
+    *
+   ***
+  *****
+ *******
+*********
+```
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 1; i <= 5; i++) {
+  console.log(" ".repeat(5 - i) + "*".repeat(2 * i - 1));
+}
+```
+
+
+</details>
+
+### Shape E (Diamond)
+### Output
+```txt
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+```
+<details>
+<summary>Show Solution</summary>
+
+```js
+// Upper part
+for (let i = 1; i <= 5; i++) {
+  console.log(" ".repeat(5 - i) + "*".repeat(2 * i - 1));
+}
+// Lower part
+for (let i = 4; i >= 1; i--) {
+  console.log(" ".repeat(5 - i) + "*".repeat(2 * i - 1));
+}
+```
+
+
+</details>
+
+## 6. Multiplication Table (၂ အလီ)
+
+၂ အလီကို ၁ ကနေ ၁၂ အထိ loop ပတ်ပြီး ထုတ်ပေးရပါမယ်။
+
+### Output
+```txt
+2 x 1 = 2
+2 x 2 = 4
+...
+2 x 12 = 24
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 1; i <= 12; i++) {
+  console.log(`2 x ${i} = ${2 * i}`);
+}
+```
+</details>
+
+## 7. Reverse a String
+
+"JavaScript" ဆိုတဲ့စာသားကို loop သုံးပြီး ပြောင်းပြန် (tpircSavaJ) ဖြစ်အောင် လှန်ပေးရပါမယ်။
+
+### Output
+```txt
+tpircSavaJ
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+let str = "JavaScript";
+let reversed = "";
+for (let i = str.length - 1; i >= 0; i--) {
+  reversed += str[i];
+}
+console.log(reversed);
+```
+</details>
+
+## 8. Factorial Calculation
+
+နံပါတ် 5 ရဲ့ Factorial (5!) ကို loop သုံးပြီး တွက်ပေးရပါမယ်။ (5! ဆိုတာ 5 * 4 * 3 * 2 * 1 ပါ)
+
+### Output
+```txt
+120
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+let result = 1;
+for (let i = 5; i >= 1; i--) {
+  result *= i;
+}
+console.log(result);
+```
+</details>
+
+## 9. Multiplication Tables (1 to 5)
+
+၁ အလီ ကနေ ၅ အလီ အထိ အကုန်လုံးကို nested loop (loop ထဲမှာ loop ထပ်တာ) သုံးပြီး ထုတ်ပေးရပါမယ်။
+
+### Output
+```txt
+--- 1 Times Table ---
+1 x 1 = 1
+...
+--- 5 Times Table ---
+5 x 1 = 5
+...
+5 x 12 = 60
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```js
+for (let i = 1; i <= 5; i++) {
+  console.log(`--- ${i} Times Table ---`);
+  for (let j = 1; j <= 12; j++) {
+    console.log(`${i} x ${j} = ${i * j}`);
+  }
+}
+```
+</details>
+
+👉 Loop များကို ကျွမ်းကျင်စွာ အသုံးပြုနိုင်ခြင်းသည် algorithm logic များအတွက် အခြေခံအကျဆုံး ဖြစ်သည်။

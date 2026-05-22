@@ -5,4 +5,6 @@ export default {
     interfaces: "Interfaces",
     generics: "Generics",
     functions: "Functions",
+    "utility-types": "Utility Types",
+    exercises: "Exercises"
 }

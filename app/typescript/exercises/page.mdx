@@ -1,0 +1,177 @@
+# TypeScript Exercises
+
+TypeScript ရဲ့ Type System ကို ပိုပြီးကျွမ်းကျင်သွားအောင် ဒီ excercises လေးတွေကို စမ်း‌ရေးကြည့်ပါ။
+
+---
+
+## 1. User Interface
+
+User တစ်ယောက်အတွက် `id`, `name`, `email` (optional) နဲ့ `role` ("admin" သို့မဟုတ် "user" သာဖြစ်ရမယ်) ပါဝင်တဲ့ Interface တစ်ခုတည်ဆောက်ပြီး object တစ်ခုကို type assign လုပ်ပေးရပါမယ်။
+
+### Output
+```txt
+{ id: 1, name: "Mg Mg", role: "admin" }
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```ts
+interface User {
+  id: number;
+  name: string;
+  email?: string;
+  role: "admin" | "user";
+}
+
+const user: User = {
+  id: 1,
+  name: "Mg Mg",
+  role: "admin"
+};
+
+console.log(user);
+```
+</details>
+
+## 2. Union Types Function
+
+Parameter တစ်ခုက `string` သို့မဟုတ် `number` လက်ခံနိုင်တဲ့ function တစ်ခုရေးပေးရပါမယ်။ အကယ်၍ string ဖြစ်နေရင် "Length is: X" လို့ထုတ်ပေးပြီး number ဖြစ်နေရင် "Value is: X" လို့ထုတ်ပေးရပါမယ်။
+
+### Output
+```txt
+Length is: 10
+Value is: 100
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```ts
+function processInput(input: string | number): void {
+  if (typeof input === "string") {
+    console.log(`Length is: ${input.length}`);
+  } else {
+    console.log(`Value is: ${input}`);
+  }
+}
+
+processInput("TypeScript");
+processInput(100);
+```
+</details>
+
+## 3. Readonly and Array
+
+နံပါတ်တွေပါတဲ့ array တစ်ခုကို readonly လုပ်ထားပေးရပါမယ်။ ၎င်း array ထဲကို push လုပ်ဖို့ကြိုးစားရင် error တက်နေတာကို check ကြည့်ရပါမယ်။
+
+### Output
+```txt
+TypeScript Error: Property 'push' does not exist on type 'readonly number[]'.
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```ts
+const numbers: readonly number[] = [1, 2, 3];
+
+// numbers.push(4); // Error တက်နေပါလိမ့်မယ်
+
+console.log(numbers);
+```
+</details>
+
+## 4. Generic Identity Function
+
+ဘယ် type ပဲပေးပေး အဲ့ဒီ type အတိုင်းပြန်ထုတ်ပေးမယ့် Generic function တစ်ခုရေးပေးရပါမယ်။
+
+### Output
+```txt
+Hello
+123
+true
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```ts
+function identity<T>(value: T): T {
+  return value;
+}
+
+console.log(identity<string>("Hello"));
+console.log(identity<number>(123));
+console.log(identity<boolean>(true));
+```
+</details>
+
+## 5. Enum for Status
+
+`Status` ဆိုတဲ့ enum တစ်ခုဆောက်ပြီး `Pending`, `Active`, `Inactive` ဆိုတဲ့ value တွေပေးရပါမယ်။ Object တစ်ခုမှာ အဲ့ဒီ enum ကို type အဖြစ်သုံးပြရပါမယ်။
+
+### Output
+```txt
+Status is: Active
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```ts
+enum Status {
+  Pending,
+  Active,
+  Inactive
+}
+
+interface Task {
+  title: string;
+  status: Status;
+}
+
+const myTask: Task = {
+  title: "Learn TypeScript",
+  status: Status.Active
+};
+
+console.log(`Status is: ${Status[myTask.status]}`);
+```
+</details>
+
+## 6. Partial & Pick (Utility Types)
+
+`Product` interface ထဲမှာ `id`, `name`, `price`, `description` တွေပါဝင်ပါတယ်။ `Pick` ကိုသုံးပြီး `name` နဲ့ `price` ပဲပါတဲ့ type တစ်ခုထုတ်ပြရပါမယ်။ ပြီးတော့ `Partial` ကိုသုံးပြီး property အားလုံး optional ဖြစ်နေတဲ့ object တစ်ခုကို တည်ဆောက်ပြရပါမယ်။
+
+### Output
+```txt
+{ name: "Laptop", price: 1200 }
+{ price: 1000 }
+```
+
+<details>
+<summary>Show Solution</summary>
+
+```ts
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+}
+
+// name နဲ့ price ပဲယူမယ်
+type ProductPreview = Pick<Product, "name" | "price">;
+const preview: ProductPreview = { name: "Laptop", price: 1200 };
+
+// အကုန် optional လုပ်မယ်
+type UpdateProduct = Partial<Product>;
+const update: UpdateProduct = { price: 1000 };
+
+console.log(preview);
+console.log(update);
+```
+</details>
+
+👉 TypeScript ကို သုံးခြင်းအားဖြင့် code မ run ခင်မှာတင် error တွေကို ကြိုတင်သိနိုင်တာကြောင့် ပိုပြီးစိတ်ချရပါတယ်။

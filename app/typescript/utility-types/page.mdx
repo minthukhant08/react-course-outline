@@ -1,0 +1,135 @@
+# Utility Types
+
+TypeScript မှာ ရှိပြီးသား Type တွေကို အလွယ်တကူ ပြုပြင်ပြောင်းလဲပြီး သုံးလို့ရအောင် Utility Types တွေက ကူညီပေးပါတယ်။ အသုံးများတဲ့ Utility Types အချို့ကို စမ်းကြည့်ရအောင်။
+
+---
+
+## 1. Partial\<Type\>
+
+ဒီကောင်က ရှိပြီးသား interface ထဲက property တွေအားလုံးကို **optional (?)** ဖြစ်သွားအောင် လုပ်ပေးတာပါ။
+
+```ts
+interface User {
+  id: number;
+  name: string;
+  age: number;
+}
+
+// User ထဲက field အကုန်လုံး optional ဖြစ်သွားမယ်
+const updateUser: Partial<User> = {
+  name: "Aung Aung"
+};
+
+console.log(updateUser);
+```
+
+### Output
+```txt
+{ name: "Aung Aung" }
+```
+
+## 2. Readonly\<Type\>
+
+Property တွေကို အသစ်ပြန်ပြင်လို့မရအောင် (Immutable ဖြစ်အောင်) တားဆီးချင်ရင် သုံးပါတယ်။
+
+```ts
+interface Config {
+  apiKey: string;
+}
+
+const config: Readonly<Config> = {
+  apiKey: "SECRET_123"
+};
+
+// config.apiKey = "NEW_KEY"; // Error: Cannot assign to 'apiKey' because it is a read-only property.
+
+console.log(config.apiKey);
+```
+
+### Output
+```txt
+SECRET_123
+```
+
+## 3. Pick\<Type, Keys\>
+
+Interface တစ်ခုထဲက ကိုယ်လိုချင်တဲ့ field တွေကိုပဲ ရွေးထုတ်ပြီး type အသစ်တစ်ခု ဆောက်ချင်ရင် သုံးပါတယ်။
+
+```ts
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+}
+
+// name နဲ့ price ကိုပဲ ရွေးယူမယ်
+type ProductPreview = Pick<Product, "name" | "price">;
+
+const laptop: ProductPreview = {
+  name: "MacBook Pro",
+  price: 2500
+};
+
+console.log(laptop);
+```
+
+### Output
+```txt
+{ name: "MacBook Pro", price: 2500 }
+```
+
+## 4. Omit\<Type, Keys\>
+
+Pick နဲ့ ပြောင်းပြန်ပါ။ ကိုယ်မလိုချင်တဲ့ field တွေကို ဖယ်ထုတ်ပြီး ကျန်တာတွေကို ယူတာပါ။
+
+```ts
+interface Employee {
+  id: number;
+  name: string;
+  salary: number;
+  password: string;
+}
+
+// password ကို ဖယ်ထုတ်လိုက်မယ်
+type PublicEmployeeInfo = Omit<Employee, "password">;
+
+const employee: PublicEmployeeInfo = {
+  id: 101,
+  name: "Su Su",
+  salary: 500000
+};
+
+console.log(employee);
+```
+
+### Output
+```txt
+{ id: 101, name: "Su Su", salary: 500000 }
+```
+
+## 5. Required\<Type\>
+
+Partial နဲ့ ပြောင်းပြန်ပါ။ Optional ဖြစ်နေတဲ့ field တွေကို မဖြစ်မနေ ထည့်ရမယ်ဆိုပြီး ပြောင်းလဲပေးတာပါ။
+
+```ts
+interface Post {
+  title: string;
+  tags?: string[];
+}
+
+// tags? က မဖြစ်မနေ ထည့်ရမယ့် field ဖြစ်သွားမယ်
+const myPost: Required<Post> = {
+  title: "TypeScript Tips",
+  tags: ["ts", "coding"]
+};
+
+console.log(myPost);
+```
+
+### Output
+```txt
+{ title: "TypeScript Tips", tags: ["ts", "coding"] }
+```
+
+👉 Utility Types တွေကို သုံးခြင်းအားဖြင့် interface တွေအများကြီး ထပ်ခါထပ်ခါ ရေးစရာမလိုတော့ဘဲ code ကို ပိုပြီး သန့်ရှင်းစေပါတယ်။
